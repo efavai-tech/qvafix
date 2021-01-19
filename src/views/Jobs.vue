@@ -13,7 +13,16 @@
         >
           <template v-slot:header>
             <v-app-bar fixed dense class="d-none d-flex d-sm-none d-sm-flex d-md-none">
-              <v-toolbar-titulo class="mr-3">Ofertas</v-toolbar-titulo>
+              <v-toolbar-titulo class="mr-3"
+                >Ofertas
+                <v-progress-linear
+                  :active="loading"
+                  :indeterminate="loading"
+                  absolute
+                  bottom
+                  color="deep-orange"
+                ></v-progress-linear
+              ></v-toolbar-titulo>
               <v-spacer></v-spacer>
               <v-text-field
                 light
@@ -53,63 +62,78 @@
                     </v-btn>
                   </v-btn-toggle>
                 </template>
+                <v-progress-linear
+                  :active="loading"
+                  :indeterminate="loading"
+                  absolute
+                  bottom
+                  color="deep-orange"
+                ></v-progress-linear>
               </v-toolbar>
             </div>
-            <v-row>
-              <v-col class="text-right"> <CreateJob /> </v-col
+            <v-row justify="end">
+              <v-col> <CreateJob /> </v-col
             ></v-row>
           </template>
 
           <template v-slot:default="props">
-            <v-card v-model="panel" popout inset multiple class="col-md6" flat>
-              <v-card
-                v-for="item in props.items"
-                :key="item.id"
-                cols="12"
-                sm="6"
-                md="4"
-                lg="3"
-                class="mt-3"
-              >
-                <v-row>
-                  <v-col cols="2" sm="1">
-                    <v-img
-                      src="img/icons/favicon-32x32.png"
-                      class="my-3 ml-2"
-                      contain
-                      height="32"
-                    />
-                  </v-col>
-                  <v-col cols="10" sm="9">
-                    <h3 class="text-justify mt-3 mr-2">{{ item.titulo }}</h3>
-                    <v-card-text>
-                      <v-list-item-content class="text-justify">{{
-                        item.contenido
-                      }}</v-list-item-content>
-                    </v-card-text>
-                  </v-col>
-                  <v-spacer></v-spacer>
-                  <v-col cols="4" sm="2" class="d-none d-lg-flex d-xl-flex">
-                    <v-btn color="blue-grey" class="ma-2 white--text">
-                      Aplicar
-                      <v-icon right dark> mdi-cloud-upload </v-icon>
-                    </v-btn>
-                  </v-col>
-                </v-row>
-
-                <v-row justify="center">
-                  <v-col
-                    cols="4"
-                    sm="2"
-                    class="d-none d-sm-flex d-md-none d-flex d-sm-none"
-                  >
-                    <v-btn color="blue-grey" class="ma-2 white--text">
-                      Aplicar
-                      <v-icon right dark> mdi-cloud-upload </v-icon>
-                    </v-btn>
-                  </v-col>
-                </v-row>
-              </v-card>
+            <v-card v-for="item in props.items" :key="item.id" cols="12" class="mt-3">
+              <v-row>
+                <v-col cols="12" sm="4" md="2">
+                  <v-img src="img/icons/favicon-32x32.png" contain height="32" />
+                  {{ item.taller.name }}
+                </v-col>
+                <v-col cols="12" sm="8" md="10">
+                  <v-row>
+                    <v-col cols="12" sm="12" md="12">
+                      <p class="title text-justify orange--text mx-2">
+                        {{ item.titulo }}
+                      </p>
+                    </v-col>
+                    <v-col cols="12" sm="8" md="8">
+                      <p class="text-justify mx-2">
+                        {{ item.contenido }}
+                      </p>
+                    </v-col>
+                    <v-col cols="12" sm="12" md="4">
+                      <v-btn color="blue-grey" class="white--text">
+                        Aplicar
+                        <v-icon right dark> mdi-cloud-upload </v-icon>
+                      </v-btn>
+                      <div class="mt-5">
+                        <v-tooltip top color="primary">
+                          <template v-slot:activator="{ on }">
+                            <v-btn
+                              class="v-btn v-btn--depressed v-btn--fab v-btn--flat v-btn--icon v-btn--outlined v-btn--round theme--dark v-size--small primary--text"
+                              small
+                              v-on="on"
+                              @click="editItem(item)"
+                            >
+                              <v-icon>v-icon notranslate mdi mdi-pen theme--dark</v-icon>
+                            </v-btn>
+                          </template>
+                          <span>Editar</span>
+                        </v-tooltip>
+                        <v-tooltip top color="red">
+                          <template v-slot:activator="{ on }">
+                            <v-btn
+                              class="v-btn v-btn--depressed v-btn--fab v-btn--flat v-btn--icon v-btn--outlined v-btn--round theme--dark v-size--small red--text"
+                              small
+                              v-on="on"
+                              @click="confirmDelete(item)"
+                            >
+                              <v-icon
+                                >v-icon notranslate mdi mdi-delete theme--dark</v-icon
+                              >
+                            </v-btn>
+                          </template>
+                          <span>Eliminar</span>
+                        </v-tooltip>
+                      </div>
+                    </v-col>
+                  </v-row>
+                </v-col>
+              </v-row>
             </v-card>
           </template>
 
@@ -162,6 +186,7 @@ import CreateJob from "../components/CreateJob";
 
 import { API } from "aws-amplify";
 import { listOfertasTrabajos } from "../graphql/queries";
+import { listTallers } from "../graphql/queries";
 
 export default {
   components: {
@@ -173,6 +198,7 @@ export default {
     search: "",
     filter: {},
     sortDesc: false,
+    loading: false,
     page: 1,
     panel: [],
     itemsPerPage: 5,
@@ -182,6 +208,25 @@ export default {
   }),
   async created() {
     this.GetOfertasTrabajo();
+    const ofertas = [
+      {
+        taller: { name: "Bartolete" },
+        titulo: "Hay una Vacante en el Taller De Calle Medio",
+        contenido: "Se busca mecánico con experiencia de más de 3 años",
+      },
+      {
+        taller: { name: "Alejo S.A" },
+        titulo: "Nesecidad de dos Técnicos",
+        contenido:
+          "Se busca mecánico con experiencia de más de 3 años y un eléctrico con título",
+      },
+      {
+        taller: { name: "Pérez" },
+        titulo: "Hay una Vacante en el Taller De Calle Medio",
+        contenido: "Se busca mecánico con experiencia de más de 3 años",
+      },
+    ];
+    this.ofertas = ofertas;
   },
   computed: {
     numberOfPages() {
@@ -202,10 +247,28 @@ export default {
       this.itemsPerPage = number;
     },
     async GetOfertasTrabajo() {
-      const ofertas = await API.graphql({
+      this.loading = true;
+      const result = await API.graphql({
         query: listOfertasTrabajos,
       });
-      this.ofertas = ofertas.data.listOfertasTrabajos.items;
+      var ofertas = result.data.listOfertasTrabajos.items;
+      this.loading = false;
+      // getTalleres
+      const t = await API.graphql({
+        query: listTallers,
+      });
+      var talleres = t.data.listTallers.items;
+
+      ofertas.forEach((item) => {
+        var taller = talleres.find((x) => x.id === item.taller);
+        // item.taller.name = taller.name;
+        var oferta = item;
+        oferta.taller = taller;
+        this.ofertas.push(oferta);
+        console.log(oferta);
+      });
+
+      // const t = this.talleres.find((x) => x.id === this.ofertas[i].taller);
     },
   },
 };
