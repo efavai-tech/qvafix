@@ -98,16 +98,16 @@ const routes = [{
         }
     },
     {
-        path: '/taller',
-        name: 'Taller',
+        path: '/clientesTalleres',
+        name: 'ClientesTalleres',
         component: () =>
-            import ( /* webpackChunkName: "about" */ '../components/Taller.vue')
+            import ( /* webpackChunkName: "about" */ '../views/admin/ClientesTalleres.vue')
     },
     {
-        path: '/ordenesadmin',
-        name: 'OrdenesAdmin',
+        path: '/ordenes',
+        name: 'Ordenes',
         component: () =>
-            import ( /* webpackChunkName: "about" */ '../components/OrdenesAdmin.vue')
+            import ( /* webpackChunkName: "about" */ '../views/admin/Ordenes.vue')
     },
 ]
 

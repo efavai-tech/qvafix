@@ -42,6 +42,7 @@ type OfertasTrabajo @model{
   taller: ID!
   titulo:String!
   contenido:String!
+  fecha:AWSDateTime
 }
 
 type Blog @model{
