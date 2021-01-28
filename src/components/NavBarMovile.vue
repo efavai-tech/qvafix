@@ -22,7 +22,33 @@
         </v-badge>
         <v-icon v-if="nuevo <= 0">mdi-briefcase-variant-outline</v-icon>
       </v-btn>
-      <Settings />
+      <v-menu v-model="menu1" top offset-y transition="slide-x-transition">
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on" v-if="login">
+            <span>Admin</span>
+            <v-icon>mdi-briefcase-upload</v-icon>
+          </v-btn>
+        </template>
+        <v-card>
+          <v-list>
+            <v-list dense nav>
+              <v-list-item
+                v-for="item in items1"
+                :key="item.title"
+                router-link
+                :to="item.link"
+              >
+                <v-list-item-icon>
+                  <v-icon>{{ item.icon }}</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-list>
+        </v-card>
+      </v-menu>
       <v-menu v-model="menu" top offset-y transition="slide-x-transition">
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on" v-if="login">
@@ -81,45 +107,14 @@
         </v-card>
       </v-menu>
     </v-bottom-navigation>
-    <v-navigation-drawer v-model="drawer" absolute temporary>
-      <v-list-item class="pt-6">
-        <v-list-item class="px-2">
-          <v-list-item-avatar>
-            <v-img src="img/default-avatar-man.jpg"></v-img>
-          </v-list-item-avatar>
-          <v-list-item-title>{{ username }}</v-list-item-title>
-        </v-list-item>
-      </v-list-item>
-
-      <v-divider class="mt-4"></v-divider>
-
-      <v-list dense nav>
-        <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          router-link
-          :to="item.link"
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
   </div>
 </template>
 
 <script>
-import Settings from "./Settings";
 import { Auth } from "aws-amplify";
 
 export default {
-  components: {
-    Settings,
-  },
+  components: {},
   created() {
     // this.login = this.$store.state.login;
     this.login = true;
@@ -134,6 +129,7 @@ export default {
   },
   data: () => ({
     menu: false,
+    menu1: false,
     nuevo: 10,
     drawer: null,
     username: undefined,
@@ -152,6 +148,18 @@ export default {
         title: "Cerrar Sesión",
         icon: "mdi-logout",
         link: "/Logout",
+      },
+    ],
+    items1: [
+      {
+        title: "Órdenes",
+        icon: "mdi-clipboard-list-outline",
+        link: "/ordenes",
+      },
+      {
+        title: "Clientes y Talleres",
+        icon: "mdi-account-group",
+        link: "/clientesTalleres",
       },
     ],
   }),

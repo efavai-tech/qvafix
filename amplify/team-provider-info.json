@@ -1,19 +1,19 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-qvafixv1-dev-100020-authRole",
-      "UnauthRoleArn": "arn:aws:iam::529173520750:role/amplify-qvafixv1-dev-100020-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::529173520750:role/amplify-qvafixv1-dev-100020-authRole",
+      "AuthRoleName": "amplify-qvafix-dev-131615-authRole",
+      "UnauthRoleArn": "arn:aws:iam::529173520750:role/amplify-qvafix-dev-131615-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::529173520750:role/amplify-qvafix-dev-131615-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-qvafixv1-dev-100020-deployment",
-      "UnauthRoleName": "amplify-qvafixv1-dev-100020-unauthRole",
-      "StackName": "amplify-qvafixv1-dev-100020",
-      "StackId": "arn:aws:cloudformation:us-east-1:529173520750:stack/amplify-qvafixv1-dev-100020/524c9b30-49e6-11eb-ba9a-0e765a9edd1f",
-      "AmplifyAppId": "d1o69r4dx8mpvv"
+      "DeploymentBucketName": "amplify-qvafix-dev-131615-deployment",
+      "UnauthRoleName": "amplify-qvafix-dev-131615-unauthRole",
+      "StackName": "amplify-qvafix-dev-131615",
+      "StackId": "arn:aws:cloudformation:us-east-1:529173520750:stack/amplify-qvafix-dev-131615/92dfd9d0-6194-11eb-9014-0e8bc15d151d",
+      "AmplifyAppId": "d22ujg49qw5edy"
     },
     "categories": {
       "auth": {
-        "qvafixv17279c404": {}
+        "qvafix375a13b8": {}
       }
     }
   }

@@ -46,7 +46,7 @@ export default {
 .main {
   margin-bottom: 220px;
 }
-.mobileMain{
+.mobileMain {
   margin-bottom: 5px;
   margin-top: 50px;
 }

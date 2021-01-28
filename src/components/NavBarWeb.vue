@@ -13,8 +13,9 @@
         <v-btn text router-link to="/jobs">
           <v-icon left>mdi-briefcase-variant-outline</v-icon> Empleo</v-btn
         >
-        <v-btn text router-link to="/ordenesadmin">
-          <v-icon left>mdi-briefcase-variant-outline</v-icon> Ordenes Admin</v-btn
+        <v-btn text @click.stop="drawer1 = !drawer1">
+          <v-icon left>mdi-briefcase-upload</v-icon>
+          Admin</v-btn
         >
         <Settings />
         <v-btn text router-link to="/Login" v-if="!logueado">
@@ -56,6 +57,32 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+    <v-navigation-drawer v-model="drawer1" absolute temporary right width="350px">
+      <v-list-item style="height: 64px">
+        <v-list-item class="px-2">
+          <v-list-item-avatar>
+            <v-img src="img/default-avatar-man.jpg"></v-img>
+          </v-list-item-avatar>
+          <v-list-item-title>{{ username }}</v-list-item-title>
+        </v-list-item>
+      </v-list-item>
+
+      <v-divider></v-divider>
+
+      <v-list dense nav>
+        <v-list-item-content>
+          <v-list-item-title>Administrar</v-list-item-title>
+        </v-list-item-content>
+        <v-list-item v-for="item in items1" :key="item.title" router-link :to="item.link">
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
   </div>
 </template>
 <script>
@@ -88,6 +115,7 @@ export default {
   },
   data: () => ({
     drawer: false,
+    drawer1: false,
     username: undefined,
     items: [
       {
@@ -99,6 +127,18 @@ export default {
         title: "Solicitud de Empleo",
         icon: "mdi-briefcase-variant",
         link: "/",
+      },
+    ],
+    items1: [
+      {
+        title: "Órdenes",
+        icon: "mdi-clipboard-list-outline",
+        link: "/ordenes",
+      },
+      {
+        title: "Clientes y Talleres",
+        icon: "mdi-account-group",
+        link: "/clientesTalleres",
       },
     ],
   }),
