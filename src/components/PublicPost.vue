@@ -5,9 +5,7 @@
         <v-card max-width="344">
           <v-list-item three-line>
             <v-list-item-content>
-              <div
-                class="display-1 font-weight-thin mb-4 text-center orange--text"
-              >
+              <div class="display-1 font-weight-thin mb-4 text-center orange--text">
                 ¿ Como debes preguntar en este foro ?
               </div>
               <v-list-item-subtitle>
@@ -17,11 +15,7 @@
           </v-list-item>
           <v-divider />
           <v-expansion-panels>
-            <v-expansion-panel
-              v-for="item in comoPreguntar"
-              :key="item.id"
-              flat
-            >
+            <v-expansion-panel v-for="item in comoPreguntar" :key="item.id" flat>
               <v-expansion-panel-header>
                 {{ item.title }}
               </v-expansion-panel-header>
@@ -37,28 +31,24 @@
         </v-card>
       </v-col>
       <v-col cols="12" sm="8" md="6" class="mt-3">
-        <v-app-bar
-          fixed
-          dense
-          class="d-none d-flex d-sm-none d-sm-flex d-md-none"
-        >
+        <v-app-bar fixed dense class="d-none d-flex d-sm-none d-sm-flex d-md-none">
           <v-toolbar-title class="mr-3">Hacer una Pregunta</v-toolbar-title>
         </v-app-bar>
         <v-card>
           <div class="mx-4">
             <div class="display-1 font-weight-thin mb-4">Título</div>
-            <p>Sea específico y tenga en cuenta que le está haciendo una pregunta a otra persona</p>
-            <v-text-field
-              v-model="title"
-              outlined
-            ></v-text-field>
+            <p>
+              Sea específico y tenga en cuenta que le está haciendo una pregunta a otra
+              persona
+            </p>
+            <v-text-field v-model="post.title" outlined></v-text-field>
             <p class="display-1 font-weight-thin">Cuerpo</p>
             <p>
-              Describa bien su problema para que la persona que va a responder
-              tenga los elementos necesarios
+              Describa bien su problema para que la persona que va a responder tenga los
+              elementos necesarios
             </p>
             <tiptap-vuetify
-              v-model="content"
+              v-model="post.content"
               :extensions="extensions"
               :toolbar-attributes="{ color: 'primary' }"
               placeholder="Descripción de su problema …"
@@ -69,24 +59,72 @@
               Agregue etiquetas para describir de qué se trata su problema
             </p>
             <v-autocomplete
-              v-model="tags"
-              :items="items"
+              v-model="post.blogID"
+              :items="blogs"
+              item-text="name"
+              item-value="id"
               outlined
               dense
               chips
-              small-chips
               label="Etiquetas"
-              multiple
-              class="mt-2"
             ></v-autocomplete>
             <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn outlined
-                ><v-icon left> mdi-publish </v-icon>Publicar</v-btn
-              >
-              <v-btn class="mx-2" outlined
-                ><v-icon left> mdi-close-octagon </v-icon>Cancelar</v-btn
-              >
+              <v-row>
+                <div class="text-center">
+                  <v-menu
+                    v-model="menu"
+                    :close-on-content-click="false"
+                    :nudge-width="80"
+                    offset-x
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn class="mx-2 mt-2" outlined v-bind="attrs" v-on="on"
+                        ><v-icon left> mdi-label </v-icon>Nueva Etiqueta</v-btn
+                      >
+                    </template>
+
+                    <v-card>
+                      <v-list>
+                        <v-list-item>
+                          <v-list-item-content>
+                            <v-list-item-title
+                              >Crear una nueva etiqueta</v-list-item-title
+                            >
+                          </v-list-item-content>
+                        </v-list-item>
+                      </v-list>
+
+                      <v-divider></v-divider>
+
+                      <v-list>
+                        <v-list-item>
+                          <v-text-field
+                            v-model="blog.name"
+                            :counter="50"
+                            :rules="tituloRules"
+                            label="Nombre"
+                            required
+                          ></v-text-field>
+                        </v-list-item>
+                      </v-list>
+
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+
+                        <v-btn text color="primary" @click="createBlog()">Aceptar</v-btn>
+                        <v-btn text @click="menu = false">Cancelar</v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-menu>
+                </div>
+                <v-spacer></v-spacer>
+                <v-btn outlined class="mx-2 mt-2" @click="createPost()"
+                  ><v-icon left> mdi-publish </v-icon>Publicar</v-btn
+                >
+                <v-btn class="mx-2 mt-2" outlined
+                  ><v-icon left> mdi-close-octagon </v-icon>Cancelar</v-btn
+                >
+              </v-row>
             </v-card-actions>
           </div>
         </v-card>
@@ -120,6 +158,12 @@ import {
   Image,
 } from "tiptap-vuetify";
 import Promociones from "../components/Promociones";
+
+import { API } from "aws-amplify";
+import { createPost } from "../graphql/mutations";
+
+import { createBlog } from "../graphql/mutations";
+import { listBlogs } from "../graphql/queries";
 
 export default {
   // specify TiptapVuetify component in "components"
@@ -155,6 +199,13 @@ export default {
     // starting editor's content
     title: "",
     content: "",
+    post: {},
+    blog: {},
+    blogs: [],
+    fav: true,
+    menu: false,
+    message: false,
+    hints: true,
     tags: "",
     comoPreguntar: [
       {
@@ -176,5 +227,39 @@ export default {
       },
     ],
   }),
+  async created() {
+    this.getListBlogs();
+  },
+  methods: {
+    async getListBlogs() {
+      const blogs = await API.graphql({
+        query: listBlogs,
+      });
+      this.blogs = blogs.data.listBlogs.items;
+    },
+
+    async createBlog() {
+      const blog = this.blog;
+      await API.graphql({
+        query: createBlog,
+        variables: { input: blog },
+      });
+      this.close();
+    },
+    async createPost() {
+      const post = this.post;
+      await API.graphql({
+        query: createPost,
+        variables: { input: post },
+      });
+      this.close();
+    },
+
+    close() {
+      this.getListBlogs();
+      this.blog = {};
+      this.menu = false;
+    },
+  },
 };
 </script>

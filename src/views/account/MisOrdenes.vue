@@ -15,41 +15,42 @@
         append-icon="mdi-magnify"
       ></v-text-field>
     </v-app-bar>
-    <v-container>
-      <v-responsive>
-        <v-card
-          v-for="orden in ordenes"
-          :key="orden.id"
-          :class="`pa-3 orden ma-2 ${orden.estado}`"
-        >
-          <v-row no-gutters>
-            <v-col cols="3">
-              <div class="caption grey--text">No</div>
-              <div>{{ orden.numero }}</div>
-            </v-col>
-            <v-col cols="6">
-              <div class="caption grey--text">Taller</div>
-              <div>{{ orden.taller }}</div>
-            </v-col>
-            <v-col cols="3">
-              <div class="caption grey--text">Estado</div>
-              <div>
-                <v-chip
-                  small
-                  color=""
-                  :class="`${orden.estado} white--text caption my-2`"
-                  >{{ orden.estado }}</v-chip
-                >
-              </div>
-            </v-col>
-          </v-row>
-        </v-card>
-      </v-responsive>
-    </v-container>
+    <v-responsive>
+      <v-card
+        v-for="orden in ordenes"
+        :key="orden.id"
+        :class="`pa-3 orden ma-2 ${orden.estado}`"
+      >
+        <v-row no-gutters>
+          <v-col cols="5">
+            <div class="caption grey--text">Equipo</div>
+            <div>{{ orden.equipo.nombre }}</div>
+          </v-col>
+          <v-col cols="3">
+            <div class="caption grey--text">Taller</div>
+            <div>{{ orden.tecnico.taller.name }}</div>
+          </v-col>
+          <v-col cols="4">
+            <div class="caption grey--text">Estado</div>
+            <div>
+              <v-chip
+                small
+                color=""
+                :class="`${orden.estado} white--text caption my-2`"
+                >{{ orden.estado }}</v-chip
+              >
+            </div>
+          </v-col>
+        </v-row>
+      </v-card>
+    </v-responsive>
   </div>
 </template>
 
 <script>
+import { API } from "aws-amplify";
+import { listOrdenServicios } from "../../graphql/queries";
+
 // import Promociones from "";
 export default {
   components: {
@@ -58,18 +59,18 @@ export default {
   data: () => ({
     openSearch: false,
     ordenes: [
-      {
-        numero: "22547",
-        equipo: "celular",
-        taller: "Bartolete Pérez",
-        estado: "completada",
-      },
-      {
-        numero: "22568",
-        equipo: "laptop",
-        taller: "Bartolete Pérez",
-        estado: "enrevision",
-      },
+      // {
+      //   numero: "22547",
+      //   equipo: "celular",
+      //   taller: "Bartolete Pérez",
+      //   estado: "finalizada",
+      // },
+      // {
+      //   numero: "22568",
+      //   equipo: "laptop",
+      //   taller: "Bartolete Pérez",
+      //   estado: "enrevision",
+      // },
     ],
     itemsPerPageArray: [10, 20, 30],
     search: "",
@@ -79,7 +80,7 @@ export default {
     panel: [],
     itemsPerPage: 5,
     sortBy: "taller",
-    keys: ["noOrnen", "taller", "equipo", "estado"],
+    keys: ["id", "taller", "equipo", "estado"],
   }),
   computed: {
     numberOfPages() {
@@ -88,6 +89,9 @@ export default {
     filteredKeys() {
       return this.keys.filter((key) => key !== `taller`);
     },
+  },
+  async created() {
+    this.getOrdenes();
   },
   methods: {
     nextPage() {
@@ -99,18 +103,27 @@ export default {
     updateItemsPerPage(number) {
       this.itemsPerPage = number;
     },
+    // ordenes
+    async getOrdenes() {
+      this.loading = true;
+      const ordenes = await API.graphql({
+        query: listOrdenServicios,
+      });
+      this.ordenes = ordenes.data.listOrdenServicios.items;
+      this.loading = false;
+    },
   },
 };
 </script>
 
 <style>
-.orden.completada {
+.orden.finalizada {
   border-left: 5px solid #3ac590;
 }
 .orden.enrevision {
   border-left: 5px solid #ebb00f;
 }
-.v-chip.completada {
+.v-chip.finalizada {
   background: #3ac590 !important;
 }
 .v-chip.enrevision {

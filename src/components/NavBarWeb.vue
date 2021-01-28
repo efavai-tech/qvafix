@@ -14,7 +14,8 @@
           <v-icon left>mdi-briefcase-variant-outline</v-icon> Empleo</v-btn
         >
         <v-btn text @click.stop="drawer1 = !drawer1">
-          <v-icon left>mdi-briefcase-variant-outline</v-icon> Admin</v-btn
+          <v-icon left>mdi-briefcase-upload</v-icon>
+          Admin</v-btn
         >
         <Settings />
         <v-btn text router-link to="/Login" v-if="!logueado">
@@ -132,7 +133,7 @@ export default {
       {
         title: "Órdenes",
         icon: "mdi-clipboard-list-outline",
-        link: "/ordenesadmin",
+        link: "/ordenes",
       },
       {
         title: "Clientes y Talleres",

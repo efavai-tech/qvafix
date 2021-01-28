@@ -1,0 +1,100 @@
+type Taller @model {
+  id: ID!
+  name: String!
+  direccion: String
+  logo: String
+  tecnico:[Tecnico] @connection(keyName: "byTaller", fields: ["id"])
+  clientes: [Cliente]
+  ofertasTrabajo: [OfertasTrabajo] @connection(keyName: "byTaller", fields: ["id"])
+}
+type Tecnico @model @key(name: "byTaller", fields: ["tallerID"]){  
+  id: ID!
+  name: String!
+  cargo: String
+  tallerID: ID!
+  taller: Taller @connection(fields: ["tallerID"])
+  }
+
+type Piezas @model{
+  id: ID!
+  nombre: String
+  precio: Int
+  cantidad: Int
+}
+
+type Equipo @model @key(name: "byCliente", fields: ["clienteID"]){
+  id: ID!
+  nombre: String!
+  descripcion: String
+  clienteID: ID!
+  cliente: Cliente @connection(fields: ["clienteID"])
+}
+type Cliente @model{
+  id: ID!
+  name: String!
+  numeroTelefono: AWSPhone
+  correo: AWSEmail
+  ordenServicio: [OrdenServicio] @connection(keyName: "byCliente", fields: ["id"])
+  equipo: [Equipo]
+}
+type OrdenServicio @model @key(name: "byCliente", fields: ["clienteID"]){
+  id: ID!
+  estado: String!
+  tecnicoID: ID!
+  tecnico: Tecnico
+  tallerID: ID!
+  clienteID: ID!
+  cliente: Cliente @connection(fields: ["clienteID"])
+  fechaDeFinalizado: AWSDateTime
+  equipoID: ID!
+  equipo: Equipo @connection(fields: ["clienteID"])
+  piezas:[Piezas]
+}
+
+type OfertasTrabajo @model @key(name: "byTaller", fields: ["tallerID"]){
+  id: ID!
+  tallerID: ID!
+  taller: Taller @connection(fields: ["tallerID"])
+  titulo:String!
+  contenido:String!
+  fecha:AWSDateTime
+}
+
+type Blog @model{
+  id: ID!
+  name: String!
+  posts: [Post] @connection(keyName: "byBlog", fields: ["id"])
+}
+
+type Post @model @key(name: "byBlog", fields: ["blogID"]) {
+  id: ID!
+  title: String!
+  content: String!
+  blogID: ID!
+  blog: Blog @connection(fields: ["blogID"])
+  comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
+}
+
+type Comment @model @key(name: "byPost", fields: ["postID", "content"]) {
+  id: ID!
+  postID: ID!
+  post: Post @connection(fields: ["postID"])
+  content: String!
+}
+# type Task
+#   @model
+#   @auth(
+#     rules: [
+#       { allow: groups, groups: ["Managers"], queries: null, mutations: [create, update, delete] }
+#       { allow: groups, groups: ["Employees"], queries: [get, list], mutations: null }
+#     ]
+#   ) {
+#   id: ID!
+#   title: String!
+#   description: String
+#   status: String
+# }
+# type PrivateNote @model @auth(rules: [{ allow: owner }]) {
+#   id: ID!
+#   content: String!
+# }

@@ -7,6 +7,9 @@
 </template>
 
 <script>
+import { API } from "aws-amplify";
+import { listEquipos } from "../../graphql/queries";
+
 import Taller from "../../components/admin/talleres";
 import Clientes from "../../components/admin/clientes";
 export default {
@@ -15,10 +18,18 @@ export default {
     Clientes,
   },
   name: "App",
-  async created() {},
-  data() {
-    return {};
+  async created() {
+    this.GetEquipos();
   },
-  methods: {},
+  data: () => ({ equipos: [] }),
+  methods: {
+    async GetEquipos() {
+      const equipos = await API.graphql({
+        query: listEquipos,
+      });
+      this.equipos = equipos.data.listEquipos.items;
+      console.log(this.equipos);
+    },
+  },
 };
 </script>

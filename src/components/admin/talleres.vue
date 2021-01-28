@@ -13,6 +13,13 @@
       ><template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>Talleres</v-toolbar-title>
+          <v-progress-linear
+            :active="loading"
+            :indeterminate="loading"
+            absolute
+            bottom
+            color="deep-orange"
+          ></v-progress-linear>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
           <v-text-field
@@ -75,6 +82,7 @@
       <template v-slot:body="{ items }">
         <tbody>
           <tr v-for="item in items" :key="item.id">
+            <td>{{ item.id }}</td>
             <td>{{ item.name }}</td>
             <td>{{ item.direccion }}</td>
             <td>
@@ -113,14 +121,20 @@ export default {
       talleres: [],
       taller: {},
       search: "",
-      dialog: false,
       dialogDelete: false,
       overlay: false,
-      menu1: false,
+      loading: false,
+      dialog: false,
       editedIndex: -1,
       editedItem: {},
       defaultItem: {},
       headers: [
+        {
+          text: "id",
+          align: "left",
+          sortable: true,
+          value: "id",
+        },
         {
           text: "Nombre",
           align: "left",
@@ -148,12 +162,12 @@ export default {
   methods: {
     // Talleres
     async getTalleres() {
-      // this.overlay = true;
+      this.loading = true;
       const talleres = await API.graphql({
         query: listTallers,
       });
       this.talleres = talleres.data.listTallers.items;
-      this.overlay = false;
+      this.loading = false;
     },
     async createTaller() {
       const taller = this.taller;
@@ -164,7 +178,8 @@ export default {
         variables: { input: taller },
       });
       this.taller = {};
-      this.menu1 = false;
+      this.getTalleres();
+      this.dialog = false;
     },
     async update(item) {
       this.taller = item;

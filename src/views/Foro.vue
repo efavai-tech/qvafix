@@ -9,9 +9,7 @@
               <v-list-item v-for="(item, i) in masVistos" :key="i">
                 <v-list-item-content>
                   <v-list-item-title v-html="item.title"></v-list-item-title>
-                  <v-list-item-subtitle
-                    v-html="item.subtitle"
-                  ></v-list-item-subtitle>
+                  <v-list-item-subtitle v-html="item.content"></v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
             </v-list-item-group>
@@ -27,9 +25,7 @@
         >
           <template v-slot:header>
             <v-app-bar fixed dense class="d-flex d-sm-none d-sm-flex d-md-none">
-              <v-toolbar-title class="mr-3"
-                >Últimas publicaciones</v-toolbar-title
-              >
+              <v-toolbar-title class="mr-3">Últimas publicaciones</v-toolbar-title>
             </v-app-bar>
             <v-row class="mx-1">
               <v-col cols="12" sm="8">
@@ -55,14 +51,7 @@
           </template>
           <v-spacer />
           <template v-slot:default="props">
-            <v-card
-              v-model="panel"
-              popout
-              inset
-              multiple
-              class="col-md6 mt-2"
-              flat
-            >
+            <v-card v-model="panel" popout inset multiple class="col-md6 mt-2" flat>
               <div class="mx-auto" tile>
                 <v-list threeLine avatar rounded>
                   <v-list-item-group color="primary">
@@ -78,31 +67,19 @@
                           <v-img :src="item.avatar"></v-img>
                         </v-list-item-avatar>
                         <v-list-item-content>
-                          <v-list-item-title
-                            >{{ item.title }}
-                          </v-list-item-title>
+                          <v-list-item-title>{{ item.title }} </v-list-item-title>
                           <v-list-item-subtitle
-                            v-html="item.subtitle"
+                            v-html="item.content"
                           ></v-list-item-subtitle>
                           <v-div v-if="$vuetify.breakpoint.xsOnly" class="pt-2">
-                            <v-btn small text color="primary"
-                              >9<br />Vistas</v-btn
-                            >
-                            <v-btn small text color="success"
-                              >3<br />Respuestas</v-btn
-                            >
+                            <v-btn small text color="primary">9<br />Vistas</v-btn>
+                            <v-btn small text color="success">3<br />Respuestas</v-btn>
                             <v-btn small text>0<br />Votos</v-btn>
                           </v-div>
                         </v-list-item-content>
-                        <v-btn-toggle
-                          shaped
-                          mandatory
-                          v-if="!$vuetify.breakpoint.xsOnly"
-                        >
+                        <v-btn-toggle shaped mandatory v-if="!$vuetify.breakpoint.xsOnly">
                           <v-btn text>{{ item.vistas }}<br />Vistas</v-btn>
-                          <v-btn text
-                            >{{ item.respuestas }}<br />Respuestas</v-btn
-                          >
+                          <v-btn text>{{ item.respuestas }}<br />Respuestas</v-btn>
                           <v-btn text>{{ item.votos }}<br />Votos</v-btn>
                         </v-btn-toggle>
                       </v-list-item>
@@ -159,6 +136,10 @@
 <script>
 import Promociones from "../components/Promociones";
 import LoginDialog from "../components/LoginDialog";
+
+import { API } from "aws-amplify";
+import { listPosts } from "../graphql/queries";
+
 export default {
   components: {
     Promociones,
@@ -171,6 +152,7 @@ export default {
     sortDesc: false,
     page: 1,
     panel: [],
+    posts: [],
     itemsPerPage: 10,
     sortBy: "vistas",
     keys: ["avatar", "action", "headline", "title", "subtitle"],
@@ -178,31 +160,31 @@ export default {
       {
         avatar: "img/material2.jpg",
         title: "Brunch this weekend?",
-        subtitle:
+        content:
           "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
       },
       {
         avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
         title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
-        subtitle:
+        content:
           "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.",
       },
       {
         avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
         title: "Oui oui",
-        subtitle:
+        content:
           "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?",
       },
       {
         avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
         title: "Birthday gift",
-        subtitle:
+        content:
           "<span class='text--primary'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?",
       },
       {
         avatar: "https://cdn.vuetifyjs.com/images/lists/5.jpg",
         title: "Recipe to try",
-        subtitle:
+        content:
           "<span class='text--primary'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.",
       },
     ],
@@ -213,7 +195,7 @@ export default {
         action: "15 min",
         headline: "Brunch this weekend?",
         title: "Ali Connors",
-        subtitle:
+        content:
           "I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
         vistas: 83,
         respuestas: 6,
@@ -225,7 +207,7 @@ export default {
         action: "2 hr",
         headline: "Summer BBQ",
         title: "me, Scrott, Jennifer",
-        subtitle: "Wish I could come, but I'm out of town this weekend.",
+        content: "Wish I could come, but I'm out of town this weekend.",
         vistas: 3,
         respuestas: 7,
         votos: 1,
@@ -236,7 +218,7 @@ export default {
         action: "6 hr",
         headline: "Oui oui",
         title: "Sandra Adams",
-        subtitle: "Do you have Paris recommendations? Have you ever been?",
+        content: "Do you have Paris recommendations? Have you ever been?",
         vistas: 8,
         respuestas: 8,
         votos: 21,
@@ -247,8 +229,7 @@ export default {
         action: "12 hr",
         headline: "Birthday gift",
         title: "Trevor Hansen",
-        subtitle:
-          "Have any ideas about what we should get Heidi for her birthday?",
+        content: "Have any ideas about what we should get Heidi for her birthday?",
         vistas: 5,
         respuestas: 22,
         votos: 10,
@@ -259,8 +240,7 @@ export default {
         action: "18hr",
         headline: "Recipe to try",
         title: "Britta Holt",
-        subtitle:
-          "We should eat this: Grate, Squash, Corn, and tomatillo Tacos.",
+        content: "We should eat this: Grate, Squash, Corn, and tomatillo Tacos.",
         vistas: 3,
         respuestas: 32,
         votos: 5,
@@ -271,7 +251,7 @@ export default {
         action: "2 hr",
         headline: "Summer BBQ",
         title: "me, Scrott, Jennifer",
-        subtitle: "Wish I could come, but I'm out of town this weekend.",
+        content: "Wish I could come, but I'm out of town this weekend.",
         vistas: 3,
         respuestas: 62,
         votos: 8,
@@ -282,7 +262,7 @@ export default {
         action: "6 hr",
         headline: "Oui oui",
         title: "Sandra Adams",
-        subtitle: "Do you have Paris recommendations? Have you ever been?",
+        content: "Do you have Paris recommendations? Have you ever been?",
         vistas: 23,
         respuestas: 9,
         votos: 1,
@@ -293,8 +273,7 @@ export default {
         action: "12 hr",
         headline: "Birthday gift",
         title: "Trevor Hansen",
-        subtitle:
-          "Have any ideas about what we should get Heidi for her birthday?",
+        content: "Have any ideas about what we should get Heidi for her birthday?",
         vistas: 63,
         respuestas: 2,
         votos: 1,
@@ -305,7 +284,7 @@ export default {
         action: "2 hr",
         headline: "Summer BBQ",
         title: "me, Scrott, Jennifer",
-        subtitle: "Wish I could come, but I'm out of town this weekend.",
+        content: "Wish I could come, but I'm out of town this weekend.",
         vistas: 54,
         respuestas: 2,
         votos: 1,
@@ -316,7 +295,7 @@ export default {
         action: "6 hr",
         headline: "Oui oui",
         title: "Sandra Adams",
-        subtitle: "Do you have Paris recommendations? Have you ever been?",
+        content: "Do you have Paris recommendations? Have you ever been?",
         vistas: 13,
         respuestas: 2,
         votos: 1,
@@ -327,8 +306,7 @@ export default {
         action: "12 hr",
         headline: "Birthday gift",
         title: "Trevor Hansen",
-        subtitle:
-          "Have any ideas about what we should get Heidi for her birthday?",
+        content: "Have any ideas about what we should get Heidi for her birthday?",
         vistas: 9,
         respuestas: 2,
         votos: 1,
@@ -350,6 +328,9 @@ export default {
       return this.keys.filter((key) => key !== `title`);
     },
   },
+  async created() {
+    this.getListPosts();
+  },
   methods: {
     nextPage() {
       if (this.page + 1 <= this.numberOfPages) this.page += 1;
@@ -359,6 +340,12 @@ export default {
     },
     updateItemsPerPage(number) {
       this.itemsPerPage = number;
+    },
+    async getListPosts() {
+      const posts = await API.graphql({
+        query: listPosts,
+      });
+      this.posts = posts.data.listPosts.items;
     },
   },
 };
