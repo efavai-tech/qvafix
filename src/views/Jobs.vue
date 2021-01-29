@@ -123,24 +123,13 @@
                   </v-row>
                 </v-col>
                 <v-col cols="12" sm="12" md="1">
-                  <v-tooltip top color="primary">
-                    <template v-slot:activator="{ on }">
-                      <v-icon class="primary--text" v-on="on" @click="editItem(item)"
-                        >v-icon notranslate mdi mdi-pen theme--dark</v-icon
-                      >
-                    </template>
-                    <span>Editar</span>
-                  </v-tooltip>
+                  <v-icon class="primary--text" v-on="on" @click="editItem(item)"
+                    >v-icon notranslate mdi mdi-pen theme--dark</v-icon
+                  >
                   <v-divider class="mx-1" inset vertical></v-divider>
-
-                  <v-tooltip top color="red">
-                    <template v-slot:activator="{ on }">
-                      <v-icon v-on="on" class="red--text" @click="confirmDelete(item)"
-                        >v-icon notranslate mdi mdi-delete theme--dark</v-icon
-                      >
-                    </template>
-                    <span>Eliminar</span>
-                  </v-tooltip>
+                  <v-icon v-on="on" class="red--text" @click="confirmDelete(item)"
+                    >v-icon notranslate mdi mdi-delete theme--dark</v-icon
+                  >
                 </v-col>
               </v-row>
             </v-card>

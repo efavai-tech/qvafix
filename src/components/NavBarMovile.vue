@@ -3,11 +3,6 @@
     <v-bottom-navigation grow app>
       <v-btn icon router-link to="/">
         <span>Home</span>
-        <v-btn icon router-link to="/Login" v-if="!login">
-          <span>Login</span>
-
-          <v-icon>mdi-login</v-icon>
-        </v-btn>
         <v-icon>mdi-home-outline</v-icon>
       </v-btn>
       <v-btn icon router-link to="/foro">
@@ -22,9 +17,14 @@
         </v-badge>
         <v-icon v-if="nuevo <= 0">mdi-briefcase-variant-outline</v-icon>
       </v-btn>
+      <v-btn icon router-link to="/Login" v-if="!logueado">
+        <span>Login</span>
+
+        <v-icon>mdi-login</v-icon>
+      </v-btn>
       <v-menu v-model="menu1" top offset-y transition="slide-x-transition">
         <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on" v-if="login">
+          <v-btn icon v-on="on" v-if="logueado">
             <span>Admin</span>
             <v-icon>mdi-briefcase-upload</v-icon>
           </v-btn>
@@ -51,7 +51,7 @@
       </v-menu>
       <v-menu v-model="menu" top offset-y transition="slide-x-transition">
         <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on" v-if="login">
+          <v-btn icon v-on="on" v-if="logueado">
             <span>Yo</span>
 
             <v-icon>mdi-account</v-icon>
@@ -85,6 +85,14 @@
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item @click="signOut()">
+                <v-list-item-icon>
+                  <v-icon>mdi-logout</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>Cerrar Sesión</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -139,16 +147,16 @@ export default {
         icon: "mdi-clipboard-list-outline",
         link: "/MisOrdenes",
       },
-      {
-        title: "Solicitudes Empleo",
-        icon: "mdi-briefcase-variant",
-        link: "/SolicitudesEmpleo",
-      },
-      {
-        title: "Cerrar Sesión",
-        icon: "mdi-logout",
-        link: "/Logout",
-      },
+      // {
+      //   title: "Solicitudes Empleo",
+      //   icon: "mdi-briefcase-variant",
+      //   link: "/SolicitudesEmpleo",
+      // },
+      // {
+      //   title: "Cerrar Sesión",
+      //   icon: "mdi-logout",
+      //   link: "/Logout",
+      // },
     ],
     items1: [
       {
@@ -163,6 +171,11 @@ export default {
       },
     ],
   }),
+  computed: {
+    logueado: function () {
+      return this.$store.state.login;
+    },
+  },
   methods: {
     enableDark() {
       this.$vuetify.theme.dark = true;
@@ -173,6 +186,16 @@ export default {
       this.$vuetify.theme.dark = false;
       this.$store.commit("DISABLE_DARK");
       console.log(this.$store.state.dark_theme);
+    },
+    signOut() {
+      Auth.signOut()
+        .then((data) => {
+          console.log(data);
+          this.$store.commit("logout");
+          this.$router.push("/");
+        })
+        .catch((err) => console.log(err));
+      this.drawer = false;
     },
   },
 };
