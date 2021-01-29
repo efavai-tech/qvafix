@@ -13,6 +13,7 @@ type Tecnico @model @key(name: "byTaller", fields: ["tallerID"]){
   cargo: String
   tallerID: ID!
   taller: Taller @connection(fields: ["tallerID"])
+  ordenServicio: [OrdenServicio] @connection(keyName: "byCliente", fields: ["id"])
   }
 
 type Piezas @model{
@@ -41,7 +42,7 @@ type OrdenServicio @model @key(name: "byCliente", fields: ["clienteID"]){
   id: ID!
   estado: String!
   tecnicoID: ID!
-  tecnico: Tecnico
+  tecnico: Tecnico @connection(fields: ["clienteID"])
   tallerID: ID!
   clienteID: ID!
   cliente: Cliente @connection(fields: ["clienteID"])

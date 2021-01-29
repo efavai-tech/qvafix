@@ -12,30 +12,32 @@
       item-key="name"
       ><template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>Talleres</v-toolbar-title>
-          <v-progress-linear
-            :active="loading"
-            :indeterminate="loading"
-            absolute
-            bottom
-            color="deep-orange"
-          ></v-progress-linear>
-          <v-divider class="mx-4" inset vertical></v-divider>
-          <v-spacer></v-spacer>
-          <v-text-field
-            v-model="search"
-            append-icon="mdi-magnify"
-            label="Buscar"
-            single-line
-            hide-details
-          ></v-text-field>
-          <v-spacer></v-spacer>
-          <v-dialog v-model="dialog" max-width="500px">
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
+          <v-row>
+            <v-toolbar-title>Talleres</v-toolbar-title>
+            <v-progress-linear
+              :active="loading"
+              :indeterminate="loading"
+              absolute
+              bottom
+              color="deep-orange"
+            ></v-progress-linear>
+            <v-divider class="mx-4" inset vertical></v-divider>
+            <v-spacer></v-spacer>
+            <v-text-field
+              v-model="search"
+              append-icon="mdi-magnify"
+              label="Buscar"
+              single-line
+              hide-details
+            ></v-text-field>
+            <v-spacer></v-spacer>
+            <template>
+              <v-btn color="primary" dark class="mb-2 mt-2" @click="dialog = true">
                 Nuevo Taller
               </v-btn>
             </template>
+          </v-row>
+          <v-dialog v-model="dialog" max-width="500px">
             <v-card>
               <v-card-title>
                 <span class="headline">{{ formTitle }}</span>

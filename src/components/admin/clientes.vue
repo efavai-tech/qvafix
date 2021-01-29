@@ -12,30 +12,30 @@
       item-key="name"
       ><template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>Clientes</v-toolbar-title>
-          <v-progress-linear
-            :active="loading"
-            :indeterminate="loading"
-            absolute
-            bottom
-            color="deep-orange"
-          ></v-progress-linear>
-          <v-divider class="mx-4" inset vertical></v-divider>
-          <v-spacer></v-spacer>
-          <v-text-field
-            v-model="search"
-            append-icon="mdi-magnify"
-            label="Buscar"
-            single-line
-            hide-details
-          ></v-text-field>
-          <v-spacer></v-spacer>
+          <v-row>
+            <v-toolbar-title>Clientes</v-toolbar-title>
+            <v-progress-linear
+              :active="loading"
+              :indeterminate="loading"
+              absolute
+              bottom
+              color="deep-orange"
+            ></v-progress-linear>
+            <v-divider class="mx-4" inset vertical></v-divider>
+            <v-spacer></v-spacer>
+            <v-text-field
+              v-model="search"
+              append-icon="mdi-magnify"
+              label="Buscar"
+              single-line
+              hide-details
+            ></v-text-field>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" dark class="mb-2 mt-2" @click="dialog = true">
+              Nuevo cliente
+            </v-btn>
+          </v-row>
           <v-dialog v-model="dialog" max-width="600px">
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-                Nuevo cliente
-              </v-btn>
-            </template>
             <v-card>
               <v-card-title>
                 <span class="headline">{{ formTitle }}</span>
