@@ -49,7 +49,9 @@
 
 <script>
 import { API } from "aws-amplify";
-import { listOrdenServicios } from "../../graphql/queries";
+import { Auth } from "aws-amplify";
+
+import { getCliente } from "../../graphql/queries";
 
 // import Promociones from "";
 export default {
@@ -58,6 +60,7 @@ export default {
   },
   data: () => ({
     openSearch: false,
+    username: undefined,
     ordenes: [
       // {
       //   numero: "22547",
@@ -78,6 +81,7 @@ export default {
     sortDesc: false,
     page: 1,
     panel: [],
+    cliente: {},
     itemsPerPage: 5,
     sortBy: "taller",
     keys: ["id", "taller", "equipo", "estado"],
@@ -91,7 +95,21 @@ export default {
     },
   },
   async created() {
-    this.getOrdenes();
+    this.getCliente();
+    Auth.currentAuthenticatedUser({
+      bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+    })
+      .then((user) => {
+        console.log(user);
+        this.username = user.attributes.email;
+        this.$store.commit("Login");
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err == "The user is not authenticated") {
+          this.$store.commit("logout");
+        }
+      });
   },
   methods: {
     nextPage() {
@@ -104,13 +122,15 @@ export default {
       this.itemsPerPage = number;
     },
     // ordenes
-    async getOrdenes() {
-      this.loading = true;
-      const ordenes = await API.graphql({
-        query: listOrdenServicios,
+    async getCliente() {
+      const id = "2891c2e8-1254-4291-b4f3-a93540af0600";
+
+      const result = await API.graphql({
+        query: getCliente,
+        variables: { input: id },
       });
-      this.ordenes = ordenes.data.listOrdenServicios.items;
-      this.loading = false;
+      console.log("result");
+      console.log(result.data);
     },
   },
 };

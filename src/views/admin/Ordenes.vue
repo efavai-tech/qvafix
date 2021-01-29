@@ -44,12 +44,12 @@
       <template v-slot:body="{ items }">
         <tbody>
           <tr v-for="item in items" :key="item.id">
-            <td>{{ item.equipo.nombre }}</td>
+            <!-- <td>{{ item.equipo.nombre }}</td>
             <td>{{ item.estado }}</td>
             <td>{{ item.tecnico.name }}</td>
             <td>{{ item.tecnico.taller.name }}</td>
             <td>{{ item.createdAt | formatDate }}</td>
-            <td>{{ item.fechaDeFinalizado }}</td>
+            <td>{{ item.fechaDeFinalizado }}</td> -->
             <td>
               <v-btn
                 depressed
@@ -169,7 +169,7 @@ export default {
     },
     async CreateOrdenServicio() {
       const ordenServicio = {
-        id: 1,
+        id: 2,
         equipoID: 1,
         clienteID: "2891c2e8-1254-4291-b4f3-a93540af0600",
         estado: "enrevision",

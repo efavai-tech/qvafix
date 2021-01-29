@@ -109,7 +109,6 @@ export default {
         console.log(err);
         if (err == "The user is not authenticated") {
           this.$store.commit("logout");
-          console.log("login:  " + this.$store.state.login);
         }
       });
   },

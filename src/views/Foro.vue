@@ -18,7 +18,7 @@
       </v-col>
       <v-col class="col-md7 mt-3">
         <v-data-iterator
-          :items="temas"
+          :items="posts"
           :items-per-page.sync="itemsPerPage"
           :page="page"
           hide-default-footer
@@ -63,25 +63,37 @@
                         router-link
                         :to="item.link"
                       >
-                        <v-list-item-avatar v-if="avatar">
-                          <v-img :src="item.avatar"></v-img>
-                        </v-list-item-avatar>
-                        <v-list-item-content>
-                          <v-list-item-title>{{ item.title }} </v-list-item-title>
-                          <v-list-item-subtitle
-                            v-html="item.content"
-                          ></v-list-item-subtitle>
-                          <v-div v-if="$vuetify.breakpoint.xsOnly" class="pt-2">
-                            <v-btn small text color="primary">9<br />Vistas</v-btn>
-                            <v-btn small text color="success">3<br />Respuestas</v-btn>
-                            <v-btn small text>0<br />Votos</v-btn>
-                          </v-div>
-                        </v-list-item-content>
-                        <v-btn-toggle shaped mandatory v-if="!$vuetify.breakpoint.xsOnly">
-                          <v-btn text>{{ item.vistas }}<br />Vistas</v-btn>
-                          <v-btn text>{{ item.respuestas }}<br />Respuestas</v-btn>
-                          <v-btn text>{{ item.votos }}<br />Votos</v-btn>
-                        </v-btn-toggle>
+                        <v-row>
+                          <v-col cols="12" sm="8" md="8">
+                            <v-list-item-avatar v-if="avatar">
+                              <v-img :src="item.avatar"></v-img>
+                            </v-list-item-avatar>
+                            <v-list-item-content>
+                              <v-list-item-title>{{ item.title }} </v-list-item-title>
+                              <v-list-item-subtitle
+                                v-html="item.content"
+                              ></v-list-item-subtitle>
+                              <v-chip outlined class="ma-2" color="secondary">
+                                {{ item.blog.name }}
+                              </v-chip>
+                              <v-spacer />
+                              <p class="text-justify">
+                                {{ item.createdAt | formatDate }}
+                              </p>
+                            </v-list-item-content>
+                          </v-col>
+                          <v-col cols="12" sm="8" md="4">
+                            <v-btn-toggle
+                              shaped
+                              mandatory
+                              v-if="!$vuetify.breakpoint.xsOnly"
+                            >
+                              <v-btn text>{{ item.vistas }}<br />Vistas</v-btn>
+                              <v-btn text>{{ item.respuestas }}<br />Respuestas</v-btn>
+                              <v-btn text>{{ item.votos }}<br />Votos</v-btn>
+                            </v-btn-toggle></v-col
+                          >
+                        </v-row>
                       </v-list-item>
                     </v-row>
                   </v-list-item-group>
@@ -154,8 +166,8 @@ export default {
     panel: [],
     posts: [],
     itemsPerPage: 10,
-    sortBy: "vistas",
-    keys: ["avatar", "action", "headline", "title", "subtitle"],
+    sortBy: "createdAt",
+    keys: ["avatar", "action", "headline", "title", "subtitle", "createdAt"],
     masVistos: [
       {
         avatar: "img/material2.jpg",
