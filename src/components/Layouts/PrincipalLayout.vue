@@ -36,7 +36,7 @@ export default {
 
   methods: {
     onResize() {
-      this.isMobile = window.innerWidth < 600;
+      this.isMobile = window.innerWidth < 850;
     },
   },
 };
@@ -46,7 +46,7 @@ export default {
 .main {
   margin-bottom: 220px;
 }
-.mobileMain{
+.mobileMain {
   margin-bottom: 5px;
   margin-top: 50px;
 }

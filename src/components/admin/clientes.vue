@@ -12,23 +12,30 @@
       item-key="name"
       ><template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>Clientes</v-toolbar-title>
-          <v-divider class="mx-4" inset vertical></v-divider>
-          <v-spacer></v-spacer>
-          <v-text-field
-            v-model="search"
-            append-icon="mdi-magnify"
-            label="Buscar"
-            single-line
-            hide-details
-          ></v-text-field>
-          <v-spacer></v-spacer>
-          <v-dialog v-model="dialog" max-width="500px">
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-                Nuevo cliente
-              </v-btn>
-            </template>
+          <v-row>
+            <v-toolbar-title>Clientes</v-toolbar-title>
+            <v-progress-linear
+              :active="loading"
+              :indeterminate="loading"
+              absolute
+              bottom
+              color="deep-orange"
+            ></v-progress-linear>
+            <v-divider class="mx-4" inset vertical></v-divider>
+            <v-spacer></v-spacer>
+            <v-text-field
+              v-model="search"
+              append-icon="mdi-magnify"
+              label="Buscar"
+              single-line
+              hide-details
+            ></v-text-field>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" dark class="mb-2 mt-2" @click="dialog = true">
+              Nuevo cliente
+            </v-btn>
+          </v-row>
+          <v-dialog v-model="dialog" max-width="600px">
             <v-card>
               <v-card-title>
                 <span class="headline">{{ formTitle }}</span>
@@ -42,10 +49,15 @@
                     </v-col>
 
                     <v-col cols="12" sm="6" md="6">
-                      <v-text-field
-                        v-model="cliente.numeroTelefono"
+                      <vue-tel-input-vuetify
+                        :preferred-countries="['cu', 'gb', 'ua', 'us']"
+                        :valid-characters-only="true"
+                        select-label="Código"
                         label="Número de Teléfono"
-                      ></v-text-field>
+                        placeholder=""
+                        @input="onInput"
+                        required
+                      ></vue-tel-input-vuetify>
                     </v-col>
                     <v-col cols="12" sm="6" md="6">
                       <v-text-field
@@ -82,6 +94,7 @@
       <template v-slot:body="{ items }">
         <tbody>
           <tr v-for="item in items" :key="item.id">
+            <td>{{ item.id }}</td>
             <td>{{ item.name }}</td>
             <td>{{ item.numeroTelefono }}</td>
             <td>{{ item.correo }}</td>
@@ -108,6 +121,8 @@
 
 <script>
 import { API } from "aws-amplify";
+import VueTelInputVuetify from "vue-tel-input-vuetify/lib/vue-tel-input-vuetify.vue";
+
 import { createCliente } from "../../graphql/mutations";
 import { updateCliente } from "../../graphql/mutations";
 import { deleteCliente } from "../../graphql/mutations";
@@ -115,20 +130,33 @@ import { listClientes } from "../../graphql/queries";
 
 export default {
   name: "App",
-
+  components: {
+    VueTelInputVuetify,
+  },
   data() {
     return {
       clientes: [],
       cliente: {},
+      phone: {
+        number: "",
+        valid: false,
+        country: undefined,
+      },
       search: "",
+      loading: false,
       dialog: false,
       dialogDelete: false,
       overlay: false,
-      menu1: false,
       editedIndex: -1,
       editedItem: {},
       defaultItem: {},
       headers: [
+        {
+          text: "id",
+          align: "left",
+          sortable: true,
+          value: "id",
+        },
         {
           text: "Nombre",
           align: "left",
@@ -162,15 +190,22 @@ export default {
   methods: {
     // clientes
     async getClientes() {
-      this.overlay = true;
+      this.loading = true;
       const clientes = await API.graphql({
         query: listClientes,
       });
       this.clientes = clientes.data.listClientes.items;
-      this.overlay = false;
+      this.loading = false;
+    },
+    onInput(formattedNumber, { number, valid, country }) {
+      this.phone.number = number.international;
+      this.phone.valid = valid;
+      this.phone.country = country && country.name;
     },
     async createCliente() {
       var cliente = this.cliente;
+      cliente.numeroTelefono = this.phone.number.replace(/ /g, "");
+
       await API.graphql({
         query: createCliente,
         variables: { input: cliente },

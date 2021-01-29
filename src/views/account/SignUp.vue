@@ -117,9 +117,9 @@ export default {
       if (this.confirmPasswordCheck()) {
         const { password, email, phone } = this;
         const username = email;
-        const phone_number = phone.number.replace(/ /g, "")
+        const phone_number = phone.number.replace(/ /g, "");
         console.log(phone_number);
-        
+
         await Auth.signUp({
           username,
           password,
@@ -128,16 +128,23 @@ export default {
             phone_number, // optional - E.164 number convention
             // other custom attributes
           },
-        }).then((data) => {
-          console.log(data);
-          localStorage.setItem("email", data.user.username);
-          this.$router.push("/confirmCode");
-        });
+        })
+          .then((data) => {
+            console.log(data);
+            localStorage.setItem("email", data.user.username);
+            this.$router.push("/confirmCode");
+          })
+          .catch((error) => {
+            console.log(error);
+            if (error.code == "UsernameExistsException") {
+              this.errors = true;
+              this.errorMessage = "El usuario con este nombre ya existe";
+            }
+          });
       }
     },
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>

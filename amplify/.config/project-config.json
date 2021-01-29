@@ -1,5 +1,5 @@
 {
-  "projectName": "QVAfixV1",
+  "projectName": "QVAfix",
   "version": "3.0",
   "frontend": "javascript",
   "javascript": {
@@ -8,8 +8,7 @@
       "SourceDir": "src",
       "DistributionDir": "dist",
       "BuildCommand": "npm.cmd run-script build",
-      "StartCommand": "npm.cmd run-script serve",
-      "ServerlessContainers": false
+      "StartCommand": "npm.cmd run-script serve"
     }
   },
   "providers": [

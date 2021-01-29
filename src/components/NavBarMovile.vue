@@ -154,7 +154,12 @@ export default {
       {
         title: "Órdenes",
         icon: "mdi-clipboard-list-outline",
-        link: "/ordenesadmin",
+        link: "/ordenes",
+      },
+      {
+        title: "Clientes y Talleres",
+        icon: "mdi-account-group",
+        link: "/clientesTalleres",
       },
     ],
   }),

@@ -30,7 +30,7 @@
                 required
               ></v-text-field>
               <v-select
-                v-model="job.taller"
+                v-model="job.tallerID"
                 :items="talleres"
                 :rules="[(v) => !!v || 'El taller es requerido']"
                 label="Taller"
@@ -59,7 +59,6 @@
 import { API } from "aws-amplify";
 import { createOfertasTrabajo } from "../graphql/mutations";
 import { listTallers } from "../graphql/queries";
-import { listOfertasTrabajos } from "../graphql/queries";
 
 export default {
   name: "App",
@@ -91,12 +90,7 @@ export default {
       this.talleres = talleres.data.listTallers.items;
       this.overlay = false;
     },
-    async GetOfertasTrabajo() {
-      const result = await API.graphql({
-        query: listOfertasTrabajos,
-      });
-      this.ofertas = result.data.listOfertasTrabajos.items;
-    },
+
     // Job
     async createOfertasTrabajo() {
       this.loading = true;
@@ -109,7 +103,6 @@ export default {
       this.job = {};
       this.dialog = false;
       this.loading = false;
-      this.GetOfertasTrabajo();
     },
     // Job End
   },
