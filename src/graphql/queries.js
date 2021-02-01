@@ -117,6 +117,20 @@ export const getTecnico = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      ordenServicio {
+        items {
+          id
+          estado
+          tecnicoID
+          tallerID
+          clienteID
+          fechaDeFinalizado
+          equipoID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -141,6 +155,9 @@ export const listTecnicos = /* GraphQL */ `
           logo
           createdAt
           updatedAt
+        }
+        ordenServicio {
+          nextToken
         }
         createdAt
         updatedAt
@@ -328,6 +345,9 @@ export const getOrdenServicio = /* GraphQL */ `
           logo
           createdAt
           updatedAt
+        }
+        ordenServicio {
+          nextToken
         }
         createdAt
         updatedAt

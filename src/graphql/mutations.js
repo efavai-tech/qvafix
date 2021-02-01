@@ -204,6 +204,20 @@ export const createTecnico = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      ordenServicio {
+        items {
+          id
+          estado
+          tecnicoID
+          tallerID
+          clienteID
+          fechaDeFinalizado
+          equipoID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -241,6 +255,20 @@ export const updateTecnico = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      ordenServicio {
+        items {
+          id
+          estado
+          tecnicoID
+          tallerID
+          clienteID
+          fechaDeFinalizado
+          equipoID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -277,6 +305,20 @@ export const deleteTecnico = /* GraphQL */ `
         }
         createdAt
         updatedAt
+      }
+      ordenServicio {
+        items {
+          id
+          estado
+          tecnicoID
+          tallerID
+          clienteID
+          fechaDeFinalizado
+          equipoID
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
       createdAt
       updatedAt
@@ -587,6 +629,9 @@ export const createOrdenServicio = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        ordenServicio {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -664,6 +709,9 @@ export const updateOrdenServicio = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        ordenServicio {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -740,6 +788,9 @@ export const deleteOrdenServicio = /* GraphQL */ `
           logo
           createdAt
           updatedAt
+        }
+        ordenServicio {
+          nextToken
         }
         createdAt
         updatedAt

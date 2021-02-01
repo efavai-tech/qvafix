@@ -1,11 +1,6 @@
 <template>
   <div>
-    <v-card
-      class="mx-auto mt-5"
-      max-width="360"
-      min-height="550"
-      :loading="loading"
-    >
+    <v-card class="mx-auto mt-5" max-width="360" min-height="550" :loading="loading">
       <v-card-text>
         <p class="display-1 text--primary">Iniciar Sesión</p>
         <v-divider />
@@ -72,11 +67,9 @@
           <v-card-text class="pb-0 pt-12">
             <ForgotPassword />
           </v-card-text>
-            <div class="text-center pt-5">
-              <v-btn text color="teal accent-4" @click="reveal = false">
-                Cerrar
-              </v-btn>
-            </div>
+          <div class="text-center pt-5">
+            <v-btn text color="teal accent-4" @click="reveal = false"> Cerrar </v-btn>
+          </div>
         </v-card>
       </v-expand-transition>
       <v-expand-transition>
@@ -156,13 +149,17 @@ export default {
           })
           .catch((error) => {
             console.log(error);
-            if (error.code == "UserNotFoundException") {
+            if (
+              error.code == "UserNotFoundException" ||
+              error.code == "ResourceNotFoundException"
+            ) {
               this.errors = true;
               this.errorMessage = "El usuario no existe";
             } else if (error.code == "NotAuthorizedException") {
               this.errors = true;
               this.errorMessage = "Usuario o contraseña incorrectos";
             }
+            this.loading = false;
           });
       }
     },
