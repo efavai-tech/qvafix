@@ -121,13 +121,16 @@ export default {
     updateItemsPerPage(number) {
       this.itemsPerPage = number;
     },
+    // Query using a parameter
+    // const oneTodo = await API.graphql({ query: queries.getTodo, variables: { id: 'some id' }});
+
     // ordenes
     async getCliente() {
-      const id = "2891c2e8-1254-4291-b4f3-a93540af0600";
+      // const clienteId = "2891c2e8-1254-4291-b4f3-a93540af0600";
 
       const result = await API.graphql({
         query: getCliente,
-        variables: { input: id },
+        variables: { id: "1" },
       });
       console.log("result");
       console.log(result.data);

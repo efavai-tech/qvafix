@@ -25,7 +25,7 @@ const routes = [{
     {
         path: '/jobs',
         name: 'Jobs',
-        component: Jobs
+        component: Jobs,
     },
     {
         path: '/foro',
