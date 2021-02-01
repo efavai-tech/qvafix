@@ -18,7 +18,7 @@
     }
   },
   "auth": {
-    "qvafixapiv1dc8daf41": {
+    "qvafixapiv1f33a39f7": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
