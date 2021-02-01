@@ -49,8 +49,7 @@
               </v-col>
             </v-row>
             <v-row justify="center" class="pt-6">
-              <!-- <v-col cols="12" sm="6" v-if="$store.state.login"> -->
-              <v-col cols="12" sm="6">
+              <v-col cols="12" sm="6" v-if="$store.state.login">
                 <BuscarOrden />
               </v-col>
               <v-col cols="12" sm="6">

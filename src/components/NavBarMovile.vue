@@ -124,7 +124,6 @@ import { Auth } from "aws-amplify";
 export default {
   components: {},
   created() {
-    // this.login = this.$store.state.login;
     this.login = true;
     Auth.currentAuthenticatedUser({
       bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
@@ -151,11 +150,6 @@ export default {
       //   title: "Solicitudes Empleo",
       //   icon: "mdi-briefcase-variant",
       //   link: "/SolicitudesEmpleo",
-      // },
-      // {
-      //   title: "Cerrar Sesión",
-      //   icon: "mdi-logout",
-      //   link: "/Logout",
       // },
     ],
     items1: [
