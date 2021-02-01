@@ -149,10 +149,7 @@ export default {
           })
           .catch((error) => {
             console.log(error);
-            if (
-              error.code == "UserNotFoundException" ||
-              error.code == "ResourceNotFoundException"
-            ) {
+            if (error.code == "UserNotFoundException") {
               this.errors = true;
               this.errorMessage = "El usuario no existe";
             } else if (error.code == "NotAuthorizedException") {
