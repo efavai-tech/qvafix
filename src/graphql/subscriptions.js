@@ -163,6 +163,42 @@ export const onDeleteTaller = /* GraphQL */ `
     }
   }
 `;
+export const onCreatePiezas = /* GraphQL */ `
+  subscription OnCreatePiezas {
+    onCreatePiezas {
+      id
+      nombre
+      precio
+      cantidad
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdatePiezas = /* GraphQL */ `
+  subscription OnUpdatePiezas {
+    onUpdatePiezas {
+      id
+      nombre
+      precio
+      cantidad
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeletePiezas = /* GraphQL */ `
+  subscription OnDeletePiezas {
+    onDeletePiezas {
+      id
+      nombre
+      precio
+      cantidad
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateTecnico = /* GraphQL */ `
   subscription OnCreateTecnico {
     onCreateTecnico {
@@ -302,42 +338,6 @@ export const onDeleteTecnico = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreatePiezas = /* GraphQL */ `
-  subscription OnCreatePiezas {
-    onCreatePiezas {
-      id
-      nombre
-      precio
-      cantidad
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdatePiezas = /* GraphQL */ `
-  subscription OnUpdatePiezas {
-    onUpdatePiezas {
-      id
-      nombre
-      precio
-      cantidad
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeletePiezas = /* GraphQL */ `
-  subscription OnDeletePiezas {
-    onDeletePiezas {
-      id
-      nombre
-      precio
-      cantidad
       createdAt
       updatedAt
     }

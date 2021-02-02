@@ -24,13 +24,13 @@
           :class="`pa-3 orden ma-2 ${orden.estado}`"
         >
           <v-row no-gutters>
-            <v-col cols="5">
-              <div class="caption grey--text">Equipo</div>
-              <div>{{ orden.equipoID }}</div>
-            </v-col>
             <v-col cols="3">
               <div class="caption grey--text">Taller</div>
-              <div>{{ orden.tecnicoID }}</div>
+              <div>{{ orden.tecnico.taller.name }}</div>
+            </v-col>
+            <v-col cols="5">
+              <div class="caption grey--text">Equipo</div>
+              <div>{{ orden.equipo.nombre }}</div>
             </v-col>
             <v-col cols="4">
               <div class="caption grey--text">Estado</div>
@@ -49,14 +49,8 @@
     </v-responsive>
     <v-responsive v-if="!tieneOrdenes"
       ><v-container>
-        <v-alert
-          color="blue-grey"
-          dark
-          dense
-          icon="mdi-order-alphabetical-ascending"
-          prominent
-        >
-          Usted no tiene órdenes en proceso
+        <v-alert color="blue-grey" dark dense icon="mdi-clipboard-list-outline" prominent>
+          Usted no tiene órdenes a su nombre
         </v-alert>
       </v-container>
     </v-responsive>
@@ -68,7 +62,7 @@ import { API } from "aws-amplify";
 import { Auth } from "aws-amplify";
 
 import { getCliente } from "../../graphql/queries";
-// import { listClientes } from "../../graphql/queries";
+import { listClientes } from "../../graphql/queries";
 
 // import Promociones from "";
 export default {
@@ -79,14 +73,7 @@ export default {
     openSearch: false,
     tieneOrdenes: false,
     username: undefined,
-    ordenes: [
-      // {
-      //   numero: "22568",
-      //   equipo: "laptop",
-      //   taller: "Bartolete Pérez",
-      //   estado: "enrevision",
-      // },
-    ],
+    ordenes: [],
     itemsPerPageArray: [10, 20, 30],
     search: "",
     filter: {},
@@ -94,6 +81,7 @@ export default {
     page: 1,
     panel: [],
     cliente: {},
+    clientes: [],
     itemsPerPage: 5,
     sortBy: "createdAt",
     keys: ["id", "taller", "equipo", "estado"],
@@ -107,7 +95,6 @@ export default {
     },
   },
   async created() {
-    this.getCliente();
     Auth.currentAuthenticatedUser({
       bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
     })
@@ -120,6 +107,7 @@ export default {
           this.$store.commit("logout");
         }
       });
+    this.getCliente();
   },
   methods: {
     nextPage() {
@@ -131,18 +119,23 @@ export default {
     updateItemsPerPage(number) {
       this.itemsPerPage = number;
     },
-    // Query using a parameter
-    // const oneTodo = await API.graphql({ query: queries.getTodo, variables: { id: 'some id' }});
 
-    // ordenes
+    // Query using a parameter
+    // Cliente con todas sus órdenes
     async getCliente() {
-      // const clienteId = "2891c2e8-1254-4291-b4f3-a93540af0600";
+      // Saber el cliente por el correo
+      const clientes = await API.graphql({
+        query: listClientes,
+      });
+      this.clientes = clientes.data.listClientes.items;
+      this.cliente = this.clientes.find((x) => x.correo == this.username);
+      // Saber el cliente por el correo end
 
       const result = await API.graphql({
         query: getCliente,
-        variables: { id: "c758ba36-b1ac-4b0c-bf88-1a459ec81fa4" },
+        variables: { id: this.cliente.id },
       });
-      this.ordenes = result.data;
+      this.ordenes = result.data.getCliente.ordenServicio.items;
       if (result.data.getCliente.ordenServicio.items.length != 0) {
         this.tieneOrdenes = true;
       }

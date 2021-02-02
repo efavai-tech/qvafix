@@ -172,6 +172,51 @@ export const deleteTaller = /* GraphQL */ `
     }
   }
 `;
+export const createPiezas = /* GraphQL */ `
+  mutation CreatePiezas(
+    $input: CreatePiezasInput!
+    $condition: ModelPiezasConditionInput
+  ) {
+    createPiezas(input: $input, condition: $condition) {
+      id
+      nombre
+      precio
+      cantidad
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePiezas = /* GraphQL */ `
+  mutation UpdatePiezas(
+    $input: UpdatePiezasInput!
+    $condition: ModelPiezasConditionInput
+  ) {
+    updatePiezas(input: $input, condition: $condition) {
+      id
+      nombre
+      precio
+      cantidad
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePiezas = /* GraphQL */ `
+  mutation DeletePiezas(
+    $input: DeletePiezasInput!
+    $condition: ModelPiezasConditionInput
+  ) {
+    deletePiezas(input: $input, condition: $condition) {
+      id
+      nombre
+      precio
+      cantidad
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createTecnico = /* GraphQL */ `
   mutation CreateTecnico(
     $input: CreateTecnicoInput!
@@ -320,51 +365,6 @@ export const deleteTecnico = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createPiezas = /* GraphQL */ `
-  mutation CreatePiezas(
-    $input: CreatePiezasInput!
-    $condition: ModelPiezasConditionInput
-  ) {
-    createPiezas(input: $input, condition: $condition) {
-      id
-      nombre
-      precio
-      cantidad
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updatePiezas = /* GraphQL */ `
-  mutation UpdatePiezas(
-    $input: UpdatePiezasInput!
-    $condition: ModelPiezasConditionInput
-  ) {
-    updatePiezas(input: $input, condition: $condition) {
-      id
-      nombre
-      precio
-      cantidad
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deletePiezas = /* GraphQL */ `
-  mutation DeletePiezas(
-    $input: DeletePiezasInput!
-    $condition: ModelPiezasConditionInput
-  ) {
-    deletePiezas(input: $input, condition: $condition) {
-      id
-      nombre
-      precio
-      cantidad
       createdAt
       updatedAt
     }
