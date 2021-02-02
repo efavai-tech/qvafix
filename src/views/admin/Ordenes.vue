@@ -12,7 +12,7 @@
       item-key="name"
       ><template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>Ordenes</v-toolbar-title>
+          <v-toolbar-title>Todas las Órdenes</v-toolbar-title>
           <v-progress-linear
             :active="loading"
             :indeterminate="loading"
@@ -30,26 +30,27 @@
             hide-details
           ></v-text-field>
           <v-spacer></v-spacer>
-          <v-btn color="primary" dark class="mb-2" @click="CreateOrdenServicio()">
+          <!-- <v-btn color="primary" dark class="mb-2" @click="CreateOrdenServicio()">
             Nueva Orden
-          </v-btn>
-          <v-btn color="primary" dark class="mb-2" @click="CreateEquipo()">
+          </v-btn> -->
+          <!-- <v-btn color="primary" dark class="mb-2" @click="CreateEquipo()">
             Nuevo Equipo
           </v-btn>
           <v-btn color="primary" dark class="mb-2" @click="CreateTecnico()">
             Nuevo Tecnico
-          </v-btn>
+          </v-btn> -->
         </v-toolbar>
       </template>
       <template v-slot:body="{ items }">
         <tbody>
           <tr v-for="item in items" :key="item.id">
-            <!-- <td>{{ item.equipo.nombre }}</td>
+            <td>{{ item.cliente.name }}</td>
+            <td>{{ item.equipo.nombre }}</td>
             <td>{{ item.estado }}</td>
             <td>{{ item.tecnico.name }}</td>
             <td>{{ item.tecnico.taller.name }}</td>
             <td>{{ item.createdAt | formatDate }}</td>
-            <td>{{ item.fechaDeFinalizado }}</td> -->
+            <td>{{ item.fechaDeFinalizado }}</td>
             <td>
               <v-btn
                 depressed
@@ -101,6 +102,12 @@ export default {
       editedItem: {},
       defaultItem: {},
       headers: [
+        {
+          text: "cliente",
+          align: "left",
+          sortable: true,
+          value: "cliente.name",
+        },
         {
           text: "equipo",
           align: "left",

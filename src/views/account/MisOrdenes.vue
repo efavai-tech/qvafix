@@ -119,24 +119,17 @@ export default {
     updateItemsPerPage(number) {
       this.itemsPerPage = number;
     },
-    // async getClientes() {
-    //   const result = await API.graphql({
-    //     query: listClientes,
-    //   });
-    //   this.clientes = result.data.listClientes.items;
-    // },
+
     // Query using a parameter
     // Cliente con todas sus órdenes
-
     async getCliente() {
       // Saber el cliente por el correo
       const clientes = await API.graphql({
         query: listClientes,
       });
       this.clientes = clientes.data.listClientes.items;
-      // Saber el cliente por el correo end
-
       this.cliente = this.clientes.find((x) => x.correo == this.username);
+      // Saber el cliente por el correo end
 
       const result = await API.graphql({
         query: getCliente,
