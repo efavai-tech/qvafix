@@ -169,12 +169,12 @@ export default {
     },
     async CreateOrdenServicio() {
       const ordenServicio = {
-        id: 2,
+        id: 1,
         equipoID: 1,
-        clienteID: "2891c2e8-1254-4291-b4f3-a93540af0600",
+        clienteID: "c758ba36-b1ac-4b0c-bf88-1a459ec81fa4",
         estado: "enrevision",
-        tecnicoID: 1,
-        tallerID: "b14ae9b6-51ee-461a-8868-39ff39ce2dac",
+        tecnicoID: 2,
+        tallerID: "3f2a1d1e-d86c-4b20-8e88-f02f8e9207d5",
       };
       this.ordenServicio = ordenServicio;
       this.ordenes = [...this.ordenes, ordenServicio];
@@ -201,7 +201,7 @@ export default {
         id: 1,
         nombre: "Laptop Fujitsu",
         descripcion: "E558",
-        clienteID: "2891c2e8-1254-4291-b4f3-a93540af0600",
+        clienteID: "c758ba36-b1ac-4b0c-bf88-1a459ec81fa4",
       };
 
       await API.graphql({
@@ -214,7 +214,7 @@ export default {
         id: 2,
         name: "Juan",
         cargo: "Técnico A",
-        tallerID: "b14ae9b6-51ee-461a-8868-39ff39ce2dac",
+        tallerID: "3f2a1d1e-d86c-4b20-8e88-f02f8e9207d5",
       };
 
       await API.graphql({

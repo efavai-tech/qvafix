@@ -9,7 +9,7 @@
               <v-list-item v-for="(item, i) in masVistos" :key="i">
                 <v-list-item-content>
                   <v-list-item-title v-html="item.title"></v-list-item-title>
-                  <v-list-item-subtitle v-html="item.content"></v-list-item-subtitle>
+                  <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
             </v-list-item-group>
@@ -50,53 +50,43 @@
             </v-row>
           </template>
           <v-spacer />
+
           <template v-slot:default="props">
             <v-card v-model="panel" popout inset multiple class="col-md6 mt-2" flat>
               <div class="mx-auto" tile>
                 <v-list threeLine avatar rounded>
-                  <v-list-item-group color="primary">
+                  <v-list-item color="primary">
                     <v-row>
                       <v-list-item
                         v-for="item in props.items"
                         :key="item.id"
                         color="grey darken-1"
-                        router-link
-                        :to="item.link"
                       >
-                        <v-row>
-                          <v-col cols="12" sm="8" md="8">
-                            <v-list-item-avatar v-if="avatar">
-                              <v-img :src="item.avatar"></v-img>
-                            </v-list-item-avatar>
-                            <v-list-item-content>
-                              <v-list-item-title>{{ item.title }} </v-list-item-title>
-                              <v-list-item-subtitle
-                                v-html="item.content"
-                              ></v-list-item-subtitle>
-                              <v-chip outlined class="ma-2" color="secondary">
-                                {{ item.blog.name }}
-                              </v-chip>
-                              <v-spacer />
-                              <p class="text-justify">
-                                {{ item.createdAt | formatDate }}
-                              </p>
-                            </v-list-item-content>
-                          </v-col>
-                          <v-col cols="12" sm="8" md="4">
-                            <v-btn-toggle
-                              shaped
-                              mandatory
-                              v-if="!$vuetify.breakpoint.xsOnly"
-                            >
-                              <v-btn text>{{ item.vistas }}<br />Vistas</v-btn>
-                              <v-btn text>{{ item.respuestas }}<br />Respuestas</v-btn>
-                              <v-btn text>{{ item.votos }}<br />Votos</v-btn>
-                            </v-btn-toggle></v-col
-                          >
-                        </v-row>
+                        <v-list-item-avatar v-if="avatar">
+                          <v-img :src="item.avatar"></v-img>
+                        </v-list-item-avatar>
+                        <v-list-item-content>
+                          <v-list-item-title>{{ item.title }} </v-list-item-title>
+                          <v-list-item-subtitle v-html="item.content">
+                          </v-list-item-subtitle>
+                          <p class="text-justify">
+                            {{ item.createdAt | formatDate }}
+                            <v-chip outlined>{{ item.blog.name }}</v-chip>
+                          </p>
+                          <v-div v-if="$vuetify.breakpoint.xsOnly" class="pt-2">
+                            <v-btn small text color="primary">9<br />Vistas</v-btn>
+                            <v-btn small text color="success">3<br />Respuestas</v-btn>
+                            <v-btn small text>1<br />Votos</v-btn>
+                          </v-div>
+                        </v-list-item-content>
+                        <v-btn-toggle shaped mandatory v-if="!$vuetify.breakpoint.xsOnly">
+                          <v-btn text>{{ item.vistas }}<br />Vistas</v-btn>
+                          <v-btn text>{{ item.comments.length }}<br />Respuestas</v-btn>
+                          <v-btn text>{{ item.votos }}<br />Votos</v-btn>
+                        </v-btn-toggle>
                       </v-list-item>
                     </v-row>
-                  </v-list-item-group>
+                  </v-list-item>
                 </v-list>
               </div>
             </v-card>
@@ -148,10 +138,8 @@
 <script>
 import Promociones from "../components/Promociones";
 import LoginDialog from "../components/LoginDialog";
-
 import { API } from "aws-amplify";
 import { listPosts } from "../graphql/queries";
-
 export default {
   components: {
     Promociones,
@@ -162,41 +150,41 @@ export default {
     buscar: "",
     filter: {},
     sortDesc: false,
+    posts: [],
     page: 1,
     panel: [],
-    posts: [],
     itemsPerPage: 10,
-    sortBy: "createdAt",
-    keys: ["avatar", "action", "headline", "title", "subtitle", "createdAt"],
+    sortBy: "vistas",
+    keys: ["avatar", "action", "headline", "title", "subtitle"],
     masVistos: [
       {
         avatar: "img/material2.jpg",
         title: "Brunch this weekend?",
-        content:
+        subtitle:
           "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
       },
       {
         avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
         title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
-        content:
+        subtitle:
           "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.",
       },
       {
         avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
         title: "Oui oui",
-        content:
+        subtitle:
           "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?",
       },
       {
         avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
         title: "Birthday gift",
-        content:
+        subtitle:
           "<span class='text--primary'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?",
       },
       {
         avatar: "https://cdn.vuetifyjs.com/images/lists/5.jpg",
         title: "Recipe to try",
-        content:
+        subtitle:
           "<span class='text--primary'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.",
       },
     ],
@@ -207,7 +195,7 @@ export default {
         action: "15 min",
         headline: "Brunch this weekend?",
         title: "Ali Connors",
-        content:
+        subtitle:
           "I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
         vistas: 83,
         respuestas: 6,
@@ -219,108 +207,9 @@ export default {
         action: "2 hr",
         headline: "Summer BBQ",
         title: "me, Scrott, Jennifer",
-        content: "Wish I could come, but I'm out of town this weekend.",
+        subtitle: "Wish I could come, but I'm out of town this weekend.",
         vistas: 3,
         respuestas: 7,
-        votos: 1,
-        link: "/respuestasForo",
-      },
-      {
-        avatar: "img/avatar/avatar-3.png",
-        action: "6 hr",
-        headline: "Oui oui",
-        title: "Sandra Adams",
-        content: "Do you have Paris recommendations? Have you ever been?",
-        vistas: 8,
-        respuestas: 8,
-        votos: 21,
-        link: "/respuestasForo",
-      },
-      {
-        avatar: "img/avatar/avatar-8.png",
-        action: "12 hr",
-        headline: "Birthday gift",
-        title: "Trevor Hansen",
-        content: "Have any ideas about what we should get Heidi for her birthday?",
-        vistas: 5,
-        respuestas: 22,
-        votos: 10,
-        link: "/respuestasForo",
-      },
-      {
-        avatar: "img/avatar/avatar-1.png",
-        action: "18hr",
-        headline: "Recipe to try",
-        title: "Britta Holt",
-        content: "We should eat this: Grate, Squash, Corn, and tomatillo Tacos.",
-        vistas: 3,
-        respuestas: 32,
-        votos: 5,
-        link: "/respuestasForo",
-      },
-      {
-        avatar: "img/avatar/avatar-2.png",
-        action: "2 hr",
-        headline: "Summer BBQ",
-        title: "me, Scrott, Jennifer",
-        content: "Wish I could come, but I'm out of town this weekend.",
-        vistas: 3,
-        respuestas: 62,
-        votos: 8,
-        link: "/respuestasForo",
-      },
-      {
-        avatar: "img/avatar/avatar-3.png",
-        action: "6 hr",
-        headline: "Oui oui",
-        title: "Sandra Adams",
-        content: "Do you have Paris recommendations? Have you ever been?",
-        vistas: 23,
-        respuestas: 9,
-        votos: 1,
-        link: "/respuestasForo",
-      },
-      {
-        avatar: "img/avatar/avatar-8.png",
-        action: "12 hr",
-        headline: "Birthday gift",
-        title: "Trevor Hansen",
-        content: "Have any ideas about what we should get Heidi for her birthday?",
-        vistas: 63,
-        respuestas: 2,
-        votos: 1,
-        link: "/respuestasForo",
-      },
-      {
-        avatar: "img/avatar/avatar-12.png",
-        action: "2 hr",
-        headline: "Summer BBQ",
-        title: "me, Scrott, Jennifer",
-        content: "Wish I could come, but I'm out of town this weekend.",
-        vistas: 54,
-        respuestas: 2,
-        votos: 1,
-        link: "/respuestasForo",
-      },
-      {
-        avatar: "img/avatar/avatar-13.png",
-        action: "6 hr",
-        headline: "Oui oui",
-        title: "Sandra Adams",
-        content: "Do you have Paris recommendations? Have you ever been?",
-        vistas: 13,
-        respuestas: 2,
-        votos: 1,
-        link: "/respuestasForo",
-      },
-      {
-        avatar: "img/avatar/avatar-1.png",
-        action: "12 hr",
-        headline: "Birthday gift",
-        title: "Trevor Hansen",
-        content: "Have any ideas about what we should get Heidi for her birthday?",
-        vistas: 9,
-        respuestas: 2,
         votos: 1,
         link: "/respuestasForo",
       },
