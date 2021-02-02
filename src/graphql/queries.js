@@ -267,6 +267,9 @@ export const getCliente = /* GraphQL */ `
           id
           estado
           tecnicoID
+          tecnico{
+            name
+          }
           tallerID
           clienteID
           fechaDeFinalizado
@@ -275,22 +278,6 @@ export const getCliente = /* GraphQL */ `
           updatedAt
         }
         nextToken
-      }
-      equipo {
-        id
-        nombre
-        descripcion
-        clienteID
-        cliente {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
       }
       createdAt
       updatedAt

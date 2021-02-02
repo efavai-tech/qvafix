@@ -122,11 +122,11 @@ export default {
         icon: "mdi-clipboard-list-outline",
         link: "/MisOrdenes",
       },
-      {
-        title: "Solicitud de Empleo",
-        icon: "mdi-briefcase-variant",
-        link: "/",
-      },
+      // {
+      //   title: "Solicitud de Empleo",
+      //   icon: "mdi-briefcase-variant",
+      //   link: "/",
+      // },
     ],
     items1: [
       {

@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "qvafixapiv1f33a39f7_identitypool_f33a39f7",
+    "identityPoolName": "qvafixbb67c3fb_identitypool_bb67c3fb",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "qvafixf33a39f7",
-    "userPoolName": "qvafixapiv1f33a39f7_userpool_f33a39f7",
+    "resourceNameTruncated": "qvafixbb67c3fb",
+    "userPoolName": "qvafixbb67c3fb_userpool_bb67c3fb",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "qvafixf33a39f7_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "qvafixbb67c3fb_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "f33a39f7",
-    "resourceName": "qvafixapiv1f33a39f7",
+    "sharedId": "bb67c3fb",
+    "resourceName": "qvafixbb67c3fb",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
