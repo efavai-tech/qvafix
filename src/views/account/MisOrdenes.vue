@@ -68,7 +68,7 @@ import { API } from "aws-amplify";
 import { Auth } from "aws-amplify";
 
 import { getCliente } from "../../graphql/queries";
-import { listClientes } from "../../graphql/queries";
+// import { listClientes } from "../../graphql/queries";
 
 // import Promociones from "";
 export default {
