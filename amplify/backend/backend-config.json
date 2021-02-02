@@ -1,6 +1,6 @@
 {
   "api": {
-    "qvafixapiv1": {
+    "qvafix": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -9,7 +9,7 @@
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
               "apiKeyExpirationDays": 365,
-              "description": "apiKey"
+              "description": ""
             }
           },
           "additionalAuthenticationProviders": []
@@ -18,7 +18,7 @@
     }
   },
   "auth": {
-    "qvafixapiv1f33a39f7": {
+    "qvafixbb67c3fb": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],

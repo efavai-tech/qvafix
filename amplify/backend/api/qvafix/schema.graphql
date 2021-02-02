@@ -7,6 +7,13 @@ type Taller @model {
   clientes: [Cliente]
   ofertasTrabajo: [OfertasTrabajo] @connection(keyName: "byTaller", fields: ["id"])
 }
+
+type Piezas @model{
+  id: ID!
+  nombre: String
+  precio: Int
+  cantidad: Int
+}
 type Tecnico @model @key(name: "byTaller", fields: ["tallerID"]){  
   id: ID!
   name: String!
@@ -15,14 +22,6 @@ type Tecnico @model @key(name: "byTaller", fields: ["tallerID"]){
   taller: Taller @connection(fields: ["tallerID"])
   ordenServicio: [OrdenServicio] @connection(keyName: "byCliente", fields: ["id"])
   }
-
-type Piezas @model{
-  id: ID!
-  nombre: String
-  precio: Int
-  cantidad: Int
-}
-
 type Equipo @model @key(name: "byCliente", fields: ["clienteID"]){
   id: ID!
   nombre: String!
@@ -42,13 +41,13 @@ type OrdenServicio @model @key(name: "byCliente", fields: ["clienteID"]){
   id: ID!
   estado: String!
   tecnicoID: ID!
-  tecnico: Tecnico @connection(fields: ["clienteID"])
+  tecnico: Tecnico @connection(keyName: "byPost",fields: ["id"])
   tallerID: ID!
   clienteID: ID!
   cliente: Cliente @connection(fields: ["clienteID"])
   fechaDeFinalizado: AWSDateTime
   equipoID: ID!
-  equipo: Equipo @connection(fields: ["clienteID"])
+  equipo: Equipo @connection(fields: ["id"])
   piezas:[Piezas]
 }
 

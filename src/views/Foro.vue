@@ -18,7 +18,7 @@
       </v-col>
       <v-col class="col-md7 mt-3">
         <v-data-iterator
-          :items="temas"
+          :items="posts"
           :items-per-page.sync="itemsPerPage"
           :page="page"
           hide-default-footer
@@ -50,65 +50,43 @@
             </v-row>
           </template>
           <v-spacer />
+
           <template v-slot:default="props">
             <v-card v-model="panel" popout inset multiple class="col-md6 mt-2" flat>
               <div class="mx-auto" tile>
                 <v-list threeLine avatar rounded>
-                  <v-list-item-group color="primary">
+                  <v-list-item color="primary">
                     <v-row>
-                      <v-card class="mx-auto" max-width="344" outlined>
-                        <v-list-item three-line>
-                          <v-list-item-content>
-                            <div class="overline mb-4">OVERLINE</div>
-                            <v-list-item-title class="headline mb-1">
-                              Headline 5
-                            </v-list-item-title>
-                            <v-list-item-subtitle
-                              >Greyhound divisely hello coldly
-                              fonwderfully</v-list-item-subtitle
-                            >
-                          </v-list-item-content>
-
-                          <v-list-item-avatar
-                            tile
-                            size="80"
-                            color="grey"
-                          ></v-list-item-avatar>
-                        </v-list-item>
-
-                        <v-card-actions>
-                          <v-btn outlined rounded text> Button </v-btn>
-                        </v-card-actions>
-                      </v-card>
                       <v-list-item
                         v-for="item in props.items"
                         :key="item.id"
                         color="grey darken-1"
-                        router-link
-                        :to="item.link"
                       >
                         <v-list-item-avatar v-if="avatar">
                           <v-img :src="item.avatar"></v-img>
                         </v-list-item-avatar>
                         <v-list-item-content>
                           <v-list-item-title>{{ item.title }} </v-list-item-title>
-                          <v-list-item-subtitle
-                            v-html="item.subtitle"
-                          ></v-list-item-subtitle>
+                          <v-list-item-subtitle v-html="item.content">
+                          </v-list-item-subtitle>
+                          <p class="text-justify">
+                            {{ item.createdAt | formatDate }}
+                            <v-chip outlined>{{ item.blog.name }}</v-chip>
+                          </p>
                           <v-div v-if="$vuetify.breakpoint.xsOnly" class="pt-2">
                             <v-btn small text color="primary">9<br />Vistas</v-btn>
                             <v-btn small text color="success">3<br />Respuestas</v-btn>
-                            <v-btn small text>0<br />Votos</v-btn>
+                            <v-btn small text>1<br />Votos</v-btn>
                           </v-div>
                         </v-list-item-content>
                         <v-btn-toggle shaped mandatory v-if="!$vuetify.breakpoint.xsOnly">
                           <v-btn text>{{ item.vistas }}<br />Vistas</v-btn>
-                          <v-btn text>{{ item.respuestas }}<br />Respuestas</v-btn>
+                          <v-btn text>{{ item.comments.length }}<br />Respuestas</v-btn>
                           <v-btn text>{{ item.votos }}<br />Votos</v-btn>
                         </v-btn-toggle>
                       </v-list-item>
                     </v-row>
-                  </v-list-item-group>
+                  </v-list-item>
                 </v-list>
               </div>
             </v-card>
@@ -160,6 +138,8 @@
 <script>
 import Promociones from "../components/Promociones";
 import LoginDialog from "../components/LoginDialog";
+import { API } from "aws-amplify";
+import { listPosts } from "../graphql/queries";
 export default {
   components: {
     Promociones,
@@ -170,6 +150,7 @@ export default {
     buscar: "",
     filter: {},
     sortDesc: false,
+    posts: [],
     page: 1,
     panel: [],
     itemsPerPage: 10,
@@ -248,6 +229,9 @@ export default {
       return this.keys.filter((key) => key !== `title`);
     },
   },
+  async created() {
+    this.getListPosts();
+  },
   methods: {
     nextPage() {
       if (this.page + 1 <= this.numberOfPages) this.page += 1;
@@ -257,6 +241,12 @@ export default {
     },
     updateItemsPerPage(number) {
       this.itemsPerPage = number;
+    },
+    async getListPosts() {
+      const posts = await API.graphql({
+        query: listPosts,
+      });
+      this.posts = posts.data.listPosts.items;
     },
   },
 };
