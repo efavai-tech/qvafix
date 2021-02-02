@@ -88,6 +88,37 @@ export const listTallers = /* GraphQL */ `
     }
   }
 `;
+export const getPiezas = /* GraphQL */ `
+  query GetPiezas($id: ID!) {
+    getPiezas(id: $id) {
+      id
+      nombre
+      precio
+      cantidad
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listPiezass = /* GraphQL */ `
+  query ListPiezass(
+    $filter: ModelPiezasFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPiezass(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        nombre
+        precio
+        cantidad
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getTecnico = /* GraphQL */ `
   query GetTecnico($id: ID!) {
     getTecnico(id: $id) {
@@ -159,37 +190,6 @@ export const listTecnicos = /* GraphQL */ `
         ordenServicio {
           nextToken
         }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getPiezas = /* GraphQL */ `
-  query GetPiezas($id: ID!) {
-    getPiezas(id: $id) {
-      id
-      nombre
-      precio
-      cantidad
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listPiezass = /* GraphQL */ `
-  query ListPiezass(
-    $filter: ModelPiezasFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPiezass(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        nombre
-        precio
-        cantidad
         createdAt
         updatedAt
       }
@@ -269,16 +269,19 @@ export const getCliente = /* GraphQL */ `
           tecnicoID
           tecnico{
             name
+            taller{
+              name
+            }
           }
-          tallerID
-          clienteID
           fechaDeFinalizado
-          equipoID
+          equipo{
+            nombre
+          }
           createdAt
           updatedAt
         }
         nextToken
-      }
+      }     
       createdAt
       updatedAt
     }
@@ -296,17 +299,6 @@ export const listClientes = /* GraphQL */ `
         name
         numeroTelefono
         correo
-        ordenServicio {
-          nextToken
-        }
-        equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
-        }
         createdAt
         updatedAt
       }
@@ -407,6 +399,9 @@ export const listOrdenServicios = /* GraphQL */ `
           name
           cargo
           tallerID
+          taller{
+            name
+          }
           createdAt
           updatedAt
         }

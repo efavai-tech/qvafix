@@ -39,15 +39,15 @@ type Cliente @model{
 }
 type OrdenServicio @model @key(name: "byCliente", fields: ["clienteID"]){
   id: ID!
+  numero:Int
   estado: String!
   tecnicoID: ID!
-  tecnico: Tecnico @connection(keyName: "byPost",fields: ["id"])
-  tallerID: ID!
+  tecnico: Tecnico @connection(fields: ["tecnicoID"])
   clienteID: ID!
   cliente: Cliente @connection(fields: ["clienteID"])
   fechaDeFinalizado: AWSDateTime
   equipoID: ID!
-  equipo: Equipo @connection(fields: ["id"])
+  equipo: Equipo @connection(fields: ["equipoID"])
   piezas:[Piezas]
 }
 
