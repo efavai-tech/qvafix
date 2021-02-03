@@ -16,7 +16,7 @@
               :indeterminate="loading"
               absolute
               bottom
-              color="dep-orange"
+              color="deep-orange"
             ></v-progress-linear
           ></v-toolbar>
 

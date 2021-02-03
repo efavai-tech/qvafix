@@ -3,7 +3,7 @@
     <v-app-bar fixed dense class="d-none d-flex d-sm-none d-sm-flex d-md-none">
       <v-toolbar-title class="mr-3">Mis órdenes</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-text-field
+      <!-- <v-text-field
         light
         filled
         flat
@@ -14,7 +14,7 @@
         dense
         outlined
         append-icon="mdi-magnify"
-      ></v-text-field>
+      ></v-text-field> -->
     </v-app-bar>
     <v-responsive v-if="tieneOrdenes">
       <div>
@@ -23,16 +23,16 @@
           :key="orden.id"
           :class="`pa-3 orden ma-2 ${orden.estado}`"
         >
-          <v-row no-gutters>
+          <v-row no-gutters class="text-center">
             <v-col cols="3">
               <div class="caption grey--text">Taller</div>
               <div>{{ orden.tecnico.taller.name }}</div>
             </v-col>
-            <v-col cols="5">
+            <v-col cols="6">
               <div class="caption grey--text">Equipo</div>
               <div>{{ orden.equipo.nombre }}</div>
             </v-col>
-            <v-col cols="4">
+            <v-col cols="3">
               <div class="caption grey--text">Estado</div>
               <div>
                 <v-chip
@@ -47,10 +47,18 @@
         </v-card>
       </div>
     </v-responsive>
-    <v-responsive v-if="!tieneOrdenes"
-      ><v-container>
+
+    <v-responsive v-if="!tieneOrdenes">
+      <v-progress-linear
+        :active="loading"
+        :indeterminate="loading"
+        absolute
+        color="deep-orange"
+      ></v-progress-linear>
+
+      <v-container>
         <v-alert color="blue-grey" dark dense icon="mdi-clipboard-list-outline" prominent>
-          Usted no tiene órdenes a su nombre
+          {{ textCard }}
         </v-alert>
       </v-container>
     </v-responsive>
@@ -70,6 +78,7 @@ export default {
     // Promociones,
   },
   data: () => ({
+    loading: false,
     openSearch: false,
     tieneOrdenes: false,
     username: undefined,
@@ -80,12 +89,21 @@ export default {
     sortDesc: false,
     page: 1,
     panel: [],
-    cliente: {},
-    clientes: [],
+    textCard: "",
     itemsPerPage: 5,
     sortBy: "createdAt",
     keys: ["id", "taller", "equipo", "estado"],
   }),
+  watch: {
+    // loading(val) {
+    //   if (!val) return;
+    //   setTimeout(() => (this.loading = false), 10000);
+    // },
+    // textCard(val) {
+    //   if (!val) return;
+    //   setTimeout(() => (this.textCard = "Usted no tiene órdenes a su nombre"), 10000);
+    // },
+  },
   computed: {
     numberOfPages() {
       return Math.ceil(this.ordenes.length / this.itemsPerPage);
@@ -123,25 +141,32 @@ export default {
     // Query using a parameter
     // Cliente con todas sus órdenes
     async getCliente() {
+      this.loading = true;
+      this.textCard = "Buscando";
       // Saber el cliente por el correo
       const clientes = await API.graphql({
         query: listClientes,
       });
-      this.clientes = clientes.data.listClientes.items;
-      this.cliente = this.clientes.find((x) => x.correo == this.username);
-      // Saber el cliente por el correo end
+      var ListClientes = clientes.data.listClientes.items;
+      var cliente = ListClientes.find((x) => x.correo == this.username);
+      if (cliente == null) {
+        this.loading = false;
+        this.textCard = "Usted no es cliente de ningún taller";
+      } else {
+        // Saber el cliente por el correo end
+        const result = await API.graphql({
+          query: getCliente,
+          variables: { id: cliente.id },
+        });
 
-      const result = await API.graphql({
-        query: getCliente,
-        variables: { id: this.cliente.id },
-      });
-
-      this.ordenes = result.data.getCliente.ordenServicio.items;
-      if (result.data.getCliente.ordenServicio.items.length != 0) {
-        this.tieneOrdenes = true;
+        this.ordenes = result.data.getCliente.ordenServicio.items;
+        if (result.data.getCliente.ordenServicio.items.length != 0) {
+          this.tieneOrdenes = true;
+        } else {
+          this.textCard = "Usted no tiene órdenes a su nombre";
+        }
+        this.loading = false;
       }
-      console.log("result");
-      console.log(result.data);
     },
   },
 };
