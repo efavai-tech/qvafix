@@ -231,9 +231,9 @@ export const onCreateTecnico = /* GraphQL */ `
       ordenServicio {
         items {
           id
+          numero
           estado
           tecnicoID
-          tallerID
           clienteID
           fechaDeFinalizado
           equipoID
@@ -279,9 +279,9 @@ export const onUpdateTecnico = /* GraphQL */ `
       ordenServicio {
         items {
           id
+          numero
           estado
           tecnicoID
-          tallerID
           clienteID
           fechaDeFinalizado
           equipoID
@@ -327,9 +327,9 @@ export const onDeleteTecnico = /* GraphQL */ `
       ordenServicio {
         items {
           id
+          numero
           estado
           tecnicoID
-          tallerID
           clienteID
           fechaDeFinalizado
           equipoID
@@ -446,9 +446,9 @@ export const onCreateCliente = /* GraphQL */ `
       ordenServicio {
         items {
           id
+          numero
           estado
           tecnicoID
-          tallerID
           clienteID
           fechaDeFinalizado
           equipoID
@@ -488,9 +488,9 @@ export const onUpdateCliente = /* GraphQL */ `
       ordenServicio {
         items {
           id
+          numero
           estado
           tecnicoID
-          tallerID
           clienteID
           fechaDeFinalizado
           equipoID
@@ -530,9 +530,9 @@ export const onDeleteCliente = /* GraphQL */ `
       ordenServicio {
         items {
           id
+          numero
           estado
           tecnicoID
-          tallerID
           clienteID
           fechaDeFinalizado
           equipoID
@@ -566,6 +566,7 @@ export const onCreateOrdenServicio = /* GraphQL */ `
   subscription OnCreateOrdenServicio {
     onCreateOrdenServicio {
       id
+      numero
       estado
       tecnicoID
       tecnico {
@@ -587,7 +588,6 @@ export const onCreateOrdenServicio = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      tallerID
       clienteID
       cliente {
         id
@@ -643,6 +643,7 @@ export const onUpdateOrdenServicio = /* GraphQL */ `
   subscription OnUpdateOrdenServicio {
     onUpdateOrdenServicio {
       id
+      numero
       estado
       tecnicoID
       tecnico {
@@ -664,7 +665,6 @@ export const onUpdateOrdenServicio = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      tallerID
       clienteID
       cliente {
         id
@@ -720,6 +720,7 @@ export const onDeleteOrdenServicio = /* GraphQL */ `
   subscription OnDeleteOrdenServicio {
     onDeleteOrdenServicio {
       id
+      numero
       estado
       tecnicoID
       tecnico {
@@ -741,7 +742,6 @@ export const onDeleteOrdenServicio = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      tallerID
       clienteID
       cliente {
         id
@@ -982,6 +982,17 @@ export const onCreatePost = /* GraphQL */ `
           id
           postID
           content
+          user
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      answer {
+        items {
+          id
+          postID
+          content
           createdAt
           updatedAt
         }
@@ -1009,6 +1020,17 @@ export const onUpdatePost = /* GraphQL */ `
         updatedAt
       }
       comments {
+        items {
+          id
+          postID
+          content
+          user
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      answer {
         items {
           id
           postID
@@ -1044,6 +1066,17 @@ export const onDeletePost = /* GraphQL */ `
           id
           postID
           content
+          user
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      answer {
+        items {
+          id
+          postID
+          content
           createdAt
           updatedAt
         }
@@ -1073,10 +1106,14 @@ export const onCreateComment = /* GraphQL */ `
         comments {
           nextToken
         }
+        answer {
+          nextToken
+        }
         createdAt
         updatedAt
       }
       content
+      user
       createdAt
       updatedAt
     }
@@ -1101,10 +1138,14 @@ export const onUpdateComment = /* GraphQL */ `
         comments {
           nextToken
         }
+        answer {
+          nextToken
+        }
         createdAt
         updatedAt
       }
       content
+      user
       createdAt
       updatedAt
     }
@@ -1127,6 +1168,103 @@ export const onDeleteComment = /* GraphQL */ `
           updatedAt
         }
         comments {
+          nextToken
+        }
+        answer {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      content
+      user
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateAnswer = /* GraphQL */ `
+  subscription OnCreateAnswer {
+    onCreateAnswer {
+      id
+      postID
+      post {
+        id
+        title
+        content
+        blogID
+        blog {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        answer {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      content
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateAnswer = /* GraphQL */ `
+  subscription OnUpdateAnswer {
+    onUpdateAnswer {
+      id
+      postID
+      post {
+        id
+        title
+        content
+        blogID
+        blog {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        answer {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      content
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteAnswer = /* GraphQL */ `
+  subscription OnDeleteAnswer {
+    onDeleteAnswer {
+      id
+      postID
+      post {
+        id
+        title
+        content
+        blogID
+        blog {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        answer {
           nextToken
         }
         createdAt

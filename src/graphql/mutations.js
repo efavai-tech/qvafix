@@ -252,9 +252,9 @@ export const createTecnico = /* GraphQL */ `
       ordenServicio {
         items {
           id
+          numero
           estado
           tecnicoID
-          tallerID
           clienteID
           fechaDeFinalizado
           equipoID
@@ -303,9 +303,9 @@ export const updateTecnico = /* GraphQL */ `
       ordenServicio {
         items {
           id
+          numero
           estado
           tecnicoID
-          tallerID
           clienteID
           fechaDeFinalizado
           equipoID
@@ -354,9 +354,9 @@ export const deleteTecnico = /* GraphQL */ `
       ordenServicio {
         items {
           id
+          numero
           estado
           tecnicoID
-          tallerID
           clienteID
           fechaDeFinalizado
           equipoID
@@ -485,9 +485,9 @@ export const createCliente = /* GraphQL */ `
       ordenServicio {
         items {
           id
+          numero
           estado
           tecnicoID
-          tallerID
           clienteID
           fechaDeFinalizado
           equipoID
@@ -530,9 +530,9 @@ export const updateCliente = /* GraphQL */ `
       ordenServicio {
         items {
           id
+          numero
           estado
           tecnicoID
-          tallerID
           clienteID
           fechaDeFinalizado
           equipoID
@@ -575,9 +575,9 @@ export const deleteCliente = /* GraphQL */ `
       ordenServicio {
         items {
           id
+          numero
           estado
           tecnicoID
-          tallerID
           clienteID
           fechaDeFinalizado
           equipoID
@@ -614,6 +614,7 @@ export const createOrdenServicio = /* GraphQL */ `
   ) {
     createOrdenServicio(input: $input, condition: $condition) {
       id
+      numero
       estado
       tecnicoID
       tecnico {
@@ -635,7 +636,6 @@ export const createOrdenServicio = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      tallerID
       clienteID
       cliente {
         id
@@ -694,6 +694,7 @@ export const updateOrdenServicio = /* GraphQL */ `
   ) {
     updateOrdenServicio(input: $input, condition: $condition) {
       id
+      numero
       estado
       tecnicoID
       tecnico {
@@ -715,7 +716,6 @@ export const updateOrdenServicio = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      tallerID
       clienteID
       cliente {
         id
@@ -774,6 +774,7 @@ export const deleteOrdenServicio = /* GraphQL */ `
   ) {
     deleteOrdenServicio(input: $input, condition: $condition) {
       id
+      numero
       estado
       tecnicoID
       tecnico {
@@ -795,7 +796,6 @@ export const deleteOrdenServicio = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      tallerID
       clienteID
       cliente {
         id
@@ -1057,6 +1057,17 @@ export const createPost = /* GraphQL */ `
           id
           postID
           content
+          user
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      answer {
+        items {
+          id
+          postID
+          content
           createdAt
           updatedAt
         }
@@ -1087,6 +1098,17 @@ export const updatePost = /* GraphQL */ `
         updatedAt
       }
       comments {
+        items {
+          id
+          postID
+          content
+          user
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      answer {
         items {
           id
           postID
@@ -1125,6 +1147,17 @@ export const deletePost = /* GraphQL */ `
           id
           postID
           content
+          user
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      answer {
+        items {
+          id
+          postID
+          content
           createdAt
           updatedAt
         }
@@ -1157,10 +1190,14 @@ export const createComment = /* GraphQL */ `
         comments {
           nextToken
         }
+        answer {
+          nextToken
+        }
         createdAt
         updatedAt
       }
       content
+      user
       createdAt
       updatedAt
     }
@@ -1188,10 +1225,14 @@ export const updateComment = /* GraphQL */ `
         comments {
           nextToken
         }
+        answer {
+          nextToken
+        }
         createdAt
         updatedAt
       }
       content
+      user
       createdAt
       updatedAt
     }
@@ -1217,6 +1258,112 @@ export const deleteComment = /* GraphQL */ `
           updatedAt
         }
         comments {
+          nextToken
+        }
+        answer {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      content
+      user
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createAnswer = /* GraphQL */ `
+  mutation CreateAnswer(
+    $input: CreateAnswerInput!
+    $condition: ModelAnswerConditionInput
+  ) {
+    createAnswer(input: $input, condition: $condition) {
+      id
+      postID
+      post {
+        id
+        title
+        content
+        blogID
+        blog {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        answer {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      content
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateAnswer = /* GraphQL */ `
+  mutation UpdateAnswer(
+    $input: UpdateAnswerInput!
+    $condition: ModelAnswerConditionInput
+  ) {
+    updateAnswer(input: $input, condition: $condition) {
+      id
+      postID
+      post {
+        id
+        title
+        content
+        blogID
+        blog {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        answer {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      content
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteAnswer = /* GraphQL */ `
+  mutation DeleteAnswer(
+    $input: DeleteAnswerInput!
+    $condition: ModelAnswerConditionInput
+  ) {
+    deleteAnswer(input: $input, condition: $condition) {
+      id
+      postID
+      post {
+        id
+        title
+        content
+        blogID
+        blog {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        answer {
           nextToken
         }
         createdAt

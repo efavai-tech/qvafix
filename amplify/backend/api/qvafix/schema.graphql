@@ -73,9 +73,17 @@ type Post @model @key(name: "byBlog", fields: ["blogID"]) {
   blogID: ID!
   blog: Blog @connection(fields: ["blogID"])
   comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
+  answer: [Answer] @connection(keyName: "byPost", fields: ["id"])
 }
 
 type Comment @model @key(name: "byPost", fields: ["postID", "content"]) {
+  id: ID!
+  postID: ID!
+  post: Post @connection(fields: ["postID"])
+  content: String!
+  user:String!
+}
+type Answer @model @key(name: "byPost", fields: ["postID", "content"]) {
   id: ID!
   postID: ID!
   post: Post @connection(fields: ["postID"])
