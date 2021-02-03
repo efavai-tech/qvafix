@@ -30,15 +30,15 @@
             hide-details
           ></v-text-field>
           <v-spacer></v-spacer>
-          <!-- <v-btn color="primary" dark class="mb-2" @click="CreateOrdenServicio()">
+          <v-btn color="primary" dark class="mb-2" @click="CreateOrdenServicio()">
             Nueva Orden
-          </v-btn> -->
-          <!-- <v-btn color="primary" dark class="mb-2" @click="CreateEquipo()">
+          </v-btn>
+          <v-btn color="primary" dark class="mb-2" @click="CreateEquipo()">
             Nuevo Equipo
           </v-btn>
           <v-btn color="primary" dark class="mb-2" @click="CreateTecnico()">
             Nuevo Tecnico
-          </v-btn> -->
+          </v-btn>
         </v-toolbar>
       </template>
       <template v-slot:body="{ items }">
@@ -176,12 +176,11 @@ export default {
     },
     async CreateOrdenServicio() {
       const ordenServicio = {
-        id: 2,
-        equipoID: 3,
-        clienteID: "934d01d7-5d55-4857-859e-95de9462714a",
+        id: 4,
+        equipoID: 4,
+        clienteID: "4999f2ed-a169-410b-a33b-753f7aa8d150",
         estado: "enrevision",
         tecnicoID: 2,
-        tallerID: "3f2a1d1e-d86c-4b20-8e88-f02f8e9207d5",
       };
       this.ordenServicio = ordenServicio;
       this.ordenes = [...this.ordenes, ordenServicio];
@@ -205,10 +204,10 @@ export default {
     // },
     async CreateEquipo() {
       const equipo = {
-        id: 3,
-        nombre: "PC",
-        descripcion: "IMicro",
-        clienteID: "934d01d7-5d55-4857-859e-95de9462714a",
+        id: 4,
+        nombre: "Celular Huawei",
+        descripcion: "Algo",
+        clienteID: "4999f2ed-a169-410b-a33b-753f7aa8d150",
       };
 
       await API.graphql({

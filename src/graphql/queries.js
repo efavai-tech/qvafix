@@ -425,7 +425,9 @@ export const listOrdenServicios = /* GraphQL */ `
           id
           name
           cargo
-          tallerID
+          taller{
+            name
+          }
           createdAt
           updatedAt
         }
