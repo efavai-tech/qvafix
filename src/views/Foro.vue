@@ -74,15 +74,19 @@
                             <v-chip outlined>{{ item.blog.name }}</v-chip>
                           </p>
                           <v-div v-if="$vuetify.breakpoint.xsOnly" class="pt-2">
-                            <v-btn small text color="primary">9<br />Vistas</v-btn>
-                            <v-btn small text color="success">3<br />Respuestas</v-btn>
-                            <v-btn small text>1<br />Votos</v-btn>
+                            <!-- <v-btn small text color="primary">9<br />Vistas</v-btn> -->
+                            <v-btn small text color="success" @click="respuestaForo(item)"
+                              >3<br />Respuestas</v-btn
+                            >
+                            <!-- <v-btn small text>1<br />Votos</v-btn> -->
                           </v-div>
                         </v-list-item-content>
                         <v-btn-toggle shaped mandatory v-if="!$vuetify.breakpoint.xsOnly">
-                          <v-btn text>{{ item.vistas }}<br />Vistas</v-btn>
-                          <v-btn text>{{ item.comments.length }}<br />Respuestas</v-btn>
-                          <v-btn text>{{ item.votos }}<br />Votos</v-btn>
+                          <!-- <v-btn text>{{ item.vistas }}<br />Vistas</v-btn> -->
+                          <v-btn text @click="respuestaForo(item)"
+                            ><br />Respuestas</v-btn
+                          >
+                          <!-- <v-btn text>{{ item.votos }}<br />Votos</v-btn> -->
                         </v-btn-toggle>
                       </v-list-item>
                     </v-row>
@@ -153,9 +157,9 @@ export default {
     posts: [],
     page: 1,
     panel: [],
-    itemsPerPage: 10,
-    sortBy: "vistas",
-    keys: ["avatar", "action", "headline", "title", "subtitle"],
+    itemsPerPage: 5,
+    sortBy: "createdAt",
+    keys: ["title", "content"],
     masVistos: [
       {
         avatar: "img/material2.jpg",
@@ -169,51 +173,9 @@ export default {
         subtitle:
           "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.",
       },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
-        title: "Oui oui",
-        subtitle:
-          "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?",
-      },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-        title: "Birthday gift",
-        subtitle:
-          "<span class='text--primary'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?",
-      },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/5.jpg",
-        title: "Recipe to try",
-        subtitle:
-          "<span class='text--primary'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.",
-      },
     ],
     selected: [2],
-    temas: [
-      {
-        avatar: "img/avatar/avatar-7.png",
-        action: "15 min",
-        headline: "Brunch this weekend?",
-        title: "Ali Connors",
-        subtitle:
-          "I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
-        vistas: 83,
-        respuestas: 6,
-        votos: 0,
-        link: "/respuestasForo",
-      },
-      {
-        avatar: "img/avatar/avatar-2.png",
-        action: "2 hr",
-        headline: "Summer BBQ",
-        title: "me, Scrott, Jennifer",
-        subtitle: "Wish I could come, but I'm out of town this weekend.",
-        vistas: 3,
-        respuestas: 7,
-        votos: 1,
-        link: "/respuestasForo",
-      },
-    ],
+    temas: [],
     avatar: true,
     threeLine: true,
     rounded: true,
@@ -223,7 +185,7 @@ export default {
       return this.$store.state.login;
     },
     numberOfPages() {
-      return Math.ceil(this.temas.length / this.itemsPerPage);
+      return Math.ceil(this.posts.length / this.itemsPerPage);
     },
     filteredKeys() {
       return this.keys.filter((key) => key !== `title`);
@@ -247,6 +209,13 @@ export default {
         query: listPosts,
       });
       this.posts = posts.data.listPosts.items;
+    },
+    respuestaForo(item) {
+      this.$store.commit("Post", item);
+      // this.$store.state.post = item;
+      this.$router.push({
+        name: "RespuestasForo",
+      });
     },
   },
 };

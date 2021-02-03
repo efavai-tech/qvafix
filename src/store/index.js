@@ -16,6 +16,7 @@ export default new Vuex.Store({
         dark_theme: JSON.parse(localStorage.getItem('dark_theme')),
         layout: "Principal",
         login: JSON.parse(localStorage.getItem('login')),
+        post: {}
     },
     mutations: {
         SET_LAYOUT(state, newLayout) {
@@ -37,7 +38,10 @@ export default new Vuex.Store({
             localStorage.setItem("login", false)
 
             state.login = false
-        }
+        },
+        Post(state, newPost) {
+            state.post = newPost
+        },
     },
     actions: {},
     getters: {},

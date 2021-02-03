@@ -135,6 +135,7 @@ export default {
         query: getCliente,
         variables: { id: this.cliente.id },
       });
+
       this.ordenes = result.data.getCliente.ordenServicio.items;
       if (result.data.getCliente.ordenServicio.items.length != 0) {
         this.tieneOrdenes = true;
