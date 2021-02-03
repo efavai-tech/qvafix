@@ -195,8 +195,6 @@ export default {
       HardBreak,
       Image,
     ],
-    items: ["TV", "Celular", "Tablet", "Laptop"],
-    // starting editor's content
     title: "",
     content: "",
     post: {},
@@ -252,7 +250,8 @@ export default {
         query: createPost,
         variables: { input: post },
       });
-      this.close();
+      this.$router.push("/foro");
+      this.post = {};
     },
 
     close() {

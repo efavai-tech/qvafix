@@ -145,6 +145,7 @@ export default {
           .then((username) => {
             console.log(username);
             this.loading = false;
+            this.$store.commit("Login");
             this.$router.push("/");
           })
           .catch((error) => {

@@ -2,30 +2,24 @@
   <div class="px-2 mt-4">
     <v-row>
       <v-col class="col-md6 mt-3">
-        <v-card flat>
+        <v-card>
           <v-card-text class="mx-2">
             <v-row class="mx-2">
               <p
                 class="d-none d-sm-flex d-md-none d-md-flex d-lg-none d-lg-flex d-xl-none d-xl-flex display-1 font-weight-light orange--text"
               >
-                {{ tema.title }}
+                {{ post.title }}
               </p>
               <v-spacer />
-              <v-btn
-                text
-                outlined
-                color="primary"
-                router-lik
-                to="/PublicPost"
+              <v-btn text outlined color="primary" router-lik to="/PublicPost"
                 >Hacer una Pregunta</v-btn
               ></v-row
             >
             <v-divider class="pt-5" />
-            Contenido del Problemas
-            {{ tema.subtitle }}
-            <p class="mt-3">Tu respuesta</p>
+            <v-card-text v-html="post.content"> </v-card-text>
+            <p class="subtitle-1 mt-3">Tu respuesta</p>
             <tiptap-vuetify
-              v-model="content"
+              v-model="answer.content"
               :extensions="extensions"
               :toolbar-attributes="{ color: 'primary' }"
               placeholder="Descripción de su respuesta …"
@@ -34,7 +28,7 @@
             </tiptap-vuetify>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn outlined
+              <v-btn outlined @click="createAnswer()"
                 ><v-icon left> mdi-publish </v-icon>Publicar</v-btn
               >
               <v-btn class="mx-2" outlined
@@ -73,11 +67,15 @@ import {
   Image,
 } from "tiptap-vuetify";
 import Promociones from "../components/Promociones";
+
+import { API } from "aws-amplify";
+import { createAnswer } from "../graphql/mutations";
+
 export default {
   components: { TiptapVuetify, Promociones },
 
   data: () => ({
-    content: "",
+    answer: {},
     tema: {
       avatar: "img/avatar/avatar-7.png",
       action: "15 min",
@@ -111,9 +109,28 @@ export default {
       HardBreak,
       Image,
     ],
+    extensions1: [],
+    post: {},
   }),
   computed: {},
-  methods: {},
+  async created() {
+    this.getPost();
+  },
+  methods: {
+    getPost() {
+      this.post = this.$store.state.post;
+    },
+    async createAnswer() {
+      const answer = this.answer;
+      answer.postID = this.post.blogID;
+      await API.graphql({
+        query: createAnswer,
+        variables: { input: answer },
+      });
+      this.$router.push("/foro");
+      this.answer = {};
+    },
+  },
 };
 </script>
 
