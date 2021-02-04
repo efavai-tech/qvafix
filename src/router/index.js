@@ -89,13 +89,6 @@ const routes = [{
         name: 'RespuestasForo',
         component: () =>
             import ( /* webpackChunkName: "about" */ '../views/RespuestasForo.vue'),
-        beforeEnter: (to, from, next) => {
-            if (!JSON.parse(localStorage.getItem('login'))) {
-                next("Login");
-            } else {
-                next();
-            }
-        }
     },
     {
         path: '/clientesTalleres',

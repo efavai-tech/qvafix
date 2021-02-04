@@ -1,7 +1,7 @@
 <template>
   <div class="px-3">
     <v-row class="text-center">
-      <v-col class="col-md6">
+      <v-col cols="mx-auto">
         <v-data-iterator
           :items="ofertas"
           :items-per-page.sync="itemsPerPage"
@@ -123,11 +123,11 @@
                   </v-row>
                 </v-col>
                 <v-col cols="12" sm="12" md="1">
-                  <v-icon class="primary--text" v-on="on" @click="editItem(item)"
+                  <v-icon class="primary--text" @click="editItem(item)"
                     >v-icon notranslate mdi mdi-pen theme--dark</v-icon
                   >
                   <v-divider class="mx-1" inset vertical></v-divider>
-                  <v-icon v-on="on" class="red--text" @click="confirmDelete(item)"
+                  <v-icon class="red--text" @click="confirmDelete(item)"
                     >v-icon notranslate mdi mdi-delete theme--dark</v-icon
                   >
                 </v-col>
