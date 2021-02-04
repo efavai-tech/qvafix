@@ -118,7 +118,7 @@ export default {
   },
   methods: {
     getPost() {
-      this.post = this.$store.state.post;
+      this.post = JSON.parse(localStorage.getItem("Post"));
     },
     async createAnswer() {
       const answer = this.answer;

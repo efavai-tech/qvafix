@@ -16,7 +16,7 @@
           </v-list>
         </v-card>
       </v-col>
-      <v-col class="col-md7 mt-3">
+      <v-col cols="mx-auto">
         <v-data-iterator
           :items="posts"
           :items-per-page.sync="itemsPerPage"
@@ -43,7 +43,7 @@
                 color="primary"
                 router-lik
                 to="/PublicPost"
-                class="mt-3"
+                class="mt-6"
                 v-if="logueado"
                 >Hacer una Pregunta</v-btn
               >
@@ -211,8 +211,7 @@ export default {
       this.posts = posts.data.listPosts.items;
     },
     respuestaForo(item) {
-      this.$store.commit("Post", item);
-      // this.$store.state.post = item;
+      localStorage.setItem("Post", JSON.stringify(item));
       this.$router.push({
         name: "RespuestasForo",
       });
