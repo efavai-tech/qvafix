@@ -129,7 +129,6 @@ export default {
       bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
     })
       .then((user) => {
-        console.log(user.attributes.email);
         this.username = user.attributes.email;
       })
       .catch((err) => console.log(err));
@@ -174,17 +173,14 @@ export default {
     enableDark() {
       this.$vuetify.theme.dark = true;
       this.$store.commit("ENABLE_DARK");
-      console.log(this.$store.state.dark_theme);
     },
     disableDark() {
       this.$vuetify.theme.dark = false;
       this.$store.commit("DISABLE_DARK");
-      console.log(this.$store.state.dark_theme);
     },
     signOut() {
       Auth.signOut()
-        .then((data) => {
-          console.log(data);
+        .then(() => {
           this.$store.commit("logout");
           this.$router.push("/");
         })

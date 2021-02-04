@@ -10,6 +10,8 @@ import '@aws-amplify/ui-vue';
 import aws_exports from './aws-exports';
 import moment from 'moment'
 
+Vue.component('vueInternetChecker', require('vue-internet-checker'));
+
 Vue.config.productionTip = false
 Vue.filter('formatDate', function(value) {
     if (value) {

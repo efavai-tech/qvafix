@@ -101,12 +101,10 @@ export default {
       bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
     })
       .then((user) => {
-        console.log(user);
         this.username = user.attributes.email;
         this.$store.commit("Login");
       })
       .catch((err) => {
-        console.log(err);
         if (err == "The user is not authenticated") {
           this.$store.commit("logout");
         }
@@ -144,8 +142,7 @@ export default {
   methods: {
     signOut() {
       Auth.signOut()
-        .then((data) => {
-          console.log(data);
+        .then(() => {
           this.$store.commit("logout");
           this.$router.push("/");
         })

@@ -47,7 +47,6 @@
         </v-card>
       </div>
     </v-responsive>
-
     <v-responsive v-if="!tieneOrdenes">
       <v-progress-linear
         :active="loading"
@@ -55,7 +54,6 @@
         absolute
         color="deep-orange"
       ></v-progress-linear>
-
       <v-container>
         <v-alert color="blue-grey" dark dense icon="mdi-clipboard-list-outline" prominent>
           {{ textCard }}
@@ -72,14 +70,10 @@ import { Auth } from "aws-amplify";
 import { getCliente } from "../../graphql/queries";
 import { listClientes } from "../../graphql/queries";
 
-// import Promociones from "";
 export default {
-  components: {
-    // Promociones,
-  },
+  components: {},
   data: () => ({
     loading: false,
-    openSearch: false,
     tieneOrdenes: false,
     username: undefined,
     ordenes: [],
@@ -94,16 +88,7 @@ export default {
     sortBy: "createdAt",
     keys: ["id", "taller", "equipo", "estado"],
   }),
-  watch: {
-    // loading(val) {
-    //   if (!val) return;
-    //   setTimeout(() => (this.loading = false), 10000);
-    // },
-    // textCard(val) {
-    //   if (!val) return;
-    //   setTimeout(() => (this.textCard = "Usted no tiene órdenes a su nombre"), 10000);
-    // },
-  },
+
   computed: {
     numberOfPages() {
       return Math.ceil(this.ordenes.length / this.itemsPerPage);
@@ -113,6 +98,12 @@ export default {
     },
   },
   async created() {
+    // var ifConnected = window.navigator.onLine;
+    // if (ifConnected) {
+    //   this.textCard = "Conección Disponible";
+    // } else {
+    //   this.textCard = "No tienes Conección";
+    // }
     Auth.currentAuthenticatedUser({
       bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
     })
