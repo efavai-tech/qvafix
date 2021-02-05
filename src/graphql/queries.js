@@ -35,6 +35,7 @@ export const getTaller = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -75,6 +76,7 @@ export const listTallers = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -139,6 +141,7 @@ export const getTecnico = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -220,6 +223,7 @@ export const getEquipo = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -245,6 +249,7 @@ export const listEquipos = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -267,36 +272,23 @@ export const getCliente = /* GraphQL */ `
           id
           numero
           estado
-          equipo{nombre}
           tecnico{
             name
             taller{
               name
             }
-          }
-          clienteID
+            }
           fechaDeFinalizado
+          equipo
+          {
+            nombre
+            }
           createdAt
           updatedAt
         }
         nextToken
-      }
-      equipo {
-        id
-        nombre
-        descripcion
-        clienteID
-        cliente {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
+      }     
+      rol
       createdAt
       updatedAt
     }
@@ -325,6 +317,7 @@ export const listClientes = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -375,6 +368,7 @@ export const getOrdenServicio = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -390,6 +384,7 @@ export const getOrdenServicio = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -420,7 +415,6 @@ export const listOrdenServicios = /* GraphQL */ `
         id
         numero
         estado
-        tecnicoID
         tecnico {
           id
           name
@@ -437,6 +431,7 @@ export const listOrdenServicios = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -483,6 +478,7 @@ export const getOfertasTrabajo = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -575,34 +571,23 @@ export const getPost = /* GraphQL */ `
       id
       title
       content
-      blogID
       blog {
-        id
-        name
-        posts {
-          nextToken
-        }
-        createdAt
-        updatedAt
+        name        
       }
       comments {
         items {
           id
-          postID
           content
           user
           createdAt
-          updatedAt
         }
         nextToken
       }
       answer {
         items {
           id
-          postID
           content
           createdAt
-          updatedAt
         }
         nextToken
       }
@@ -622,13 +607,10 @@ export const listPosts = /* GraphQL */ `
         id
         title
         content
-        blogID
         blog {
-          id
           name
-        }
+        }         
         createdAt
-        updatedAt
       }
       nextToken
     }

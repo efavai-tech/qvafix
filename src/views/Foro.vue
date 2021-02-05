@@ -21,11 +21,26 @@
           :items="posts"
           :items-per-page.sync="itemsPerPage"
           :page="page"
+          :search="search"
+          :sort-by="['createdAt']"
+          :sort-desc="sortDesc"
           hide-default-footer
         >
           <template v-slot:header>
             <v-app-bar fixed dense class="d-flex d-sm-none d-sm-flex d-md-none">
-              <v-toolbar-title class="mr-3">Últimas publicaciones</v-toolbar-title>
+              <v-toolbar-title class="mr-3">Últimas publicaciones</v-toolbar-title
+              ><v-spacer></v-spacer>
+              <v-text-field
+                light
+                filled
+                flat
+                v-model="search"
+                solo
+                rounded
+                hide-details
+                dense
+                append-icon="mdi-magnify"
+              ></v-text-field>
             </v-app-bar>
             <v-row class="mx-1">
               <v-col cols="12" sm="8">
@@ -73,13 +88,13 @@
                             {{ item.createdAt | formatDate }}
                             <v-chip outlined>{{ item.blog.name }}</v-chip>
                           </p>
-                          <v-div v-if="$vuetify.breakpoint.xsOnly" class="pt-2">
+                          <div v-if="$vuetify.breakpoint.xsOnly" class="pt-2">
                             <!-- <v-btn small text color="primary">9<br />Vistas</v-btn> -->
                             <v-btn small text color="success" @click="respuestaForo(item)"
                               >3<br />Respuestas</v-btn
                             >
                             <!-- <v-btn small text>1<br />Votos</v-btn> -->
-                          </v-div>
+                          </div>
                         </v-list-item-content>
                         <v-btn-toggle shaped mandatory v-if="!$vuetify.breakpoint.xsOnly">
                           <!-- <v-btn text>{{ item.vistas }}<br />Vistas</v-btn> -->
@@ -142,8 +157,11 @@
 <script>
 import Promociones from "../components/Promociones";
 import LoginDialog from "../components/LoginDialog";
+
 import { API } from "aws-amplify";
 import { listPosts } from "../graphql/queries";
+import { getPost } from "../graphql/queries";
+
 export default {
   components: {
     Promociones,
@@ -151,14 +169,13 @@ export default {
   },
   data: () => ({
     itemsPerPageArray: [10, 20, 30],
-    buscar: "",
+    search: "",
     filter: {},
-    sortDesc: false,
     posts: [],
     page: 1,
     panel: [],
     itemsPerPage: 5,
-    sortBy: "createdAt",
+    sortDesc: true,
     keys: ["title", "content"],
     masVistos: [
       {
@@ -210,8 +227,12 @@ export default {
       });
       this.posts = posts.data.listPosts.items;
     },
-    respuestaForo(item) {
-      localStorage.setItem("Post", JSON.stringify(item));
+    async respuestaForo(item) {
+      var post = await API.graphql({
+        query: getPost,
+        variables: { id: item.id },
+      });
+      localStorage.setItem("Post", JSON.stringify(post));
       this.$router.push({
         name: "RespuestasForo",
       });
