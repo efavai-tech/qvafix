@@ -22,7 +22,7 @@
 
         <v-icon>mdi-login</v-icon>
       </v-btn>
-      <v-menu v-model="menu1" top offset-y transition="slide-x-transition">
+      <!-- <v-menu v-model="menu1" top offset-y transition="slide-x-transition">
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on" v-if="logueado">
             <span>Admin</span>
@@ -48,7 +48,7 @@
             </v-list>
           </v-list>
         </v-card>
-      </v-menu>
+      </v-menu> -->
       <v-menu v-model="menu" top offset-y transition="slide-x-transition">
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on" v-if="logueado">
@@ -123,21 +123,12 @@ import { Auth } from "aws-amplify";
 
 export default {
   components: {},
-  created() {
-    this.login = true;
-    Auth.currentAuthenticatedUser({
-      bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
-    })
-      .then((user) => {
-        this.username = user.attributes.email;
-      })
-      .catch((err) => console.log(err));
-  },
   data: () => ({
     menu: false,
     menu1: false,
     nuevo: 10,
     drawer: null,
+    user: {},
     username: undefined,
     items: [
       {
@@ -151,19 +142,30 @@ export default {
       //   link: "/SolicitudesEmpleo",
       // },
     ],
-    items1: [
-      {
-        title: "Órdenes",
-        icon: "mdi-clipboard-list-outline",
-        link: "/ordenes",
-      },
-      {
-        title: "Clientes y Talleres",
-        icon: "mdi-account-group",
-        link: "/clientesTalleres",
-      },
-    ],
+    // items1: [
+    //   {
+    //     title: "Órdenes",
+    //     icon: "mdi-clipboard-list-outline",
+    //     link: "/ordenes",
+    //   },
+    //   {
+    //     title: "Clientes y Talleres",
+    //     icon: "mdi-account-group",
+    //     link: "/clientesTalleres",
+    //   },
+    // ],
   }),
+  created() {
+    Auth.currentAuthenticatedUser({
+      bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+    })
+      .then((user) => {
+        // localStorage.setItem("user", JSON.stringify(user));
+        this.username = user.attributes.email;
+      })
+      .catch((err) => console.log(err));
+    // this.user = JSON.parse(localStorage.getItem("user"));
+  },
   computed: {
     logueado: function () {
       return this.$store.state.login;
