@@ -35,7 +35,7 @@ type Cliente @model{
   numeroTelefono: AWSPhone
   correo: AWSEmail
   ordenServicio: [OrdenServicio] @connection(keyName: "byCliente", fields: ["id"])
-  equipo: [Equipo]
+  equipo: [Equipo] @connection(keyName: "byCliente", fields: ["id"])
 }
 type OrdenServicio @model @key(name: "byCliente", fields: ["clienteID"]){
   id: ID!
@@ -72,22 +72,23 @@ type Post @model @key(name: "byBlog", fields: ["blogID"]) {
   content: String!
   blogID: ID!
   blog: Blog @connection(fields: ["blogID"])
-  comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
   answer: [Answer] @connection(keyName: "byPost", fields: ["id"])
-}
-
-type Comment @model @key(name: "byPost", fields: ["postID", "content"]) {
-  id: ID!
-  postID: ID!
-  post: Post @connection(fields: ["postID"])
-  content: String!
-  user:String!
+  username:String!
 }
 type Answer @model @key(name: "byPost", fields: ["postID", "content"]) {
   id: ID!
   postID: ID!
   post: Post @connection(fields: ["postID"])
   content: String!
+  comments: [Comment] @connection(keyName: "byAnswer")
+  username:String!
+}
+type Comment @model @key(name: "byAnswer") {
+  id: ID!
+  answerID: ID!
+  answer: Answer @connection(fields: ["answerID"])
+  content: String!
+  username:String!
 }
 # type Task
 #   @model

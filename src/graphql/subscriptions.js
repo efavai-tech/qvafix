@@ -35,6 +35,7 @@ export const onCreateTaller = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -89,6 +90,7 @@ export const onUpdateTaller = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -143,6 +145,7 @@ export const onDeleteTaller = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -219,6 +222,7 @@ export const onCreateTecnico = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -267,6 +271,7 @@ export const onUpdateTecnico = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -315,6 +320,7 @@ export const onDeleteTecnico = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -366,6 +372,7 @@ export const onCreateEquipo = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -397,6 +404,7 @@ export const onUpdateEquipo = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -428,6 +436,7 @@ export const onDeleteEquipo = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -467,12 +476,14 @@ export const onCreateCliente = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
         createdAt
         updatedAt
       }
+      rol
       createdAt
       updatedAt
     }
@@ -509,12 +520,14 @@ export const onUpdateCliente = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
         createdAt
         updatedAt
       }
+      rol
       createdAt
       updatedAt
     }
@@ -551,12 +564,14 @@ export const onDeleteCliente = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
         createdAt
         updatedAt
       }
+      rol
       createdAt
       updatedAt
     }
@@ -605,6 +620,7 @@ export const onCreateOrdenServicio = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -620,6 +636,7 @@ export const onCreateOrdenServicio = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -682,6 +699,7 @@ export const onUpdateOrdenServicio = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -697,6 +715,7 @@ export const onUpdateOrdenServicio = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -759,6 +778,7 @@ export const onDeleteOrdenServicio = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -774,6 +794,7 @@ export const onDeleteOrdenServicio = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -811,6 +832,7 @@ export const onCreateOfertasTrabajo = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -846,6 +868,7 @@ export const onUpdateOfertasTrabajo = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -881,6 +904,7 @@ export const onDeleteOfertasTrabajo = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }

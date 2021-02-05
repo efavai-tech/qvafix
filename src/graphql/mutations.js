@@ -38,6 +38,7 @@ export const createTaller = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -95,6 +96,7 @@ export const updateTaller = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -152,6 +154,7 @@ export const deleteTaller = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -240,6 +243,7 @@ export const createTecnico = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -291,6 +295,7 @@ export const updateTecnico = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -342,6 +347,7 @@ export const deleteTecnico = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -396,6 +402,7 @@ export const createEquipo = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -430,6 +437,7 @@ export const updateEquipo = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -464,6 +472,7 @@ export const deleteEquipo = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -506,12 +515,14 @@ export const createCliente = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
         createdAt
         updatedAt
       }
+      rol
       createdAt
       updatedAt
     }
@@ -551,12 +562,14 @@ export const updateCliente = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
         createdAt
         updatedAt
       }
+      rol
       createdAt
       updatedAt
     }
@@ -596,12 +609,14 @@ export const deleteCliente = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
         createdAt
         updatedAt
       }
+      rol
       createdAt
       updatedAt
     }
@@ -653,6 +668,7 @@ export const createOrdenServicio = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -668,6 +684,7 @@ export const createOrdenServicio = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -733,6 +750,7 @@ export const updateOrdenServicio = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -748,6 +766,7 @@ export const updateOrdenServicio = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -813,6 +832,7 @@ export const deleteOrdenServicio = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        rol
         createdAt
         updatedAt
       }
@@ -828,6 +848,7 @@ export const deleteOrdenServicio = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -868,6 +889,7 @@ export const createOfertasTrabajo = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -906,6 +928,7 @@ export const updateOfertasTrabajo = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
@@ -944,6 +967,7 @@ export const deleteOfertasTrabajo = /* GraphQL */ `
           name
           numeroTelefono
           correo
+          rol
           createdAt
           updatedAt
         }
