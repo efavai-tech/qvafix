@@ -28,14 +28,8 @@ export const getTaller = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -76,7 +70,6 @@ export const listTallers = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -141,7 +134,6 @@ export const getTecnico = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -216,14 +208,8 @@ export const getEquipo = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -249,7 +235,6 @@ export const listEquipos = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -272,23 +257,26 @@ export const getCliente = /* GraphQL */ `
           id
           numero
           estado
-          tecnico{
-            name
-            taller{
-              name
-            }
-            }
+          tecnicoID
+          clienteID
           fechaDeFinalizado
-          equipo
-          {
-            nombre
-            }
+          equipoID
           createdAt
           updatedAt
         }
         nextToken
-      }     
-      rol
+      }
+      equipo {
+        items {
+          id
+          nombre
+          descripcion
+          clienteID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -310,14 +298,8 @@ export const listClientes = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -361,14 +343,8 @@ export const getOrdenServicio = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -384,7 +360,6 @@ export const getOrdenServicio = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -415,13 +390,12 @@ export const listOrdenServicios = /* GraphQL */ `
         id
         numero
         estado
+        tecnicoID
         tecnico {
           id
           name
           cargo
-          taller{
-            name
-          }
+          tallerID
           createdAt
           updatedAt
         }
@@ -431,7 +405,6 @@ export const listOrdenServicios = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -478,7 +451,6 @@ export const getOfertasTrabajo = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -535,6 +507,7 @@ export const getBlog = /* GraphQL */ `
           title
           content
           blogID
+          username
           createdAt
           updatedAt
         }
@@ -571,26 +544,28 @@ export const getPost = /* GraphQL */ `
       id
       title
       content
+      blogID
       blog {
-        name        
-      }
-      comments {
-        items {
-          id
-          content
-          user
-          createdAt
+        id
+        name
+        posts {
+          nextToken
         }
-        nextToken
+        createdAt
+        updatedAt
       }
       answer {
         items {
           id
           content
+          username
+          postID
           createdAt
+          updatedAt
         }
         nextToken
       }
+      username
       createdAt
       updatedAt
     }
@@ -607,24 +582,6 @@ export const listPosts = /* GraphQL */ `
         id
         title
         content
-        blog {
-          name
-        }         
-        createdAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getComment = /* GraphQL */ `
-  query GetComment($id: ID!) {
-    getComment(id: $id) {
-      id
-      postID
-      post {
-        id
-        title
-        content
         blogID
         blog {
           id
@@ -632,42 +589,10 @@ export const getComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        comments {
-          nextToken
-        }
         answer {
           nextToken
         }
-        createdAt
-        updatedAt
-      }
-      content
-      user
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listComments = /* GraphQL */ `
-  query ListComments(
-    $filter: ModelCommentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        postID
-        post {
-          id
-          title
-          content
-          blogID
-          createdAt
-          updatedAt
-        }
-        content
-        user
+        username
         createdAt
         updatedAt
       }
@@ -679,6 +604,8 @@ export const getAnswer = /* GraphQL */ `
   query GetAnswer($id: ID!) {
     getAnswer(id: $id) {
       id
+      content
+      username
       postID
       post {
         id
@@ -691,16 +618,29 @@ export const getAnswer = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        comments {
-          nextToken
-        }
         answer {
           nextToken
         }
+        username
         createdAt
         updatedAt
       }
-      content
+      comments {
+        id
+        answerID
+        answer {
+          id
+          content
+          username
+          postID
+          createdAt
+          updatedAt
+        }
+        content
+        username
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -715,16 +655,90 @@ export const listAnswers = /* GraphQL */ `
     listAnswers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        content
+        username
         postID
         post {
           id
           title
           content
           blogID
+          username
+          createdAt
+          updatedAt
+        }
+        comments {
+          id
+          answerID
+          content
+          username
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getComment = /* GraphQL */ `
+  query GetComment($id: ID!) {
+    getComment(id: $id) {
+      id
+      answerID
+      answer {
+        id
+        content
+        username
+        postID
+        post {
+          id
+          title
+          content
+          blogID
+          username
+          createdAt
+          updatedAt
+        }
+        comments {
+          id
+          answerID
+          content
+          username
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      content
+      username
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listComments = /* GraphQL */ `
+  query ListComments(
+    $filter: ModelCommentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        answerID
+        answer {
+          id
+          content
+          username
+          postID
           createdAt
           updatedAt
         }
         content
+        username
         createdAt
         updatedAt
       }
