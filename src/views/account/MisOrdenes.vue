@@ -134,6 +134,14 @@ export default {
     async getCliente() {
       this.loading = true;
       this.textCard = "Buscando";
+      //        let filter = {
+      //             or: [
+      //                 {
+      //                     correo: {eq:"alejoroman0605@gmail.com"}
+      //                 },
+      //                 ]
+      //         };
+      // return await API.graphql(graphqlOperation(listClientes, {limit: 20, filter:filter}));
       // Saber el cliente por el correo
       const clientes = await API.graphql({
         query: listClientes,

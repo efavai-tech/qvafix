@@ -31,14 +31,8 @@ export const createTaller = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -89,14 +83,8 @@ export const updateTaller = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -147,14 +135,8 @@ export const deleteTaller = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -243,7 +225,6 @@ export const createTecnico = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -295,7 +276,6 @@ export const updateTecnico = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -347,7 +327,6 @@ export const deleteTecnico = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -395,14 +374,8 @@ export const createEquipo = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -430,14 +403,8 @@ export const updateEquipo = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -465,14 +432,8 @@ export const deleteEquipo = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -506,23 +467,16 @@ export const createCliente = /* GraphQL */ `
         nextToken
       }
       equipo {
-        id
-        nombre
-        descripcion
-        clienteID
-        cliente {
+        items {
           id
-          name
-          numeroTelefono
-          correo
-          rol
+          nombre
+          descripcion
+          clienteID
           createdAt
           updatedAt
         }
-        createdAt
-        updatedAt
+        nextToken
       }
-      rol
       createdAt
       updatedAt
     }
@@ -553,23 +507,16 @@ export const updateCliente = /* GraphQL */ `
         nextToken
       }
       equipo {
-        id
-        nombre
-        descripcion
-        clienteID
-        cliente {
+        items {
           id
-          name
-          numeroTelefono
-          correo
-          rol
+          nombre
+          descripcion
+          clienteID
           createdAt
           updatedAt
         }
-        createdAt
-        updatedAt
+        nextToken
       }
-      rol
       createdAt
       updatedAt
     }
@@ -600,23 +547,16 @@ export const deleteCliente = /* GraphQL */ `
         nextToken
       }
       equipo {
-        id
-        nombre
-        descripcion
-        clienteID
-        cliente {
+        items {
           id
-          name
-          numeroTelefono
-          correo
-          rol
+          nombre
+          descripcion
+          clienteID
           createdAt
           updatedAt
         }
-        createdAt
-        updatedAt
+        nextToken
       }
-      rol
       createdAt
       updatedAt
     }
@@ -661,14 +601,8 @@ export const createOrdenServicio = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -684,7 +618,6 @@ export const createOrdenServicio = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -743,14 +676,8 @@ export const updateOrdenServicio = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -766,7 +693,6 @@ export const updateOrdenServicio = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -825,14 +751,8 @@ export const deleteOrdenServicio = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -848,7 +768,6 @@ export const deleteOrdenServicio = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -889,7 +808,6 @@ export const createOfertasTrabajo = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -928,7 +846,6 @@ export const updateOfertasTrabajo = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -967,7 +884,6 @@ export const deleteOfertasTrabajo = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -999,6 +915,7 @@ export const createBlog = /* GraphQL */ `
           title
           content
           blogID
+          username
           createdAt
           updatedAt
         }
@@ -1023,6 +940,7 @@ export const updateBlog = /* GraphQL */ `
           title
           content
           blogID
+          username
           createdAt
           updatedAt
         }
@@ -1047,6 +965,7 @@ export const deleteBlog = /* GraphQL */ `
           title
           content
           blogID
+          username
           createdAt
           updatedAt
         }
@@ -1076,27 +995,18 @@ export const createPost = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      comments {
-        items {
-          id
-          postID
-          content
-          user
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       answer {
         items {
           id
-          postID
           content
+          username
+          postID
           createdAt
           updatedAt
         }
         nextToken
       }
+      username
       createdAt
       updatedAt
     }
@@ -1121,27 +1031,18 @@ export const updatePost = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      comments {
-        items {
-          id
-          postID
-          content
-          user
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       answer {
         items {
           id
-          postID
           content
+          username
+          postID
           createdAt
           updatedAt
         }
         nextToken
       }
+      username
       createdAt
       updatedAt
     }
@@ -1166,26 +1067,164 @@ export const deletePost = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      comments {
+      answer {
         items {
           id
-          postID
           content
-          user
+          username
+          postID
           createdAt
           updatedAt
         }
         nextToken
       }
-      answer {
-        items {
+      username
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createAnswer = /* GraphQL */ `
+  mutation CreateAnswer(
+    $input: CreateAnswerInput!
+    $condition: ModelAnswerConditionInput
+  ) {
+    createAnswer(input: $input, condition: $condition) {
+      id
+      content
+      username
+      postID
+      post {
+        id
+        title
+        content
+        blogID
+        blog {
           id
-          postID
-          content
+          name
           createdAt
           updatedAt
         }
-        nextToken
+        answer {
+          nextToken
+        }
+        username
+        createdAt
+        updatedAt
+      }
+      comments {
+        id
+        answerID
+        answer {
+          id
+          content
+          username
+          postID
+          createdAt
+          updatedAt
+        }
+        content
+        username
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateAnswer = /* GraphQL */ `
+  mutation UpdateAnswer(
+    $input: UpdateAnswerInput!
+    $condition: ModelAnswerConditionInput
+  ) {
+    updateAnswer(input: $input, condition: $condition) {
+      id
+      content
+      username
+      postID
+      post {
+        id
+        title
+        content
+        blogID
+        blog {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        answer {
+          nextToken
+        }
+        username
+        createdAt
+        updatedAt
+      }
+      comments {
+        id
+        answerID
+        answer {
+          id
+          content
+          username
+          postID
+          createdAt
+          updatedAt
+        }
+        content
+        username
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteAnswer = /* GraphQL */ `
+  mutation DeleteAnswer(
+    $input: DeleteAnswerInput!
+    $condition: ModelAnswerConditionInput
+  ) {
+    deleteAnswer(input: $input, condition: $condition) {
+      id
+      content
+      username
+      postID
+      post {
+        id
+        title
+        content
+        blogID
+        blog {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        answer {
+          nextToken
+        }
+        username
+        createdAt
+        updatedAt
+      }
+      comments {
+        id
+        answerID
+        answer {
+          id
+          content
+          username
+          postID
+          createdAt
+          updatedAt
+        }
+        content
+        username
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -1199,29 +1238,34 @@ export const createComment = /* GraphQL */ `
   ) {
     createComment(input: $input, condition: $condition) {
       id
-      postID
-      post {
+      answerID
+      answer {
         id
-        title
         content
-        blogID
-        blog {
+        username
+        postID
+        post {
           id
-          name
+          title
+          content
+          blogID
+          username
           createdAt
           updatedAt
         }
         comments {
-          nextToken
-        }
-        answer {
-          nextToken
+          id
+          answerID
+          content
+          username
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
       }
       content
-      user
+      username
       createdAt
       updatedAt
     }
@@ -1234,29 +1278,34 @@ export const updateComment = /* GraphQL */ `
   ) {
     updateComment(input: $input, condition: $condition) {
       id
-      postID
-      post {
+      answerID
+      answer {
         id
-        title
         content
-        blogID
-        blog {
+        username
+        postID
+        post {
           id
-          name
+          title
+          content
+          blogID
+          username
           createdAt
           updatedAt
         }
         comments {
-          nextToken
-        }
-        answer {
-          nextToken
+          id
+          answerID
+          content
+          username
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
       }
       content
-      user
+      username
       createdAt
       updatedAt
     }
@@ -1269,131 +1318,34 @@ export const deleteComment = /* GraphQL */ `
   ) {
     deleteComment(input: $input, condition: $condition) {
       id
-      postID
-      post {
+      answerID
+      answer {
         id
-        title
         content
-        blogID
-        blog {
+        username
+        postID
+        post {
           id
-          name
+          title
+          content
+          blogID
+          username
           createdAt
           updatedAt
         }
         comments {
-          nextToken
-        }
-        answer {
-          nextToken
+          id
+          answerID
+          content
+          username
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
       }
       content
-      user
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createAnswer = /* GraphQL */ `
-  mutation CreateAnswer(
-    $input: CreateAnswerInput!
-    $condition: ModelAnswerConditionInput
-  ) {
-    createAnswer(input: $input, condition: $condition) {
-      id
-      postID
-      post {
-        id
-        title
-        content
-        blogID
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        answer {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      content
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateAnswer = /* GraphQL */ `
-  mutation UpdateAnswer(
-    $input: UpdateAnswerInput!
-    $condition: ModelAnswerConditionInput
-  ) {
-    updateAnswer(input: $input, condition: $condition) {
-      id
-      postID
-      post {
-        id
-        title
-        content
-        blogID
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        answer {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      content
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteAnswer = /* GraphQL */ `
-  mutation DeleteAnswer(
-    $input: DeleteAnswerInput!
-    $condition: ModelAnswerConditionInput
-  ) {
-    deleteAnswer(input: $input, condition: $condition) {
-      id
-      postID
-      post {
-        id
-        title
-        content
-        blogID
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        answer {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      content
+      username
       createdAt
       updatedAt
     }

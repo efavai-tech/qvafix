@@ -28,14 +28,8 @@ export const onCreateTaller = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -83,14 +77,8 @@ export const onUpdateTaller = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -138,14 +126,8 @@ export const onDeleteTaller = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -222,7 +204,6 @@ export const onCreateTecnico = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -271,7 +252,6 @@ export const onUpdateTecnico = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -320,7 +300,6 @@ export const onDeleteTecnico = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -365,14 +344,8 @@ export const onCreateEquipo = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -397,14 +370,8 @@ export const onUpdateEquipo = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -429,14 +396,8 @@ export const onDeleteEquipo = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -467,23 +428,16 @@ export const onCreateCliente = /* GraphQL */ `
         nextToken
       }
       equipo {
-        id
-        nombre
-        descripcion
-        clienteID
-        cliente {
+        items {
           id
-          name
-          numeroTelefono
-          correo
-          rol
+          nombre
+          descripcion
+          clienteID
           createdAt
           updatedAt
         }
-        createdAt
-        updatedAt
+        nextToken
       }
-      rol
       createdAt
       updatedAt
     }
@@ -511,23 +465,16 @@ export const onUpdateCliente = /* GraphQL */ `
         nextToken
       }
       equipo {
-        id
-        nombre
-        descripcion
-        clienteID
-        cliente {
+        items {
           id
-          name
-          numeroTelefono
-          correo
-          rol
+          nombre
+          descripcion
+          clienteID
           createdAt
           updatedAt
         }
-        createdAt
-        updatedAt
+        nextToken
       }
-      rol
       createdAt
       updatedAt
     }
@@ -555,23 +502,16 @@ export const onDeleteCliente = /* GraphQL */ `
         nextToken
       }
       equipo {
-        id
-        nombre
-        descripcion
-        clienteID
-        cliente {
+        items {
           id
-          name
-          numeroTelefono
-          correo
-          rol
+          nombre
+          descripcion
+          clienteID
           createdAt
           updatedAt
         }
-        createdAt
-        updatedAt
+        nextToken
       }
-      rol
       createdAt
       updatedAt
     }
@@ -613,14 +553,8 @@ export const onCreateOrdenServicio = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -636,7 +570,6 @@ export const onCreateOrdenServicio = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -692,14 +625,8 @@ export const onUpdateOrdenServicio = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -715,7 +642,6 @@ export const onUpdateOrdenServicio = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -771,14 +697,8 @@ export const onDeleteOrdenServicio = /* GraphQL */ `
           nextToken
         }
         equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
+          nextToken
         }
-        rol
         createdAt
         updatedAt
       }
@@ -794,7 +714,6 @@ export const onDeleteOrdenServicio = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -832,7 +751,6 @@ export const onCreateOfertasTrabajo = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -868,7 +786,6 @@ export const onUpdateOfertasTrabajo = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -904,7 +821,6 @@ export const onDeleteOfertasTrabajo = /* GraphQL */ `
           name
           numeroTelefono
           correo
-          rol
           createdAt
           updatedAt
         }
@@ -933,6 +849,7 @@ export const onCreateBlog = /* GraphQL */ `
           title
           content
           blogID
+          username
           createdAt
           updatedAt
         }
@@ -954,6 +871,7 @@ export const onUpdateBlog = /* GraphQL */ `
           title
           content
           blogID
+          username
           createdAt
           updatedAt
         }
@@ -975,6 +893,7 @@ export const onDeleteBlog = /* GraphQL */ `
           title
           content
           blogID
+          username
           createdAt
           updatedAt
         }
@@ -1001,27 +920,18 @@ export const onCreatePost = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      comments {
-        items {
-          id
-          postID
-          content
-          user
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       answer {
         items {
           id
-          postID
           content
+          username
+          postID
           createdAt
           updatedAt
         }
         nextToken
       }
+      username
       createdAt
       updatedAt
     }
@@ -1043,27 +953,18 @@ export const onUpdatePost = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      comments {
-        items {
-          id
-          postID
-          content
-          user
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       answer {
         items {
           id
-          postID
           content
+          username
+          postID
           createdAt
           updatedAt
         }
         nextToken
       }
+      username
       createdAt
       updatedAt
     }
@@ -1085,26 +986,155 @@ export const onDeletePost = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      comments {
+      answer {
         items {
           id
-          postID
           content
-          user
+          username
+          postID
           createdAt
           updatedAt
         }
         nextToken
       }
-      answer {
-        items {
+      username
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateAnswer = /* GraphQL */ `
+  subscription OnCreateAnswer {
+    onCreateAnswer {
+      id
+      content
+      username
+      postID
+      post {
+        id
+        title
+        content
+        blogID
+        blog {
           id
-          postID
-          content
+          name
           createdAt
           updatedAt
         }
-        nextToken
+        answer {
+          nextToken
+        }
+        username
+        createdAt
+        updatedAt
+      }
+      comments {
+        id
+        answerID
+        answer {
+          id
+          content
+          username
+          postID
+          createdAt
+          updatedAt
+        }
+        content
+        username
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateAnswer = /* GraphQL */ `
+  subscription OnUpdateAnswer {
+    onUpdateAnswer {
+      id
+      content
+      username
+      postID
+      post {
+        id
+        title
+        content
+        blogID
+        blog {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        answer {
+          nextToken
+        }
+        username
+        createdAt
+        updatedAt
+      }
+      comments {
+        id
+        answerID
+        answer {
+          id
+          content
+          username
+          postID
+          createdAt
+          updatedAt
+        }
+        content
+        username
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteAnswer = /* GraphQL */ `
+  subscription OnDeleteAnswer {
+    onDeleteAnswer {
+      id
+      content
+      username
+      postID
+      post {
+        id
+        title
+        content
+        blogID
+        blog {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        answer {
+          nextToken
+        }
+        username
+        createdAt
+        updatedAt
+      }
+      comments {
+        id
+        answerID
+        answer {
+          id
+          content
+          username
+          postID
+          createdAt
+          updatedAt
+        }
+        content
+        username
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -1115,29 +1145,34 @@ export const onCreateComment = /* GraphQL */ `
   subscription OnCreateComment {
     onCreateComment {
       id
-      postID
-      post {
+      answerID
+      answer {
         id
-        title
         content
-        blogID
-        blog {
+        username
+        postID
+        post {
           id
-          name
+          title
+          content
+          blogID
+          username
           createdAt
           updatedAt
         }
         comments {
-          nextToken
-        }
-        answer {
-          nextToken
+          id
+          answerID
+          content
+          username
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
       }
       content
-      user
+      username
       createdAt
       updatedAt
     }
@@ -1147,29 +1182,34 @@ export const onUpdateComment = /* GraphQL */ `
   subscription OnUpdateComment {
     onUpdateComment {
       id
-      postID
-      post {
+      answerID
+      answer {
         id
-        title
         content
-        blogID
-        blog {
+        username
+        postID
+        post {
           id
-          name
+          title
+          content
+          blogID
+          username
           createdAt
           updatedAt
         }
         comments {
-          nextToken
-        }
-        answer {
-          nextToken
+          id
+          answerID
+          content
+          username
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
       }
       content
-      user
+      username
       createdAt
       updatedAt
     }
@@ -1179,122 +1219,34 @@ export const onDeleteComment = /* GraphQL */ `
   subscription OnDeleteComment {
     onDeleteComment {
       id
-      postID
-      post {
+      answerID
+      answer {
         id
-        title
         content
-        blogID
-        blog {
+        username
+        postID
+        post {
           id
-          name
+          title
+          content
+          blogID
+          username
           createdAt
           updatedAt
         }
         comments {
-          nextToken
-        }
-        answer {
-          nextToken
+          id
+          answerID
+          content
+          username
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
       }
       content
-      user
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateAnswer = /* GraphQL */ `
-  subscription OnCreateAnswer {
-    onCreateAnswer {
-      id
-      postID
-      post {
-        id
-        title
-        content
-        blogID
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        answer {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      content
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateAnswer = /* GraphQL */ `
-  subscription OnUpdateAnswer {
-    onUpdateAnswer {
-      id
-      postID
-      post {
-        id
-        title
-        content
-        blogID
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        answer {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      content
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteAnswer = /* GraphQL */ `
-  subscription OnDeleteAnswer {
-    onDeleteAnswer {
-      id
-      postID
-      post {
-        id
-        title
-        content
-        blogID
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        answer {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      content
+      username
       createdAt
       updatedAt
     }
