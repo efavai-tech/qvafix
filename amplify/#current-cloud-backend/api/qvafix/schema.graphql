@@ -2,24 +2,12 @@ type Taller @model {
   id: ID!
   name: String!
   direccion: String
-  correo: AWSEmail
-  mision: String
-  vision: String
-  descripcionLaboral:String
-  otro: String
   logo: String
-  tecnicos:[Tecnico] @connection(keyName: "byTaller", fields: ["id"])
+  tecnico:[Tecnico] @connection(keyName: "byTaller", fields: ["id"])
   clientes: [Cliente]
   ofertasTrabajo: [OfertasTrabajo] @connection(keyName: "byTaller", fields: ["id"])
-  telefonos: [Telefono] @connection(keyName: "byTaller", fields: ["id"])
 }
-type Telefono @model @key(name: "byTaller", fields: ["tallerID"]){
-  id: ID!
-  numero: String!
-  descripcion: String!
-  tallerID: ID!
-  taller: Taller @connection(fields: ["tallerID"])
-}
+
 type Piezas @model{
   id: ID!
   nombre: String
@@ -48,14 +36,6 @@ type Cliente @model{
   correo: AWSEmail
   ordenServicio: [OrdenServicio] @connection(keyName: "byCliente", fields: ["id"])
   equipo: [Equipo] @connection(keyName: "byCliente", fields: ["id"])
-}
-type Aspirante @model{
-  id: ID!
-  name: String!
-  numeroTelefono: AWSPhone
-  correo: AWSEmail
-  tallerID: ID
-  taller: Taller @connection(fields: ["tallerID"])
 }
 type OrdenServicio @model @key(name: "byCliente", fields: ["clienteID"]){
   id: ID!
@@ -89,26 +69,26 @@ type Blog @model{
 type Post @model @key(name: "byBlog", fields: ["blogID"]) {
   id: ID!
   title: String!
-  content: String
+  content: String!
   blogID: ID!
   blog: Blog @connection(fields: ["blogID"])
   answer: [Answer] @connection(keyName: "byPost", fields: ["id"])
-  username:String
+  username:String!
 }
 type Answer @model @key(name: "byPost", fields: ["postID", "content"]) {
   id: ID!
-  content: String
-  username:String
+  content: String!
+  username:String!
   postID: ID!
   post: Post @connection(fields: ["postID"])
-  comments: [Comment] @connection(keyName: "byAnswer", fields: ["id"])
+  comments: [Comment] 
 }
-type Comment @model @key(name: "byAnswer", fields: ["answerID"]) {
+type Comment @model {
   id: ID!
   answerID: ID!
   answer: Answer @connection(fields: ["answerID"])
-  content: String
-  username:String
+  content: String!
+  username:String!
 }
 # type Task
 #   @model

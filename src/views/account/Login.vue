@@ -4,17 +4,18 @@
       <v-card-text>
         <p class="display-1 text--primary">Iniciar Sesión</p>
         <v-divider />
-        <div v-if="errors" class="pt-5">
+        <div v-if="errors">
           <p class="red--text">{{ errorMessage }}</p>
         </div>
         <v-form ref="form" v-model="valid" lazy-validation>
-          <div class="pt-3">
+          <div>
             <v-text-field
               append-icon="mdi-account"
               v-model="username"
               :rules="emailRules"
               label="Correo"
               required
+              class="mt-2"
             ></v-text-field>
             <v-text-field
               label="Contraseña"
@@ -135,10 +136,19 @@ export default {
   }),
   created() {
     this.$store.commit("SET_LAYOUT", "Login");
+    var ifConnected = window.navigator.onLine;
+    if (!ifConnected) {
+      this.errors = true;
+      this.errorMessage = "No tienes Conección";
+    }
   },
   methods: {
     async signIn() {
-      if (this.$refs.form.validate()) {
+      var ifConnected = window.navigator.onLine;
+      if (!ifConnected) {
+        this.errors = true;
+        this.errorMessage = "No tienes Conección";
+      } else if (this.$refs.form.validate()) {
         this.loading = true;
         const { username, password } = this;
         await Auth.signIn({ username, password })
@@ -146,7 +156,29 @@ export default {
             console.log(username);
             this.loading = false;
             this.$store.commit("Login");
-            this.$router.push("/");
+
+            // Guardar usuario
+            Auth.currentAuthenticatedUser({
+              bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+            })
+              .then((u) => {
+                var user = {};
+                user.email = u.attributes.email;
+                if (
+                  u.signInUserSession.accessToken.payload["cognito:groups"] == undefined
+                ) {
+                  user.groups = ["user"];
+                } else {
+                  user.groups = u.signInUserSession.accessToken.payload["cognito:groups"];
+                }
+                localStorage.setItem("user", JSON.stringify(user));
+                this.$router.push("/");
+              })
+              .catch((err) => {
+                if (err == "The user is not authenticated") {
+                  this.$store.commit("logout");
+                }
+              });
           })
           .catch((error) => {
             console.log(error);

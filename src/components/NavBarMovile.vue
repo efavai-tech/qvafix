@@ -22,9 +22,15 @@
 
         <v-icon>mdi-login</v-icon>
       </v-btn>
-      <!-- <v-menu v-model="menu1" top offset-y transition="slide-x-transition">
+      <v-menu
+        v-model="menu1"
+        top
+        offset-y
+        transition="slide-x-transition"
+        v-if="admin && logueado"
+      >
         <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on" v-if="logueado">
+          <v-btn icon v-on="on">
             <span>Admin</span>
             <v-icon>mdi-briefcase-upload</v-icon>
           </v-btn>
@@ -48,7 +54,7 @@
             </v-list>
           </v-list>
         </v-card>
-      </v-menu> -->
+      </v-menu>
       <v-menu v-model="menu" top offset-y transition="slide-x-transition">
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on" v-if="logueado">
@@ -65,7 +71,7 @@
                 <v-list-item-avatar>
                   <v-img src="img/default-avatar-man.jpg"></v-img>
                 </v-list-item-avatar>
-                <v-list-item-title>{{ username }}</v-list-item-title>
+                <v-list-item-title>{{ user.email }}</v-list-item-title>
               </v-list-item>
             </v-list-item>
           </v-list>
@@ -128,8 +134,7 @@ export default {
     menu1: false,
     nuevo: 10,
     drawer: null,
-    user: {},
-    username: undefined,
+    user: { groups: [] },
     items: [
       {
         title: "Mis Ordenes",
@@ -142,33 +147,34 @@ export default {
       //   link: "/SolicitudesEmpleo",
       // },
     ],
-    // items1: [
-    //   {
-    //     title: "Órdenes",
-    //     icon: "mdi-clipboard-list-outline",
-    //     link: "/ordenes",
-    //   },
-    //   {
-    //     title: "Clientes y Talleres",
-    //     icon: "mdi-account-group",
-    //     link: "/clientesTalleres",
-    //   },
-    // ],
+    items1: [
+      {
+        title: "Órdenes",
+        icon: "mdi-clipboard-list-outline",
+        link: "/ordenes",
+      },
+      {
+        title: "Clientes y Talleres",
+        icon: "mdi-account-group",
+        link: "/clientesTalleres",
+      },
+    ],
   }),
   created() {
-    Auth.currentAuthenticatedUser({
-      bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
-    })
-      .then((user) => {
-        // localStorage.setItem("user", JSON.stringify(user));
-        this.username = user.attributes.email;
-      })
-      .catch((err) => console.log(err));
-    // this.user = JSON.parse(localStorage.getItem("user"));
+    var user = JSON.parse(localStorage.getItem("user"));
+    if (user != null) {
+      this.user = user;
+    }
   },
   computed: {
     logueado: function () {
       return this.$store.state.login;
+    },
+    admin: function () {
+      if (this.user.groups.includes("admin")) {
+        return true;
+      }
+      return false;
     },
   },
   methods: {
@@ -184,6 +190,8 @@ export default {
       Auth.signOut()
         .then(() => {
           this.$store.commit("logout");
+          var user = { email: "", groups: [] };
+          localStorage.setItem("user", JSON.stringify(user));
           this.$router.push("/");
         })
         .catch((err) => console.log(err));

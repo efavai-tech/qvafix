@@ -16,49 +16,52 @@
         append-icon="mdi-magnify"
       ></v-text-field> -->
     </v-app-bar>
-    <v-responsive v-if="tieneOrdenes">
-      <div>
-        <v-card
-          v-for="orden in ordenes"
-          :key="orden.id"
-          :class="`pa-3 orden ma-2 ${orden.estado}`"
-        >
-          <v-row no-gutters class="text-center">
-            <v-col cols="3">
-              <div class="caption grey--text">Taller</div>
-              <div>{{ orden.tecnico.taller.name }}</div>
-            </v-col>
-            <v-col cols="6">
-              <div class="caption grey--text">Equipo</div>
-              <div>{{ orden.equipo.nombre }}</div>
-            </v-col>
-            <v-col cols="3">
-              <div class="caption grey--text">Estado</div>
-              <div>
-                <v-chip
-                  small
-                  color=""
-                  :class="`${orden.estado} white--text caption my-2`"
-                  >{{ orden.estado }}</v-chip
-                >
-              </div>
-            </v-col>
-          </v-row>
-        </v-card>
-      </div>
-    </v-responsive>
-    <v-responsive v-if="!tieneOrdenes">
+    <v-responsive v-if="!ifConnected || !tieneOrdenes">
       <v-progress-linear
         :active="loading"
         :indeterminate="loading"
         absolute
         color="deep-orange"
       ></v-progress-linear>
-      <v-container>
-        <v-alert color="blue-grey" dark dense icon="mdi-clipboard-list-outline" prominent>
-          {{ textCard }}
-        </v-alert>
-      </v-container>
+      <v-alert
+        class="mx-2"
+        color="blue-grey"
+        dark
+        dense
+        icon="mdi-clipboard-list-outline"
+        prominent
+      >
+        {{ textCard }}
+      </v-alert>
+    </v-responsive>
+    <v-responsive v-if="tieneOrdenes">
+      <v-card
+        v-for="orden in ordenes"
+        :key="orden.id"
+        :class="`pa-3 orden ma-2 ${orden.estado}`"
+      >
+        <v-row no-gutters class="text-center">
+          <v-col cols="3">
+            <div class="caption grey--text">Taller</div>
+            <div>{{ orden.tecnico.taller.name }}</div>
+          </v-col>
+          <v-col cols="6">
+            <div class="caption grey--text">Equipo</div>
+            <div>{{ orden.equipo.nombre }}</div>
+          </v-col>
+          <v-col cols="3">
+            <div class="caption grey--text">Estado</div>
+            <div>
+              <v-chip
+                small
+                color=""
+                :class="`${orden.estado} white--text caption my-2`"
+                >{{ orden.estado }}</v-chip
+              >
+            </div>
+          </v-col>
+        </v-row>
+      </v-card>
     </v-responsive>
   </div>
 </template>
@@ -80,6 +83,7 @@ export default {
     itemsPerPageArray: [10, 20, 30],
     search: "",
     filter: {},
+    ifConnected: false,
     sortDesc: false,
     page: 1,
     panel: [],
@@ -98,25 +102,31 @@ export default {
     },
   },
   async created() {
-    // var ifConnected = window.navigator.onLine;
-    // if (ifConnected) {
-    //   this.textCard = "Conección Disponible";
-    // } else {
-    //   this.textCard = "No tienes Conección";
-    // }
-    Auth.currentAuthenticatedUser({
-      bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
-    })
-      .then((user) => {
-        this.username = user.attributes.email;
-        this.$store.commit("Login");
+    var ifConnected = window.navigator.onLine;
+    this.ifConnected = ifConnected;
+    if (ifConnected) {
+      Auth.currentAuthenticatedUser({
+        bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
       })
-      .catch((err) => {
-        if (err == "The user is not authenticated") {
-          this.$store.commit("logout");
-        }
-      });
-    this.getCliente();
+        .then((user) => {
+          this.username = user.attributes.email;
+          this.$store.commit("Login");
+        })
+        .catch((err) => {
+          if (err == "The user is not authenticated") {
+            this.$store.commit("logout");
+          }
+        });
+      this.getCliente();
+    } else {
+      var cliente = JSON.parse(localStorage.getItem("cliente"));
+      this.username = cliente.correo;
+      this.textCard = "No tienes Conección";
+      this.ordenes = cliente.ordenServicio.items;
+      if (cliente.ordenServicio.items.length != 0) {
+        this.tieneOrdenes = true;
+      }
+    }
   },
   methods: {
     nextPage() {
@@ -134,14 +144,7 @@ export default {
     async getCliente() {
       this.loading = true;
       this.textCard = "Buscando";
-      //        let filter = {
-      //             or: [
-      //                 {
-      //                     correo: {eq:"alejoroman0605@gmail.com"}
-      //                 },
-      //                 ]
-      //         };
-      // return await API.graphql(graphqlOperation(listClientes, {limit: 20, filter:filter}));
+
       // Saber el cliente por el correo
       const clientes = await API.graphql({
         query: listClientes,
@@ -157,8 +160,8 @@ export default {
           query: getCliente,
           variables: { id: cliente.id },
         });
+        localStorage.setItem("cliente", JSON.stringify(result.data.getCliente));
         this.ordenes = result.data.getCliente.ordenServicio.items;
-
         if (result.data.getCliente.ordenServicio.items.length != 0) {
           this.tieneOrdenes = true;
         } else {

@@ -1,15 +1,13 @@
 <template>
-  <v-card>
+  <v-card flat>
     <v-card-title class="text-center justify-center">
-      <h1 class="font-weight-bold display-3 basil--text">Ranking</h1>
+      <h1 class="font-weight-bold display-2 basil--text">Ranking</h1>
     </v-card-title>
-
     <v-tabs v-model="tab" background-color="transparent" grow>
       <v-tab> Calidad </v-tab>
       <v-tab> Rapidez </v-tab>
       <v-tab> Garantía</v-tab>
     </v-tabs>
-
     <v-tabs-items v-model="tab">
       <v-tab-item><RadialBar /> </v-tab-item>
       <v-tab-item><GraficoBarras /></v-tab-item>
@@ -25,7 +23,7 @@ export default {
   components: {
     GraficoBarras,
     RadialBar,
-    PolarArea
+    PolarArea,
   },
   data() {
     return {

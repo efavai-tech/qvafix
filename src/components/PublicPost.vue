@@ -101,7 +101,7 @@
                           <v-text-field
                             v-model="blog.name"
                             :counter="50"
-                            :rules="tituloRules"
+                            :rules="[(v) => !!v || 'El nombre es requerido']"
                             label="Nombre"
                             required
                           ></v-text-field>
@@ -246,6 +246,8 @@ export default {
     },
     async createPost() {
       const post = this.post;
+      var user = JSON.parse(localStorage.getItem("user"));
+      post.username = user.email;
       await API.graphql({
         query: createPost,
         variables: { input: post },
