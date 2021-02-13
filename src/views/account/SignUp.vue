@@ -1,8 +1,11 @@
 <template>
-  <div>
+  <v-card flat :loading="loading">
     <v-form>
       <p class="display-1 text--primary">Crear Usuario</p>
       <v-divider />
+      <div v-if="errors">
+        <p class="red--text">{{ errorMessage }}</p>
+      </div>
       <v-text-field
         append-icon="mdi-email"
         v-model="email"
@@ -56,7 +59,7 @@
         Aceptar
       </v-btn>
     </div>
-  </div>
+  </v-card>
 </template>
 
 <script>
@@ -77,6 +80,7 @@ export default {
       country: undefined,
     },
     dialog: false,
+    loading: false,
     show_password: false,
     errorMessages: [],
     errorMessagesPassword: [],
@@ -99,6 +103,13 @@ export default {
       this.confirmPasswordCheck();
     },
   },
+  async created() {
+    var ifConnected = window.navigator.onLine;
+    if (!ifConnected) {
+      this.errors = true;
+      this.errorMessage = "No tienes Conección";
+    }
+  },
   methods: {
     onInput(formattedNumber, { number, valid, country }) {
       this.phone.number = number.international;
@@ -115,6 +126,7 @@ export default {
     },
     async signUp() {
       if (this.confirmPasswordCheck()) {
+        this.loading = true;
         const { password, email, phone } = this;
         const username = email;
         const phone_number = phone.number.replace(/ /g, "");
@@ -130,6 +142,7 @@ export default {
           },
         })
           .then((data) => {
+            this.loading = false;
             console.log(data);
             localStorage.setItem("email", data.user.username);
             this.$router.push("/confirmCode");

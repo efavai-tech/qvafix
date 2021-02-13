@@ -13,25 +13,8 @@ export const getTaller = /* GraphQL */ `
           id
           name
           cargo
-          tallerID
-          createdAt
-          updatedAt
         }
         nextToken
-      }
-      clientes {
-        id
-        name
-        numeroTelefono
-        correo
-        ordenServicio {
-          nextToken
-        }
-        equipo {
-          nextToken
-        }
-        createdAt
-        updatedAt
       }
       ofertasTrabajo {
         items {
@@ -257,10 +240,18 @@ export const getCliente = /* GraphQL */ `
           id
           numero
           estado
-          tecnicoID
+          tecnico{
+            name
+            taller{
+              name
+            }
+            }
           clienteID
           fechaDeFinalizado
-          equipoID
+          equipo
+          {
+            nombre
+            }
           createdAt
           updatedAt
         }
@@ -395,7 +386,9 @@ export const listOrdenServicios = /* GraphQL */ `
           id
           name
           cargo
-          tallerID
+          taller{
+            name
+          }
           createdAt
           updatedAt
         }
@@ -582,16 +575,12 @@ export const listPosts = /* GraphQL */ `
         id
         title
         content
-        blogID
         blog {
           id
           name
           createdAt
           updatedAt
-        }
-        answer {
-          nextToken
-        }
+        }        
         username
         createdAt
         updatedAt

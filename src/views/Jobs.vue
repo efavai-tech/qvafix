@@ -40,7 +40,7 @@
               <v-toolbar class="mb-1">
                 <v-icon large>mdi-briefcase-variant-outline</v-icon>
                 <h2>Ofertas de Empleo</h2>
-                <v-col>
+                <v-col v-if="admin">
                   <v-btn
                     color="blue-grey"
                     class="white--text"
@@ -79,7 +79,7 @@
                 ></v-progress-linear>
               </v-toolbar>
             </div>
-            <v-col>
+            <v-col v-if="admin">
               <v-btn
                 color="blue-grey"
                 class="white--text"
@@ -114,7 +114,7 @@
                     </v-col>
                     <v-row justify="end">
                       <v-col cols="12" sm="12" md="4">
-                        <v-btn color="blue-grey" class="white--text">
+                        <v-btn color="blue-grey" class="white--text" @click="aplicar()">
                           Aplicar
                           <v-icon right dark> mdi-cloud-upload </v-icon>
                         </v-btn>
@@ -122,7 +122,7 @@
                     </v-row>
                   </v-row>
                 </v-col>
-                <v-col cols="12" sm="12" md="1">
+                <v-col cols="12" sm="12" md="1" v-if="admin">
                   <v-icon class="primary--text" @click="editItem(item)"
                     >v-icon notranslate mdi mdi-pen theme--dark</v-icon
                   >
@@ -249,6 +249,57 @@
           </v-card>
         </v-dialog>
         <!-- /DeleteJob -->
+        <!-- respuesta si no esta logeado -->
+        <v-dialog v-model="dialog2" width="300">
+          <v-card color="#385F73" dark>
+            <v-card-title></v-card-title>
+            <v-card-text class="headline font-weight-bold text-center">
+              Para aplicar al trabajo usted debe estar logeado
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn text router-link to="/Login"> Login </v-btn>
+              <v-btn text @click="dialog2 = false"> Cancelar </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <!-- Aplicar -->
+        <v-dialog
+          transition="dialog-top-transition"
+          v-model="dialog3"
+          max-width="600"
+          persistent
+        >
+          <v-card>
+            <v-toolbar dark
+              >Oferta laboral
+
+              <v-progress-linear
+                :active="loading"
+                :indeterminate="loading"
+                absolute
+                bottom
+                color="dep-orange"
+              ></v-progress-linear
+            ></v-toolbar>
+
+            <v-card-text>
+              <v-form ref="form" v-model="valid" lazy-validation>
+                <v-text-field
+                  v-model="aspirante.name"
+                  label="Nombre"
+                  required
+                ></v-text-field>
+              </v-form>
+            </v-card-text>
+            <v-card-actions class="justify-end">
+              <v-btn text color="primary" @click="save()">Aceptar</v-btn>
+              <v-btn text @click="dialog3 = false">Cancelar</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <!-- /Aplicar -->
       </v-col>
       <v-col class="d-none d-lg-flex d-xl-flex" cols="3">
         <Promociones />
@@ -286,6 +337,8 @@ export default {
     job: { fecha: "", tallerID: {} },
     dialog: false,
     dialog1: false,
+    dialog2: false,
+    dialog3: false,
     overlay: false,
     valid: true,
     talleres: [],
@@ -294,8 +347,14 @@ export default {
       (v) => !!v || "El titulo es requerido",
       (v) => (v && v.length <= 50) || "El título de tener menos de 50 caracteres",
     ],
+    user: {},
+    aspirante: {},
   }),
   async created() {
+    var user = JSON.parse(localStorage.getItem("user"));
+    if (user != null) {
+      this.user = user;
+    }
     this.getTalleres();
     this.GetOfertasTrabajo();
   },
@@ -308,6 +367,12 @@ export default {
     },
     method() {
       return this.editedIndex === -1 ? "POST" : "PUT";
+    },
+    admin: function () {
+      if (this.user.groups.includes("admin")) {
+        return true;
+      }
+      return false;
     },
   },
   methods: {
@@ -381,6 +446,15 @@ export default {
         variables: { input: jobDetails },
       });
       this.close();
+    },
+    aplicar() {
+      var login = this.$store.state.login;
+      console.log(login);
+      if (!login) {
+        this.dialog2 = true;
+      } else {
+        this.dialog3 = true;
+      }
     },
     // Job End
     close() {
