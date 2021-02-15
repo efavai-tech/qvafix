@@ -54,7 +54,7 @@ type Aspirante @model{
   name: String!
   numeroTelefono: AWSPhone
   correo: AWSEmail
-  tallerID: ID
+  tallerID: ID!
   taller: Taller @connection(fields: ["tallerID"])
 }
 type OrdenServicio @model @key(name: "byCliente", fields: ["clienteID"]){
