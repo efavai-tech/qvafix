@@ -368,10 +368,17 @@ export const getCliente = /* GraphQL */ `
           id
           numero
           estado
-          tecnicoID
-          clienteID
+          tecnico{
+            name
+            taller{
+              name
+            }
+            }
           fechaDeFinalizado
-          equipoID
+          equipo
+          {
+            nombre
+            }
           createdAt
           updatedAt
         }
@@ -764,7 +771,13 @@ export const getPost = /* GraphQL */ `
           id
           content
           username
-          postID
+          comments{
+            items {
+            id
+            content
+            username
+          }
+          }
           createdAt
           updatedAt
         }
