@@ -1608,26 +1608,6 @@ export const createComment = /* GraphQL */ `
     createComment(input: $input, condition: $condition) {
       id
       answerID
-      answer {
-        id
-        content
-        username
-        postID
-        post {
-          id
-          title
-          content
-          blogID
-          username
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
       content
       username
       createdAt
