@@ -13,7 +13,7 @@
         <v-btn text router-link to="/jobs">
           <v-icon left>mdi-briefcase-variant-outline</v-icon> Empleo</v-btn
         >
-        <v-btn text @click.stop="drawer1 = !drawer1">
+        <v-btn text @click.stop="drawer1 = !drawer1" v-if="admin">
           <v-icon left>mdi-briefcase-upload</v-icon>
           Admin</v-btn
         >
@@ -32,7 +32,7 @@
           <v-list-item-avatar>
             <v-img src="img/default-avatar-man.jpg"></v-img>
           </v-list-item-avatar>
-          <v-list-item-title>{{ username }}</v-list-item-title>
+          <v-list-item-title>{{ user.email }}</v-list-item-title>
         </v-list-item>
       </v-list-item>
 
@@ -63,7 +63,7 @@
           <v-list-item-avatar>
             <v-img src="img/default-avatar-man.jpg"></v-img>
           </v-list-item-avatar>
-          <v-list-item-title>{{ username }}</v-list-item-title>
+          <v-list-item-title>{{ user.email }}</v-list-item-title>
         </v-list-item>
       </v-list-item>
 
@@ -96,24 +96,10 @@ export default {
     Settings,
     // AccountNavigation,
   },
-  created() {
-    Auth.currentAuthenticatedUser({
-      bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
-    })
-      .then((user) => {
-        this.username = user.attributes.email;
-        this.$store.commit("Login");
-      })
-      .catch((err) => {
-        if (err == "The user is not authenticated") {
-          this.$store.commit("logout");
-        }
-      });
-  },
   data: () => ({
     drawer: false,
     drawer1: false,
-    username: undefined,
+    user: { groups: [] },
     items: [
       {
         title: "Mis Ordenes",
@@ -139,11 +125,19 @@ export default {
       },
     ],
   }),
+  created() {
+    var user = JSON.parse(localStorage.getItem("user"));
+    if (user != null) {
+      this.user = user;
+    }
+  },
   methods: {
     signOut() {
       Auth.signOut()
         .then(() => {
           this.$store.commit("logout");
+          var user = { email: "", groups: [] };
+          localStorage.setItem("user", JSON.stringify(user));
           this.$router.push("/");
         })
         .catch((err) => console.log(err));
@@ -160,6 +154,12 @@ export default {
   computed: {
     logueado: function () {
       return this.$store.state.login;
+    },
+    admin: function () {
+      if (this.user.groups.includes("admin")) {
+        return true;
+      }
+      return false;
     },
   },
 };

@@ -7,8 +7,13 @@ export const onCreateTaller = /* GraphQL */ `
       id
       name
       direccion
+      correo
+      mision
+      vision
+      descripcionLaboral
+      otro
       logo
-      tecnico {
+      tecnicos {
         items {
           id
           name
@@ -40,6 +45,17 @@ export const onCreateTaller = /* GraphQL */ `
           titulo
           contenido
           fecha
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      telefonos {
+        items {
+          id
+          numero
+          descripcion
+          tallerID
           createdAt
           updatedAt
         }
@@ -56,8 +72,13 @@ export const onUpdateTaller = /* GraphQL */ `
       id
       name
       direccion
+      correo
+      mision
+      vision
+      descripcionLaboral
+      otro
       logo
-      tecnico {
+      tecnicos {
         items {
           id
           name
@@ -89,6 +110,17 @@ export const onUpdateTaller = /* GraphQL */ `
           titulo
           contenido
           fecha
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      telefonos {
+        items {
+          id
+          numero
+          descripcion
+          tallerID
           createdAt
           updatedAt
         }
@@ -105,8 +137,13 @@ export const onDeleteTaller = /* GraphQL */ `
       id
       name
       direccion
+      correo
+      mision
+      vision
+      descripcionLaboral
+      otro
       logo
-      tecnico {
+      tecnicos {
         items {
           id
           name
@@ -142,6 +179,143 @@ export const onDeleteTaller = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+      telefonos {
+        items {
+          id
+          numero
+          descripcion
+          tallerID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateTelefono = /* GraphQL */ `
+  subscription OnCreateTelefono {
+    onCreateTelefono {
+      id
+      numero
+      descripcion
+      tallerID
+      taller {
+        id
+        name
+        direccion
+        correo
+        mision
+        vision
+        descripcionLaboral
+        otro
+        logo
+        tecnicos {
+          nextToken
+        }
+        clientes {
+          id
+          name
+          numeroTelefono
+          correo
+          createdAt
+          updatedAt
+        }
+        ofertasTrabajo {
+          nextToken
+        }
+        telefonos {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateTelefono = /* GraphQL */ `
+  subscription OnUpdateTelefono {
+    onUpdateTelefono {
+      id
+      numero
+      descripcion
+      tallerID
+      taller {
+        id
+        name
+        direccion
+        correo
+        mision
+        vision
+        descripcionLaboral
+        otro
+        logo
+        tecnicos {
+          nextToken
+        }
+        clientes {
+          id
+          name
+          numeroTelefono
+          correo
+          createdAt
+          updatedAt
+        }
+        ofertasTrabajo {
+          nextToken
+        }
+        telefonos {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteTelefono = /* GraphQL */ `
+  subscription OnDeleteTelefono {
+    onDeleteTelefono {
+      id
+      numero
+      descripcion
+      tallerID
+      taller {
+        id
+        name
+        direccion
+        correo
+        mision
+        vision
+        descripcionLaboral
+        otro
+        logo
+        tecnicos {
+          nextToken
+        }
+        clientes {
+          id
+          name
+          numeroTelefono
+          correo
+          createdAt
+          updatedAt
+        }
+        ofertasTrabajo {
+          nextToken
+        }
+        telefonos {
+          nextToken
+        }
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -195,8 +369,13 @@ export const onCreateTecnico = /* GraphQL */ `
         id
         name
         direccion
+        correo
+        mision
+        vision
+        descripcionLaboral
+        otro
         logo
-        tecnico {
+        tecnicos {
           nextToken
         }
         clientes {
@@ -208,6 +387,9 @@ export const onCreateTecnico = /* GraphQL */ `
           updatedAt
         }
         ofertasTrabajo {
+          nextToken
+        }
+        telefonos {
           nextToken
         }
         createdAt
@@ -243,8 +425,13 @@ export const onUpdateTecnico = /* GraphQL */ `
         id
         name
         direccion
+        correo
+        mision
+        vision
+        descripcionLaboral
+        otro
         logo
-        tecnico {
+        tecnicos {
           nextToken
         }
         clientes {
@@ -256,6 +443,9 @@ export const onUpdateTecnico = /* GraphQL */ `
           updatedAt
         }
         ofertasTrabajo {
+          nextToken
+        }
+        telefonos {
           nextToken
         }
         createdAt
@@ -291,8 +481,13 @@ export const onDeleteTecnico = /* GraphQL */ `
         id
         name
         direccion
+        correo
+        mision
+        vision
+        descripcionLaboral
+        otro
         logo
-        tecnico {
+        tecnicos {
           nextToken
         }
         clientes {
@@ -304,6 +499,9 @@ export const onDeleteTecnico = /* GraphQL */ `
           updatedAt
         }
         ofertasTrabajo {
+          nextToken
+        }
+        telefonos {
           nextToken
         }
         createdAt
@@ -517,6 +715,135 @@ export const onDeleteCliente = /* GraphQL */ `
     }
   }
 `;
+export const onCreateAspirante = /* GraphQL */ `
+  subscription OnCreateAspirante {
+    onCreateAspirante {
+      id
+      name
+      numeroTelefono
+      correo
+      tallerID
+      taller {
+        id
+        name
+        direccion
+        correo
+        mision
+        vision
+        descripcionLaboral
+        otro
+        logo
+        tecnicos {
+          nextToken
+        }
+        clientes {
+          id
+          name
+          numeroTelefono
+          correo
+          createdAt
+          updatedAt
+        }
+        ofertasTrabajo {
+          nextToken
+        }
+        telefonos {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateAspirante = /* GraphQL */ `
+  subscription OnUpdateAspirante {
+    onUpdateAspirante {
+      id
+      name
+      numeroTelefono
+      correo
+      tallerID
+      taller {
+        id
+        name
+        direccion
+        correo
+        mision
+        vision
+        descripcionLaboral
+        otro
+        logo
+        tecnicos {
+          nextToken
+        }
+        clientes {
+          id
+          name
+          numeroTelefono
+          correo
+          createdAt
+          updatedAt
+        }
+        ofertasTrabajo {
+          nextToken
+        }
+        telefonos {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteAspirante = /* GraphQL */ `
+  subscription OnDeleteAspirante {
+    onDeleteAspirante {
+      id
+      name
+      numeroTelefono
+      correo
+      tallerID
+      taller {
+        id
+        name
+        direccion
+        correo
+        mision
+        vision
+        descripcionLaboral
+        otro
+        logo
+        tecnicos {
+          nextToken
+        }
+        clientes {
+          id
+          name
+          numeroTelefono
+          correo
+          createdAt
+          updatedAt
+        }
+        ofertasTrabajo {
+          nextToken
+        }
+        telefonos {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateOrdenServicio = /* GraphQL */ `
   subscription OnCreateOrdenServicio {
     onCreateOrdenServicio {
@@ -533,6 +860,11 @@ export const onCreateOrdenServicio = /* GraphQL */ `
           id
           name
           direccion
+          correo
+          mision
+          vision
+          descripcionLaboral
+          otro
           logo
           createdAt
           updatedAt
@@ -605,6 +937,11 @@ export const onUpdateOrdenServicio = /* GraphQL */ `
           id
           name
           direccion
+          correo
+          mision
+          vision
+          descripcionLaboral
+          otro
           logo
           createdAt
           updatedAt
@@ -677,6 +1014,11 @@ export const onDeleteOrdenServicio = /* GraphQL */ `
           id
           name
           direccion
+          correo
+          mision
+          vision
+          descripcionLaboral
+          otro
           logo
           createdAt
           updatedAt
@@ -742,8 +1084,13 @@ export const onCreateOfertasTrabajo = /* GraphQL */ `
         id
         name
         direccion
+        correo
+        mision
+        vision
+        descripcionLaboral
+        otro
         logo
-        tecnico {
+        tecnicos {
           nextToken
         }
         clientes {
@@ -755,6 +1102,9 @@ export const onCreateOfertasTrabajo = /* GraphQL */ `
           updatedAt
         }
         ofertasTrabajo {
+          nextToken
+        }
+        telefonos {
           nextToken
         }
         createdAt
@@ -777,8 +1127,13 @@ export const onUpdateOfertasTrabajo = /* GraphQL */ `
         id
         name
         direccion
+        correo
+        mision
+        vision
+        descripcionLaboral
+        otro
         logo
-        tecnico {
+        tecnicos {
           nextToken
         }
         clientes {
@@ -790,6 +1145,9 @@ export const onUpdateOfertasTrabajo = /* GraphQL */ `
           updatedAt
         }
         ofertasTrabajo {
+          nextToken
+        }
+        telefonos {
           nextToken
         }
         createdAt
@@ -812,8 +1170,13 @@ export const onDeleteOfertasTrabajo = /* GraphQL */ `
         id
         name
         direccion
+        correo
+        mision
+        vision
+        descripcionLaboral
+        otro
         logo
-        tecnico {
+        tecnicos {
           nextToken
         }
         clientes {
@@ -825,6 +1188,9 @@ export const onDeleteOfertasTrabajo = /* GraphQL */ `
           updatedAt
         }
         ofertasTrabajo {
+          nextToken
+        }
+        telefonos {
           nextToken
         }
         createdAt
@@ -1029,20 +1395,15 @@ export const onCreateAnswer = /* GraphQL */ `
         updatedAt
       }
       comments {
-        id
-        answerID
-        answer {
+        items {
           id
+          answerID
           content
           username
-          postID
           createdAt
           updatedAt
         }
-        content
-        username
-        createdAt
-        updatedAt
+        nextToken
       }
       createdAt
       updatedAt
@@ -1075,20 +1436,15 @@ export const onUpdateAnswer = /* GraphQL */ `
         updatedAt
       }
       comments {
-        id
-        answerID
-        answer {
+        items {
           id
+          answerID
           content
           username
-          postID
           createdAt
           updatedAt
         }
-        content
-        username
-        createdAt
-        updatedAt
+        nextToken
       }
       createdAt
       updatedAt
@@ -1121,20 +1477,15 @@ export const onDeleteAnswer = /* GraphQL */ `
         updatedAt
       }
       comments {
-        id
-        answerID
-        answer {
+        items {
           id
+          answerID
           content
           username
-          postID
           createdAt
           updatedAt
         }
-        content
-        username
-        createdAt
-        updatedAt
+        nextToken
       }
       createdAt
       updatedAt
@@ -1161,12 +1512,7 @@ export const onCreateComment = /* GraphQL */ `
           updatedAt
         }
         comments {
-          id
-          answerID
-          content
-          username
-          createdAt
-          updatedAt
+          nextToken
         }
         createdAt
         updatedAt
@@ -1198,12 +1544,7 @@ export const onUpdateComment = /* GraphQL */ `
           updatedAt
         }
         comments {
-          id
-          answerID
-          content
-          username
-          createdAt
-          updatedAt
+          nextToken
         }
         createdAt
         updatedAt
@@ -1235,12 +1576,7 @@ export const onDeleteComment = /* GraphQL */ `
           updatedAt
         }
         comments {
-          id
-          answerID
-          content
-          username
-          createdAt
-          updatedAt
+          nextToken
         }
         createdAt
         updatedAt

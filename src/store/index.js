@@ -16,7 +16,10 @@ export default new Vuex.Store({
         dark_theme: JSON.parse(localStorage.getItem('dark_theme')),
         layout: "Principal",
         login: JSON.parse(localStorage.getItem('login')),
-        post: {}
+        post: {},
+        user: JSON.parse(localStorage.getItem('user')),
+        cliente: JSON.parse(localStorage.getItem('cliente')),
+        taller: JSON.parse(localStorage.getItem('taller')),
     },
     mutations: {
         SET_LAYOUT(state, newLayout) {
@@ -36,11 +39,19 @@ export default new Vuex.Store({
         },
         logout(state) {
             localStorage.setItem("login", false)
-
             state.login = false
         },
         Post(state, newPost) {
             state.post = newPost
+        },
+        user(state, newUser) {
+            state.user = newUser
+        },
+        cliente(state, newCliente) {
+            state.cliente = newCliente
+        },
+        taller(state, newTaller) {
+            state.taller = newTaller
         },
     },
     actions: {},
