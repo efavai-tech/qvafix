@@ -16,25 +16,35 @@
               ></v-row
             ></v-container
           >
-          <v-card-text v-html="post.content"> </v-card-text>
-          <div class="font-weight-light title mb-2">
+          <v-card-text class="font-weight-light title" v-html="post.content">
+          </v-card-text>
+          <p class="font-weight-light title ml-3">
             {{ post.answer.items.length }} Respuestas
-          </div>
+          </p>
+
           <div v-if="post.answer.items.length != 0">
             <v-card flat v-for="item in post.answer.items" :key="item.id">
               <v-card-text>
                 {{ item.createdAt | formatDate }}
-                <p v-html="item.content"></p>
-                <v-row>
-                  <v-btn text @click="addcomment()" color="primary" class="text-lowercase"
-                    >añadir comentario</v-btn
-                  >
-                </v-row>
+                <p v-html="item.content" class="font-weight-light title"></p>
+                <p v-if="item.comments.items.length != 0">Comentarios:</p>
+                <div v-for="comment in item.comments.items" :key="comment.id">
+                  {{ comment.username }}
+                  <p v-html="comment.content"></p>
+                </div>
+                <v-btn
+                  text
+                  @click="addcomment(item)"
+                  color="primary"
+                  class="text-lowercase"
+                  >añadir comentario</v-btn
+                >
               </v-card-text>
               <v-divider />
             </v-card>
             <v-divider />
           </div>
+
           <p class="subtitle-1 mt-6">Tu respuesta</p>
           <tiptap-vuetify
             v-model="answer.content"
@@ -122,6 +132,7 @@ import Promociones from "../components/Promociones";
 import { API } from "aws-amplify";
 import { createAnswer } from "../graphql/mutations";
 import { createComment } from "../graphql/mutations";
+import { getPost } from "../graphql/queries";
 
 export default {
   components: { TiptapVuetify, Promociones },
@@ -166,6 +177,8 @@ export default {
     dialog: false,
     post: {},
     comment: {},
+    comentarioRespuesta: {},
+    user: {},
   }),
   computed: {},
   async created() {
@@ -187,19 +200,33 @@ export default {
       this.$router.push("/foro");
       this.answer = {};
     },
-    addcomment() {
+    addcomment(item) {
       this.dialog = true;
-      this.comment.postID = this.post.id;
+      this.comentarioRespuesta = item;
     },
     async createComment() {
       this.loading = true;
       const comment = this.comment;
+      comment.answerID = this.comentarioRespuesta.id;
+      var user = JSON.parse(localStorage.getItem("user"));
+      comment.username = user.email;
       await API.graphql({
         query: createComment,
         variables: { input: comment },
       });
-      this.$router.push("/respuestasForo");
+      this.reloadPost();
+      this.dialog = false;
       this.answer = {};
+    },
+    async reloadPost() {
+      if (this.$store.state.login) {
+        var post = await API.graphql({
+          query: getPost,
+          variables: { id: this.post.id },
+        });
+        localStorage.setItem("Post", JSON.stringify(post));
+        this.getPost();
+      }
     },
   },
 };

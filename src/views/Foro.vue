@@ -51,7 +51,6 @@
                 </h2></v-col
               >
               <v-spacer />
-              <LoginDialog v-if="!logueado" />
               <v-btn
                 text
                 outlined
@@ -60,6 +59,15 @@
                 to="/PublicPost"
                 class="mt-6"
                 v-if="logueado"
+                >Hacer una Pregunta</v-btn
+              >
+              <v-btn
+                text
+                outlined
+                color="primary"
+                @click="dialog = true"
+                class="mt-6"
+                v-if="!logueado"
                 >Hacer una Pregunta</v-btn
               >
             </v-row>
@@ -146,6 +154,22 @@
             </v-row>
           </template>
         </v-data-iterator>
+        <v-dialog v-model="dialog" width="300">
+          <v-card color="#385F73" dark>
+            <v-card-title></v-card-title>
+            <v-card-text class="headline font-weight-bold text-center">
+              Para hacer una pregunta usted debe estar logeado
+            </v-card-text>
+
+            <v-divider></v-divider>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn text router-link to="/Login"> Login </v-btn>
+              <v-btn text @click="dialog = false"> Cancelar </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-col>
       <v-col class="d-none d-lg-flex d-xl-flex" cols="3">
         <Promociones />
@@ -156,7 +180,6 @@
 
 <script>
 import Promociones from "../components/Promociones";
-import LoginDialog from "../components/LoginDialog";
 
 import { API } from "aws-amplify";
 import { listPosts } from "../graphql/queries";
@@ -165,9 +188,9 @@ import { getPost } from "../graphql/queries";
 export default {
   components: {
     Promociones,
-    LoginDialog,
   },
   data: () => ({
+    dialog: false,
     itemsPerPageArray: [10, 20, 30],
     search: "",
     filter: {},
@@ -228,14 +251,18 @@ export default {
       this.posts = posts.data.listPosts.items;
     },
     async respuestaForo(item) {
-      var post = await API.graphql({
-        query: getPost,
-        variables: { id: item.id },
-      });
-      localStorage.setItem("Post", JSON.stringify(post));
-      this.$router.push({
-        name: "RespuestasForo",
-      });
+      if (this.$store.state.login) {
+        var post = await API.graphql({
+          query: getPost,
+          variables: { id: item.id },
+        });
+        localStorage.setItem("Post", JSON.stringify(post));
+        this.$router.push({
+          name: "RespuestasForo",
+        });
+      } else {
+        this.dialog = true;
+      }
     },
   },
 };
