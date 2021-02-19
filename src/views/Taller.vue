@@ -20,8 +20,7 @@
       {{ taller.name }}<br />
     </div>
     <div class="font-weight-light title mb-2" align="center" justify="center">
-      No dedicamos a reparar.<br />
-      Descripción de a lo que se dedican en el taller
+      {{ taller.descripcionLaboral }}
     </div>
     <v-row no-gutters class="mt-12">
       <v-col cols="12" sm="12">
@@ -29,15 +28,20 @@
           Nos puede contactar<br />
           a través de:
         </p></v-col
-      >
-      <v-col cols="12" sm="4">
-        <div class="font-weight-light title mb-2" align="center" justify="center">
-          <v-icon>mdi-email</v-icon> correo@gmail.com
+      ><v-col cols="12" sm="4">
+        <div
+          class="font-weight-light title mb-2"
+          align="center"
+          justify="center"
+          v-for="telefono in taller.telefonos.items"
+          :key="telefono.id"
+        >
+          <v-icon>mdi-cellphone-android</v-icon>{{ telefono.numero }}
         </div>
       </v-col>
       <v-col cols="12" sm="4">
         <div class="font-weight-light title mb-2" align="center" justify="center">
-          <v-icon>mdi-cellphone-android</v-icon> Teléfono: 45256357
+          <v-icon>mdi-email</v-icon> {{ taller.correo }}
         </div>
       </v-col>
       <v-col cols="12" sm="4">
@@ -57,8 +61,8 @@ export default {
     taller: {},
     colors: ["grey lighten-4", "grey lighten-4"],
     items: [
-      { title: "Misión", text: "Misión del taller" },
-      { title: "Visión", text: "Visión del taller" },
+      { title: "Misión", text: "" },
+      { title: "Visión", text: "" },
     ],
     cards: [
       {
@@ -78,7 +82,8 @@ export default {
     }
     var taller = JSON.parse(localStorage.getItem("taller"));
     this.taller = taller.data.getTaller;
-    console.log(taller);
+    this.items[0].text = this.taller.mision;
+    this.items[1].text = this.taller.vision;
   },
   computed: {},
   methods: {},

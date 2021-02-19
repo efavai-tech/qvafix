@@ -119,9 +119,14 @@ export default {
         link: "/ordenes",
       },
       {
-        title: "Clientes y Talleres",
+        title: "Talleres",
         icon: "mdi-account-group",
-        link: "/clientesTalleres",
+        link: "/talleres",
+      },
+      {
+        title: "Clientes",
+        icon: "mdi-account-group",
+        link: "/clientes",
       },
     ],
   }),

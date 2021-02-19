@@ -1,5 +1,11 @@
 {
   "AppSyncApiName": "qvafix",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authqvafixbb67c3fb",
+      "Outputs.UserPoolId"
+    ]
+  }
 }

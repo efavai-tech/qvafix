@@ -85,13 +85,11 @@
                         :key="item.id"
                         color="grey darken-1"
                       >
-                        <v-list-item-avatar v-if="avatar">
+                        <!-- <v-list-item-avatar v-if="avatar">
                           <v-img :src="item.avatar"></v-img>
-                        </v-list-item-avatar>
+                        </v-list-item-avatar> -->
                         <v-list-item-content>
                           <v-list-item-title>{{ item.title }} </v-list-item-title>
-                          <v-list-item-subtitle v-html="item.content">
-                          </v-list-item-subtitle>
                           <p class="text-justify">
                             {{ item.createdAt | formatDate }}
                             <v-chip outlined>{{ item.blog.name }}</v-chip>
@@ -99,7 +97,7 @@
                           <div v-if="$vuetify.breakpoint.xsOnly" class="pt-2">
                             <!-- <v-btn small text color="primary">9<br />Vistas</v-btn> -->
                             <v-btn small text color="success" @click="respuestaForo(item)"
-                              >3<br />Respuestas</v-btn
+                              ><br />Respuestas</v-btn
                             >
                             <!-- <v-btn small text>1<br />Votos</v-btn> -->
                           </div>

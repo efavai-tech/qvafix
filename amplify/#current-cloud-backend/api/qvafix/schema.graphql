@@ -1,5 +1,9 @@
-type Taller @model {
-  id: ID!
+type Taller @model  @auth(
+    rules: [
+      { allow: groups, groups: ["admin"], queries: [get,list], mutations: [create, update, delete] }
+      { allow: public, queries: [get, list], mutations: null }
+    ]) {
+     id: ID!
   name: String!
   direccion: String
   correo: AWSEmail
@@ -10,13 +14,14 @@ type Taller @model {
   logo: String
   tecnicos:[Tecnico] @connection(keyName: "byTaller", fields: ["id"])
   clientes: [Cliente]
-  ofertasTrabajo: [OfertasTrabajo] @connection(keyName: "byTaller", fields: ["id"])
+  ofertasTrabajo: [OfertaTrabajo] @connection(keyName: "byTaller", fields: ["id"])
   telefonos: [Telefono] @connection(keyName: "byTaller", fields: ["id"])
+  administradorID:ID
 }
 type Telefono @model @key(name: "byTaller", fields: ["tallerID"]){
   id: ID!
   numero: String!
-  descripcion: String!
+  descripcion: String
   tallerID: ID!
   taller: Taller @connection(fields: ["tallerID"])
 }
@@ -49,14 +54,6 @@ type Cliente @model{
   ordenServicio: [OrdenServicio] @connection(keyName: "byCliente", fields: ["id"])
   equipo: [Equipo] @connection(keyName: "byCliente", fields: ["id"])
 }
-type Aspirante @model{
-  id: ID!
-  name: String!
-  numeroTelefono: AWSPhone
-  correo: AWSEmail
-  tallerID: ID!
-  taller: Taller @connection(fields: ["tallerID"])
-}
 type OrdenServicio @model @key(name: "byCliente", fields: ["clienteID"]){
   id: ID!
   numero:Int
@@ -70,16 +67,23 @@ type OrdenServicio @model @key(name: "byCliente", fields: ["clienteID"]){
   equipo: Equipo @connection(fields: ["equipoID"])
   piezas:[Piezas]
 }
-
-type OfertasTrabajo @model @key(name: "byTaller", fields: ["tallerID"]){
+type OfertaTrabajo @model @key(name: "byTaller", fields: ["tallerID"]){
   id: ID!
   tallerID: ID!
   taller: Taller @connection(fields: ["tallerID"])
   titulo:String!
   contenido:String!
   fecha:AWSDateTime
+  aspirantes: [Aspirante] @connection(keyName: "byOfertaTrabajo", fields: ["id"])
 }
-
+type Aspirante @model @key(name: "byOfertaTrabajo", fields: ["ofertaTrabajoID"]) {
+  id: ID!
+  name: String!
+  numeroTelefono: AWSPhone
+  correo: AWSEmail
+  ofertaTrabajoID: ID!
+  ofertaTrabajo: OfertaTrabajo @connection(fields: ["ofertaTrabajoID"])
+}
 type Blog @model{
   id: ID!
   name: String!
