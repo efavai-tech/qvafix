@@ -91,11 +91,24 @@
           </template>
 
           <template v-slot:default="props">
-            <v-card v-for="item in props.items" :key="item.id" cols="12" class="mt-3">
+            <v-responsive v-if="enviado">
+              <v-alert
+                class="mx-2"
+                color="success"
+                dark
+                dense
+                icon="mdi-check-all"
+                prominent
+              >
+                {{ textCard }}
+              </v-alert>
+            </v-responsive>
+            <v-card v-for="item in props.items" :key="item.id" cols="12" class="mt-2">
               <v-row>
                 <v-col cols="12" sm="4" md="2">
                   <v-img src="img/icons/favicon-32x32.png" contain height="32" />
-                  {{ item.taller.name }}
+                  {{ item.taller.name }}<br />
+                  {{ item.taller.direccion }}
                 </v-col>
                 <v-col cols="12" sm="8" md="9">
                   <v-row>
@@ -114,7 +127,12 @@
                     </v-col>
                     <v-row justify="end">
                       <v-col cols="12" sm="12" md="4">
-                        <v-btn color="blue-grey" class="white--text" @click="aplicar()">
+                        <v-btn
+                          color="blue-grey"
+                          class="white--text"
+                          @click="confirmAplicar(item)"
+                          :loading="loading"
+                        >
                           Aplicar
                           <v-icon right dark> mdi-cloud-upload </v-icon>
                         </v-btn>
@@ -286,15 +304,41 @@
 
             <v-card-text>
               <v-form ref="form" v-model="valid" lazy-validation>
-                <v-text-field
-                  v-model="aspirante.name"
-                  label="Nombre"
-                  required
-                ></v-text-field>
+                <v-row>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field
+                      v-model="aspirante.name"
+                      label="Nombre"
+                      placeholder="Nombre y Apellidos"
+                      required
+                    ></v-text-field
+                  ></v-col>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field
+                      v-model="aspirante.correo"
+                      :rules="emailRules"
+                      label="correo"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="6">
+                    <vue-tel-input-vuetify
+                      :preferred-countries="['cu', 'gb', 'ua', 'us']"
+                      :valid-characters-only="true"
+                      select-label="Código"
+                      label="Número de Teléfono"
+                      placeholder=""
+                      @input="onInput"
+                      v-model="phone.number"
+                      required
+                    ></vue-tel-input-vuetify>
+                  </v-col>
+                </v-row>
               </v-form>
             </v-card-text>
             <v-card-actions class="justify-end">
-              <v-btn text color="primary" @click="save()">Aceptar</v-btn>
+              <v-btn text color="primary" @click="aplicar()" :loading="loading"
+                >Aceptar</v-btn
+              >
               <v-btn text @click="dialog3 = false">Cancelar</v-btn>
             </v-card-actions>
           </v-card>
@@ -312,15 +356,20 @@
 import Promociones from "../components/Promociones";
 
 import { API } from "aws-amplify";
+import VueTelInputVuetify from "vue-tel-input-vuetify/lib/vue-tel-input-vuetify.vue";
+
 import { listTallers } from "../graphql/queries";
-import { listOfertasTrabajos } from "../graphql/queries";
-import { createOfertasTrabajo } from "../graphql/mutations";
-import { updateOfertasTrabajo } from "../graphql/mutations";
-import { deleteOfertasTrabajo } from "../graphql/mutations";
+import { listOfertaTrabajos } from "../graphql/queries";
+import { createOfertaTrabajo } from "../graphql/mutations";
+import { updateOfertaTrabajo } from "../graphql/mutations";
+import { deleteOfertaTrabajo } from "../graphql/mutations";
+
+import { createAspirante } from "../graphql/mutations";
 
 export default {
   components: {
     Promociones,
+    VueTelInputVuetify,
   },
   data: () => ({
     itemsPerPageArray: [10, 20, 30],
@@ -342,13 +391,24 @@ export default {
     overlay: false,
     valid: true,
     talleres: [],
+    phone: {
+      number: "",
+      valid: false,
+      country: undefined,
+    },
     editedIndex: -1,
     tituloRules: [
       (v) => !!v || "El titulo es requerido",
       (v) => (v && v.length <= 50) || "El título de tener menos de 50 caracteres",
     ],
+    emailRules: [
+      (v) => !!v || "El email es requerido",
+      (v) => /.+@.+\..+/.test(v) || "Debe tener una dirección válida",
+    ],
     user: {},
     aspirante: {},
+    textCard: "",
+    enviado: false,
   }),
   async created() {
     var user = JSON.parse(localStorage.getItem("user"));
@@ -385,6 +445,11 @@ export default {
     updateItemsPerPage(number) {
       this.itemsPerPage = number;
     },
+    onInput(formattedNumber, { number, valid, country }) {
+      this.phone.number = number.international;
+      this.phone.valid = valid;
+      this.phone.country = country && country.name;
+    },
     // Talleres
     async getTalleres() {
       const talleres = await API.graphql({
@@ -395,9 +460,9 @@ export default {
     async GetOfertasTrabajo() {
       this.loading = true;
       const result = await API.graphql({
-        query: listOfertasTrabajos,
+        query: listOfertaTrabajos,
       });
-      this.ofertas = result.data.listOfertasTrabajos.items;
+      this.ofertas = result.data.listOfertaTrabajos.items;
       this.loading = false;
     },
     editItem(item) {
@@ -412,7 +477,7 @@ export default {
         var job = this.job;
         job.fecha = new Date();
         await API.graphql({
-          query: createOfertasTrabajo,
+          query: createOfertaTrabajo,
           variables: { input: job },
         });
         this.close();
@@ -426,7 +491,7 @@ export default {
         job.contenido = j.contenido;
         job.fecha = j.fecha;
         await API.graphql({
-          query: updateOfertasTrabajo,
+          query: updateOfertaTrabajo,
           variables: { input: job },
         });
         this.close();
@@ -442,19 +507,40 @@ export default {
         id: this.job.id,
       };
       await API.graphql({
-        query: deleteOfertasTrabajo,
+        query: deleteOfertaTrabajo,
         variables: { input: jobDetails },
       });
       this.close();
     },
-    aplicar() {
+    confirmAplicar(item) {
       var login = this.$store.state.login;
+      this.job = item;
       console.log(login);
       if (!login) {
         this.dialog2 = true;
       } else {
+        this.aspirante.correo = this.user.email;
+        this.phone.number = this.user.phone_number;
         this.dialog3 = true;
       }
+    },
+    async aplicar() {
+      this.loading = true;
+      const { phone } = this;
+      const phone_number = phone.number.replace(/ /g, "");
+      var aspirante = this.aspirante;
+      aspirante.numeroTelefono = phone_number;
+      aspirante.ofertaTrabajoID = this.job.id;
+
+      await API.graphql({
+        query: createAspirante,
+        variables: { input: aspirante },
+      });
+      this.dialog3 = false;
+      this.loading = false;
+      this.enviado = true;
+      this.textCard = "Su solicitud a sido enviada";
+      setTimeout(() => (this.enviado = false), 5000);
     },
     // Job End
     close() {

@@ -17,7 +17,8 @@
             ></v-container
           >
           <v-card-text class="font-weight-light title" v-html="post.content">
-          </v-card-text>
+          </v-card-text
+          >{{ post.blog.name }}
           <p class="font-weight-light title ml-3">
             {{ post.answer.items.length }} Respuestas
           </p>

@@ -217,10 +217,10 @@ export default {
     },
     async CreateTecnico() {
       const tecnico = {
-        id: 2,
-        name: "Juan",
+        id: 5,
+        name: "Alejo",
         cargo: "Técnico A",
-        tallerID: "3f2a1d1e-d86c-4b20-8e88-f02f8e9207d5",
+        tallerID: "9d972b3a-ffd3-4950-b037-3da0f781d5c7",
       };
 
       await API.graphql({
