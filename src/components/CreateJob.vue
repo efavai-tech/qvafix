@@ -46,7 +46,7 @@
             </v-form>
           </v-card-text>
           <v-card-actions class="justify-end">
-            <v-btn text @click="createOfertasTrabajo">Aceptar</v-btn>
+            <v-btn text @click="createOfertaTrabajo">Aceptar</v-btn>
             <v-btn text @click="dialog = false">Cancelar</v-btn>
           </v-card-actions>
         </v-card>
@@ -57,7 +57,7 @@
 
 <script>
 import { API } from "aws-amplify";
-import { createOfertasTrabajo } from "../graphql/mutations";
+import { createOfertaTrabajo } from "../graphql/mutations";
 import { listTallers } from "../graphql/queries";
 
 export default {
@@ -92,12 +92,12 @@ export default {
     },
 
     // Job
-    async createOfertasTrabajo() {
+    async createOfertaTrabajo() {
       this.loading = true;
       var job = this.job;
       job.fecha = this.currentDate;
       await API.graphql({
-        query: createOfertasTrabajo,
+        query: createOfertaTrabajo,
         variables: { input: job },
       });
       this.job = {};

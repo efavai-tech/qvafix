@@ -91,22 +91,62 @@ const routes = [{
             import ( /* webpackChunkName: "about" */ '../views/RespuestasForo.vue'),
     },
     {
-        path: '/clientesTalleres',
-        name: 'ClientesTalleres',
+        path: '/clientes',
+        name: 'Clientes',
         component: () =>
-            import ( /* webpackChunkName: "about" */ '../views/admin/ClientesTalleres.vue')
+            import ( /* webpackChunkName: "about" */ '../views/admin/Clientes.vue'),
+        beforeEnter: (to, from, next) => {
+            if (!JSON.parse(localStorage.getItem('login'))) {
+                next("Login");
+            } else {
+                next();
+            }
+        }
     },
     {
         path: '/ordenes',
         name: 'Ordenes',
         component: () =>
-            import ( /* webpackChunkName: "about" */ '../views/admin/Ordenes.vue')
+            import ( /* webpackChunkName: "about" */ '../views/admin/Ordenes.vue'),
+        beforeEnter: (to, from, next) => {
+            if (!JSON.parse(localStorage.getItem('login'))) {
+                next("Login");
+            } else {
+                next();
+            }
+        }
     },
     {
         path: '/taller',
         name: 'Taller',
         component: () =>
             import ( /* webpackChunkName: "about" */ '../views/Taller.vue')
+    },
+    {
+        path: '/talleres',
+        name: 'Talleres',
+        component: () =>
+            import ( /* webpackChunkName: "about" */ '../views/Talleres.vue'),
+        beforeEnter: (to, from, next) => {
+            if (!JSON.parse(localStorage.getItem('login'))) {
+                next("Login");
+            } else {
+                next();
+            }
+        }
+    },
+    {
+        path: '/solicitudesEmpleo',
+        name: 'SolicitudesEmpleo',
+        component: () =>
+            import ( /* webpackChunkName: "about" */ '../views/admin/SolicitudesEmpleo.vue'),
+        beforeEnter: (to, from, next) => {
+            if (!JSON.parse(localStorage.getItem('login'))) {
+                next("Login");
+            } else {
+                next();
+            }
+        }
     },
 ]
 

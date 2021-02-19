@@ -152,8 +152,7 @@ export default {
         this.loading = true;
         const { username, password } = this;
         await Auth.signIn({ username, password })
-          .then((username) => {
-            console.log(username);
+          .then(() => {
             this.loading = false;
             this.$store.commit("Login");
 
@@ -164,6 +163,7 @@ export default {
               .then((u) => {
                 var user = {};
                 user.email = u.attributes.email;
+                user.phone_number = u.attributes.phone_number;
                 if (
                   u.signInUserSession.accessToken.payload["cognito:groups"] == undefined
                 ) {
