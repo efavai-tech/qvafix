@@ -1,0 +1,115 @@
+type Taller @model {
+  id: ID!
+  name: String!
+  direccion: String
+  correo: AWSEmail
+  mision: String
+  vision: String
+  descripcionLaboral:String
+  otro: String
+  logo: String
+  tecnicos:[Tecnico] @connection(keyName: "byTaller", fields: ["id"])
+  clientes: [Cliente]
+  ofertasTrabajo: [OfertaTrabajo] @connection(keyName: "byTaller", fields: ["id"])
+  telefonos: String
+  administradorID:ID
+    }
+
+type Piezas @model{
+  id: ID!
+  nombre: String
+  precio: Int
+  cantidad: Int
+}
+
+type Tecnico @model @key(name: "byTaller", fields: ["tallerID"])
+{  
+  id: ID!
+  name: String!
+  cargo: String
+  tallerID: ID!
+  taller: Taller @connection(fields: ["tallerID"])
+  ordenServicio: [OrdenServicio] @connection(keyName: "byCliente", fields: ["id"])
+  }
+
+type Equipo @model @key(name: "byCliente", fields: ["clienteID"])
+{
+  id: ID!
+  nombre: String!
+  descripcion: String
+  clienteID: ID!
+  cliente: Cliente @connection(fields: ["clienteID"])
+}
+
+type Cliente @model{
+  id: ID!
+  name: String!
+  numeroTelefono: AWSPhone
+  correo: AWSEmail
+  ordenServicio: [OrdenServicio] @connection(keyName: "byCliente", fields: ["id"])
+  equipo: [Equipo] @connection(keyName: "byCliente", fields: ["id"])
+}
+
+type OrdenServicio @model @key(name: "byCliente", fields: ["clienteID"])
+{
+  id: ID!
+  numero:Int
+  estado: String!
+  tecnicoID: ID!
+  tecnico: Tecnico @connection(fields: ["tecnicoID"])
+  clienteID: ID!
+  cliente: Cliente @connection(fields: ["clienteID"])
+  fechaDeFinalizado: AWSDateTime
+  equipoID: ID!
+  equipo: Equipo @connection(fields: ["equipoID"])
+  piezas:[Piezas]
+}
+
+type OfertaTrabajo @model @key(name: "byTaller", fields: ["tallerID"])
+{
+  id: ID!
+  tallerID: ID!
+  taller: Taller @connection(fields: ["tallerID"])
+  titulo:String!
+  contenido:String!
+  fecha:AWSDateTime
+  aspirantes: [Aspirante] @connection(keyName: "byOfertaTrabajo", fields: ["id"])
+}
+type Aspirante @model @key(name: "byOfertaTrabajo", fields: ["ofertaTrabajoID"]){
+  id: ID!
+  name: String!
+  numeroTelefono: AWSPhone
+  correo: AWSEmail
+  ofertaTrabajoID: ID!
+  ofertaTrabajo: OfertaTrabajo @connection(fields: ["ofertaTrabajoID"])
+}
+type Blog @model{
+  id: ID!
+  name: String!
+  posts: [Post] @connection(keyName: "byBlog", fields: ["id"])
+}
+
+type Post @model @key(name: "byBlog", fields: ["blogID"]) {
+  id: ID!
+  title: String!
+  content: String
+  blogID: ID!
+  blog: Blog @connection(fields: ["blogID"])
+  answer: [Answer] @connection(keyName: "byPost", fields: ["id"])
+  username:String
+}
+type Answer @model @key(name: "byPost", fields: ["postID", "content"]) {
+  id: ID!
+  content: String
+  username:String
+  postID: ID!
+  post: Post @connection(fields: ["postID"])
+  comments: [Comment] @connection(keyName: "byAnswer", fields: ["id"])
+}
+type Comment @model @key(name: "byAnswer", fields: ["answerID"]) {
+  id: ID!
+  answerID: ID!
+  answer: Answer @connection(fields: ["answerID"])
+  content: String
+  username:String
+}

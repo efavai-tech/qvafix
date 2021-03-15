@@ -26,8 +26,17 @@
             }
           },
           "additionalAuthenticationProviders": []
-        }
-      }
+        },
+        "GraphQLAPIIdOutput": "zw2ejjinfnaj3mp7a4otsaqb2e",
+        "GraphQLAPIEndpointOutput": "https://6lh2b245rbhibjy5p3j5lxkgdi.appsync-api.us-east-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-jma5fj45l5fo5bk7fuycit2xly"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-qvafix-dev-222945-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apiqvafix"
+      },
+      "lastPushTimeStamp": "2021-03-15T02:53:32.639Z",
+      "lastPushDirHash": "cwwa7eETke6WPWMKehoFt5zf8xI="
     }
   }
 }
