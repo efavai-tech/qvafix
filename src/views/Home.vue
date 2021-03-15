@@ -155,6 +155,8 @@
 </template>
 
 <script>
+import api from "@/api";
+
 import Ranking from "../components/Ranking";
 import Promociones from "../components/Promociones";
 import BuscarOrden from "../components/BuscarOrden";
@@ -183,10 +185,12 @@ export default {
   created() {
     this.$store.commit("SET_LAYOUT", "Principal");
     this.getTalleres();
+    this.getTendenciasFromApi();
   },
   data: () => ({
     loading: false,
     talleres: [],
+    tendencias: [],
     itemsPerPageArray: [10, 20, 30],
     search: "",
     page: 1,
@@ -196,6 +200,17 @@ export default {
       "Pretendemos agrupar a la comunidad de talleres con el objetivo de establecer una colaboración y tener una plaza digital que sea nuestra. Lleve su taller de reparaciones al siguiente nivel de competitividad y calidad en el servicio.",
   }),
   methods: {
+    getTendenciasFromApi() {
+      const url = api.getUrl("CapacidadTecnologica", "Tendencias");
+      this.axios.get(url).then(
+        (response) => {
+          this.tendencias = response.data;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
     nextPage() {
       if (this.page + 1 <= this.numberOfPages) this.page += 1;
     },

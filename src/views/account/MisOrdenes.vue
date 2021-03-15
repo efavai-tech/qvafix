@@ -144,13 +144,14 @@ export default {
     async getCliente() {
       this.loading = true;
       this.textCard = "Buscando";
-
+      // var c = JSON.parse(localStorage.getItem("cliente"));
+      // console.log(c);
       // Saber el cliente por el correo
       const clientes = await API.graphql({
         query: listClientes,
+        variables: { filter: { correo: { eq: "alejoroman0605@gmail.com" } } },
       });
-      var ListClientes = clientes.data.listClientes.items;
-      var cliente = ListClientes.find((x) => x.correo == this.username);
+      var cliente = clientes.data.listClientes.items[0];
       if (cliente == null) {
         this.loading = false;
         this.textCard = "Usted no es cliente de ningún taller";

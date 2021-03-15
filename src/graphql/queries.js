@@ -1,14 +1,215 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getTelefono = /* GraphQL */ `
-  query GetTelefono($id: ID!) {
-    getTelefono(id: $id) {
+export const getOrdenServicio = /* GraphQL */ `
+  query GetOrdenServicio($id: ID!) {
+    getOrdenServicio(id: $id) {
       id
       numero
-      descripcion
-      tallerID
-      taller {
+      estado
+      tecnicoID
+      tecnico {
+        id
+        name
+        cargo
+        tallerID
+        taller {
+          id
+          name
+          direccion
+          correo
+          mision
+          vision
+          descripcionLaboral
+          otro
+          logo
+          telefonos
+          administradorID
+          createdAt
+          updatedAt
+        }
+        ordenServicio {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      clienteID
+      cliente {
+        id
+        name
+        numeroTelefono
+        correo
+        ordenServicio {
+          nextToken
+        }
+        equipo {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      fechaDeFinalizado
+      equipoID
+      equipo {
+        id
+        nombre
+        descripcion
+        clienteID
+        cliente {
+          id
+          name
+          numeroTelefono
+          correo
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      piezas {
+        id
+        nombre
+        precio
+        cantidad
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listOrdenServicios = /* GraphQL */ `
+  query ListOrdenServicios(
+    $filter: ModelOrdenServicioFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listOrdenServicios(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        numero
+        estado
+        tecnicoID
+        tecnico {
+          id
+          name
+          cargo
+          tallerID
+          createdAt
+          updatedAt
+          owner
+        }
+        clienteID
+        cliente {
+          id
+          name
+          numeroTelefono
+          correo
+          createdAt
+          updatedAt
+          owner
+        }
+        fechaDeFinalizado
+        equipoID
+        equipo {
+          id
+          nombre
+          descripcion
+          clienteID
+          createdAt
+          updatedAt
+          owner
+        }
+        piezas {
+          id
+          nombre
+          precio
+          cantidad
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getTaller = /* GraphQL */ `
+  query GetTaller($id: ID!) {
+    getTaller(id: $id) {
+      id
+      name
+      direccion
+      correo
+      mision
+      vision
+      descripcionLaboral
+      otro
+      logo
+      tecnicos {
+        items {
+          id
+          name
+          cargo
+          tallerID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      clientes {
+        id
+        name
+        numeroTelefono
+        correo
+        ordenServicio {
+          nextToken
+        }
+        equipo {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      ofertasTrabajo {
+        items {
+          id
+          tallerID
+          titulo
+          contenido
+          fecha
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      telefonos
+      administradorID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listTallers = /* GraphQL */ `
+  query ListTallers(
+    $filter: ModelTallerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTallers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
         id
         name
         direccion
@@ -28,48 +229,13 @@ export const getTelefono = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listTelefonos = /* GraphQL */ `
-  query ListTelefonos(
-    $filter: ModelTelefonoFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listTelefonos(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        numero
-        descripcion
-        tallerID
-        taller {
-          id
-          name
-          direccion
-          correo
-          mision
-          vision
-          descripcionLaboral
-          otro
-          logo
-          administradorID
-          createdAt
-          updatedAt
-        }
         createdAt
         updatedAt
       }
@@ -135,13 +301,12 @@ export const getTecnico = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -157,11 +322,13 @@ export const getTecnico = /* GraphQL */ `
           equipoID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -187,6 +354,7 @@ export const listTecnicos = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -196,6 +364,7 @@ export const listTecnicos = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -221,9 +390,11 @@ export const getEquipo = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -246,9 +417,11 @@ export const listEquipos = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -266,20 +439,13 @@ export const getCliente = /* GraphQL */ `
           id
           numero
           estado
-          tecnico
-          {
-            name
-            taller{
-              name
-            }
-          }
+          tecnicoID
+          clienteID
           fechaDeFinalizado
-          equipo
-          {
-            nombre
-          }
+          equipoID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -291,11 +457,13 @@ export const getCliente = /* GraphQL */ `
           clienteID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -319,138 +487,7 @@ export const listClientes = /* GraphQL */ `
         }
         createdAt
         updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getOrdenServicio = /* GraphQL */ `
-  query GetOrdenServicio($id: ID!) {
-    getOrdenServicio(id: $id) {
-      id
-      numero
-      estado
-      tecnicoID
-      tecnico {
-        id
-        name
-        cargo
-        tallerID
-        taller {
-          id
-          name
-          direccion
-          correo
-          mision
-          vision
-          descripcionLaboral
-          otro
-          logo
-          administradorID
-          createdAt
-          updatedAt
-        }
-        ordenServicio {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      clienteID
-      cliente {
-        id
-        name
-        numeroTelefono
-        correo
-        ordenServicio {
-          nextToken
-        }
-        equipo {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      fechaDeFinalizado
-      equipoID
-      equipo {
-        id
-        nombre
-        descripcion
-        clienteID
-        cliente {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      piezas {
-        id
-        nombre
-        precio
-        cantidad
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listOrdenServicios = /* GraphQL */ `
-  query ListOrdenServicios(
-    $filter: ModelOrdenServicioFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listOrdenServicios(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        numero
-        estado
-        tecnicoID
-        tecnico {
-          id
-          name
-          cargo
-          tallerID
-          createdAt
-          updatedAt
-        }
-        clienteID
-        cliente {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        fechaDeFinalizado
-        equipoID
-        equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
-        }
-        piezas {
-          id
-          nombre
-          precio
-          cantidad
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
+        owner
       }
       nextToken
     }
@@ -481,13 +518,12 @@ export const getOfertaTrabajo = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -509,6 +545,7 @@ export const getOfertaTrabajo = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -532,6 +569,7 @@ export const listOfertaTrabajos = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -544,6 +582,7 @@ export const listOfertaTrabajos = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -570,6 +609,7 @@ export const getAspirante = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -582,6 +622,7 @@ export const getAspirante = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -609,6 +650,7 @@ export const listAspirantes = /* GraphQL */ `
           fecha
           createdAt
           updatedAt
+          owner
         }
         createdAt
         updatedAt
@@ -631,11 +673,13 @@ export const getBlog = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -654,6 +698,7 @@ export const listBlogs = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -674,6 +719,7 @@ export const getPost = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       answer {
         items {
@@ -683,12 +729,14 @@ export const getPost = /* GraphQL */ `
           postID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       username
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -709,6 +757,7 @@ export const listPosts = /* GraphQL */ `
           name
           createdAt
           updatedAt
+          owner
         }
         answer {
           nextToken
@@ -716,6 +765,7 @@ export const listPosts = /* GraphQL */ `
         username
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -738,6 +788,7 @@ export const getAnswer = /* GraphQL */ `
           name
           createdAt
           updatedAt
+          owner
         }
         answer {
           nextToken
@@ -745,6 +796,7 @@ export const getAnswer = /* GraphQL */ `
         username
         createdAt
         updatedAt
+        owner
       }
       comments {
         items {
@@ -754,11 +806,13 @@ export const getAnswer = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -782,12 +836,14 @@ export const listAnswers = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         comments {
           nextToken
         }
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -811,17 +867,20 @@ export const getComment = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         comments {
           nextToken
         }
         createdAt
         updatedAt
+        owner
       }
       content
       username
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -842,119 +901,13 @@ export const listComments = /* GraphQL */ `
           postID
           createdAt
           updatedAt
+          owner
         }
         content
         username
         createdAt
         updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getTaller = /* GraphQL */ `
-  query GetTaller($id: ID!) {
-    getTaller(id: $id) {
-      id
-      name
-      direccion
-      correo
-      mision
-      vision
-      descripcionLaboral
-      otro
-      logo
-      tecnicos {
-        items {
-          id
-          name
-          cargo
-          tallerID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      clientes {
-        id
-        name
-        numeroTelefono
-        correo
-        ordenServicio {
-          nextToken
-        }
-        equipo {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      ofertasTrabajo {
-        items {
-          id
-          tallerID
-          titulo
-          contenido
-          fecha
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      telefonos {
-        items {
-          id
-          numero
-          descripcion
-          tallerID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      administradorID
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listTallers = /* GraphQL */ `
-  query ListTallers(
-    $filter: ModelTallerFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listTallers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        direccion
-        correo
-        mision
-        vision
-        descripcionLaboral
-        otro
-        logo
-        tecnicos {
-          nextToken
-        }
-        clientes {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos {
-          nextToken
-        }
-        administradorID
-        createdAt
-        updatedAt
+        owner
       }
       nextToken
     }

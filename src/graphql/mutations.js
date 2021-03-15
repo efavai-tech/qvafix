@@ -1,144 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createTelefono = /* GraphQL */ `
-  mutation CreateTelefono(
-    $input: CreateTelefonoInput!
-    $condition: ModelTelefonoConditionInput
-  ) {
-    createTelefono(input: $input, condition: $condition) {
-      id
-      numero
-      descripcion
-      tallerID
-      taller {
-        id
-        name
-        direccion
-        correo
-        mision
-        vision
-        descripcionLaboral
-        otro
-        logo
-        tecnicos {
-          nextToken
-        }
-        clientes {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos {
-          nextToken
-        }
-        administradorID
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateTelefono = /* GraphQL */ `
-  mutation UpdateTelefono(
-    $input: UpdateTelefonoInput!
-    $condition: ModelTelefonoConditionInput
-  ) {
-    updateTelefono(input: $input, condition: $condition) {
-      id
-      numero
-      descripcion
-      tallerID
-      taller {
-        id
-        name
-        direccion
-        correo
-        mision
-        vision
-        descripcionLaboral
-        otro
-        logo
-        tecnicos {
-          nextToken
-        }
-        clientes {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos {
-          nextToken
-        }
-        administradorID
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteTelefono = /* GraphQL */ `
-  mutation DeleteTelefono(
-    $input: DeleteTelefonoInput!
-    $condition: ModelTelefonoConditionInput
-  ) {
-    deleteTelefono(input: $input, condition: $condition) {
-      id
-      numero
-      descripcion
-      tallerID
-      taller {
-        id
-        name
-        direccion
-        correo
-        mision
-        vision
-        descripcionLaboral
-        otro
-        logo
-        tecnicos {
-          nextToken
-        }
-        clientes {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos {
-          nextToken
-        }
-        administradorID
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const createPiezas = /* GraphQL */ `
   mutation CreatePiezas(
     $input: CreatePiezasInput!
@@ -214,13 +76,12 @@ export const createTecnico = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -236,11 +97,13 @@ export const createTecnico = /* GraphQL */ `
           equipoID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -274,13 +137,12 @@ export const updateTecnico = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -296,11 +158,13 @@ export const updateTecnico = /* GraphQL */ `
           equipoID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -334,13 +198,12 @@ export const deleteTecnico = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -356,11 +219,13 @@ export const deleteTecnico = /* GraphQL */ `
           equipoID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -387,9 +252,11 @@ export const createEquipo = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -416,9 +283,11 @@ export const updateEquipo = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -445,9 +314,11 @@ export const deleteEquipo = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -472,6 +343,7 @@ export const createCliente = /* GraphQL */ `
           equipoID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -483,11 +355,13 @@ export const createCliente = /* GraphQL */ `
           clienteID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -512,6 +386,7 @@ export const updateCliente = /* GraphQL */ `
           equipoID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -523,11 +398,13 @@ export const updateCliente = /* GraphQL */ `
           clienteID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -552,6 +429,7 @@ export const deleteCliente = /* GraphQL */ `
           equipoID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -563,11 +441,13 @@ export const deleteCliente = /* GraphQL */ `
           clienteID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -596,6 +476,7 @@ export const createOrdenServicio = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -605,6 +486,7 @@ export const createOrdenServicio = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       clienteID
       cliente {
@@ -620,6 +502,7 @@ export const createOrdenServicio = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       fechaDeFinalizado
       equipoID
@@ -635,9 +518,11 @@ export const createOrdenServicio = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         createdAt
         updatedAt
+        owner
       }
       piezas {
         id
@@ -649,6 +534,7 @@ export const createOrdenServicio = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -677,6 +563,7 @@ export const updateOrdenServicio = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -686,6 +573,7 @@ export const updateOrdenServicio = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       clienteID
       cliente {
@@ -701,6 +589,7 @@ export const updateOrdenServicio = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       fechaDeFinalizado
       equipoID
@@ -716,9 +605,11 @@ export const updateOrdenServicio = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         createdAt
         updatedAt
+        owner
       }
       piezas {
         id
@@ -730,6 +621,7 @@ export const updateOrdenServicio = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -758,6 +650,7 @@ export const deleteOrdenServicio = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -767,6 +660,7 @@ export const deleteOrdenServicio = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       clienteID
       cliente {
@@ -782,6 +676,7 @@ export const deleteOrdenServicio = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       fechaDeFinalizado
       equipoID
@@ -797,9 +692,11 @@ export const deleteOrdenServicio = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         createdAt
         updatedAt
+        owner
       }
       piezas {
         id
@@ -811,6 +708,7 @@ export const deleteOrdenServicio = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -842,13 +740,12 @@ export const createOfertaTrabajo = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -870,6 +767,7 @@ export const createOfertaTrabajo = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -901,13 +799,12 @@ export const updateOfertaTrabajo = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -929,6 +826,7 @@ export const updateOfertaTrabajo = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -960,13 +858,12 @@ export const deleteOfertaTrabajo = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -988,6 +885,7 @@ export const deleteOfertaTrabajo = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -1015,6 +913,7 @@ export const createAspirante = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -1027,6 +926,7 @@ export const createAspirante = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -1057,6 +957,7 @@ export const updateAspirante = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -1069,6 +970,7 @@ export const updateAspirante = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -1099,6 +1001,7 @@ export const deleteAspirante = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -1111,6 +1014,7 @@ export const deleteAspirante = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -1134,11 +1038,13 @@ export const createBlog = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -1159,11 +1065,13 @@ export const updateBlog = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -1184,11 +1092,13 @@ export const deleteBlog = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -1210,6 +1120,7 @@ export const createPost = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       answer {
         items {
@@ -1219,12 +1130,14 @@ export const createPost = /* GraphQL */ `
           postID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       username
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -1246,6 +1159,7 @@ export const updatePost = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       answer {
         items {
@@ -1255,12 +1169,14 @@ export const updatePost = /* GraphQL */ `
           postID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       username
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -1282,6 +1198,7 @@ export const deletePost = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       answer {
         items {
@@ -1291,12 +1208,14 @@ export const deletePost = /* GraphQL */ `
           postID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       username
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -1320,6 +1239,7 @@ export const createAnswer = /* GraphQL */ `
           name
           createdAt
           updatedAt
+          owner
         }
         answer {
           nextToken
@@ -1327,6 +1247,7 @@ export const createAnswer = /* GraphQL */ `
         username
         createdAt
         updatedAt
+        owner
       }
       comments {
         items {
@@ -1336,11 +1257,13 @@ export const createAnswer = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -1364,6 +1287,7 @@ export const updateAnswer = /* GraphQL */ `
           name
           createdAt
           updatedAt
+          owner
         }
         answer {
           nextToken
@@ -1371,6 +1295,7 @@ export const updateAnswer = /* GraphQL */ `
         username
         createdAt
         updatedAt
+        owner
       }
       comments {
         items {
@@ -1380,11 +1305,13 @@ export const updateAnswer = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -1408,6 +1335,7 @@ export const deleteAnswer = /* GraphQL */ `
           name
           createdAt
           updatedAt
+          owner
         }
         answer {
           nextToken
@@ -1415,6 +1343,7 @@ export const deleteAnswer = /* GraphQL */ `
         username
         createdAt
         updatedAt
+        owner
       }
       comments {
         items {
@@ -1424,11 +1353,13 @@ export const deleteAnswer = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -1453,17 +1384,20 @@ export const createComment = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         comments {
           nextToken
         }
         createdAt
         updatedAt
+        owner
       }
       content
       username
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -1488,17 +1422,20 @@ export const updateComment = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         comments {
           nextToken
         }
         createdAt
         updatedAt
+        owner
       }
       content
       username
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -1523,17 +1460,20 @@ export const deleteComment = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         comments {
           nextToken
         }
         createdAt
         updatedAt
+        owner
       }
       content
       username
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -1560,6 +1500,7 @@ export const createTaller = /* GraphQL */ `
           tallerID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -1576,6 +1517,7 @@ export const createTaller = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       ofertasTrabajo {
         items {
@@ -1586,20 +1528,11 @@ export const createTaller = /* GraphQL */ `
           fecha
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      telefonos {
-        items {
-          id
-          numero
-          descripcion
-          tallerID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      telefonos
       administradorID
       createdAt
       updatedAt
@@ -1629,6 +1562,7 @@ export const updateTaller = /* GraphQL */ `
           tallerID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -1645,6 +1579,7 @@ export const updateTaller = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       ofertasTrabajo {
         items {
@@ -1655,20 +1590,11 @@ export const updateTaller = /* GraphQL */ `
           fecha
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      telefonos {
-        items {
-          id
-          numero
-          descripcion
-          tallerID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      telefonos
       administradorID
       createdAt
       updatedAt
@@ -1698,6 +1624,7 @@ export const deleteTaller = /* GraphQL */ `
           tallerID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -1714,6 +1641,7 @@ export const deleteTaller = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       ofertasTrabajo {
         items {
@@ -1724,20 +1652,11 @@ export const deleteTaller = /* GraphQL */ `
           fecha
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      telefonos {
-        items {
-          id
-          numero
-          descripcion
-          tallerID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      telefonos
       administradorID
       createdAt
       updatedAt

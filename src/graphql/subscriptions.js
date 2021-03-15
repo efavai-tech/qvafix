@@ -21,6 +21,7 @@ export const onCreateTaller = /* GraphQL */ `
           tallerID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -37,6 +38,7 @@ export const onCreateTaller = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       ofertasTrabajo {
         items {
@@ -47,20 +49,11 @@ export const onCreateTaller = /* GraphQL */ `
           fecha
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      telefonos {
-        items {
-          id
-          numero
-          descripcion
-          tallerID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      telefonos
       administradorID
       createdAt
       updatedAt
@@ -87,6 +80,7 @@ export const onUpdateTaller = /* GraphQL */ `
           tallerID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -103,6 +97,7 @@ export const onUpdateTaller = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       ofertasTrabajo {
         items {
@@ -113,20 +108,11 @@ export const onUpdateTaller = /* GraphQL */ `
           fecha
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      telefonos {
-        items {
-          id
-          numero
-          descripcion
-          tallerID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      telefonos
       administradorID
       createdAt
       updatedAt
@@ -153,6 +139,7 @@ export const onDeleteTaller = /* GraphQL */ `
           tallerID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -169,6 +156,7 @@ export const onDeleteTaller = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       ofertasTrabajo {
         items {
@@ -179,150 +167,12 @@ export const onDeleteTaller = /* GraphQL */ `
           fecha
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      telefonos {
-        items {
-          id
-          numero
-          descripcion
-          tallerID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      telefonos
       administradorID
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateTelefono = /* GraphQL */ `
-  subscription OnCreateTelefono {
-    onCreateTelefono {
-      id
-      numero
-      descripcion
-      tallerID
-      taller {
-        id
-        name
-        direccion
-        correo
-        mision
-        vision
-        descripcionLaboral
-        otro
-        logo
-        tecnicos {
-          nextToken
-        }
-        clientes {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos {
-          nextToken
-        }
-        administradorID
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateTelefono = /* GraphQL */ `
-  subscription OnUpdateTelefono {
-    onUpdateTelefono {
-      id
-      numero
-      descripcion
-      tallerID
-      taller {
-        id
-        name
-        direccion
-        correo
-        mision
-        vision
-        descripcionLaboral
-        otro
-        logo
-        tecnicos {
-          nextToken
-        }
-        clientes {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos {
-          nextToken
-        }
-        administradorID
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteTelefono = /* GraphQL */ `
-  subscription OnDeleteTelefono {
-    onDeleteTelefono {
-      id
-      numero
-      descripcion
-      tallerID
-      taller {
-        id
-        name
-        direccion
-        correo
-        mision
-        vision
-        descripcionLaboral
-        otro
-        logo
-        tecnicos {
-          nextToken
-        }
-        clientes {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos {
-          nextToken
-        }
-        administradorID
-        createdAt
-        updatedAt
-      }
       createdAt
       updatedAt
     }
@@ -365,8 +215,8 @@ export const onDeletePiezas = /* GraphQL */ `
   }
 `;
 export const onCreateTecnico = /* GraphQL */ `
-  subscription OnCreateTecnico {
-    onCreateTecnico {
+  subscription OnCreateTecnico($owner: String) {
+    onCreateTecnico(owner: $owner) {
       id
       name
       cargo
@@ -391,13 +241,12 @@ export const onCreateTecnico = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -413,17 +262,19 @@ export const onCreateTecnico = /* GraphQL */ `
           equipoID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateTecnico = /* GraphQL */ `
-  subscription OnUpdateTecnico {
-    onUpdateTecnico {
+  subscription OnUpdateTecnico($owner: String) {
+    onUpdateTecnico(owner: $owner) {
       id
       name
       cargo
@@ -448,13 +299,12 @@ export const onUpdateTecnico = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -470,17 +320,19 @@ export const onUpdateTecnico = /* GraphQL */ `
           equipoID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteTecnico = /* GraphQL */ `
-  subscription OnDeleteTecnico {
-    onDeleteTecnico {
+  subscription OnDeleteTecnico($owner: String) {
+    onDeleteTecnico(owner: $owner) {
       id
       name
       cargo
@@ -505,13 +357,12 @@ export const onDeleteTecnico = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -527,17 +378,19 @@ export const onDeleteTecnico = /* GraphQL */ `
           equipoID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onCreateEquipo = /* GraphQL */ `
-  subscription OnCreateEquipo {
-    onCreateEquipo {
+  subscription OnCreateEquipo($owner: String) {
+    onCreateEquipo(owner: $owner) {
       id
       nombre
       descripcion
@@ -555,15 +408,17 @@ export const onCreateEquipo = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateEquipo = /* GraphQL */ `
-  subscription OnUpdateEquipo {
-    onUpdateEquipo {
+  subscription OnUpdateEquipo($owner: String) {
+    onUpdateEquipo(owner: $owner) {
       id
       nombre
       descripcion
@@ -581,15 +436,17 @@ export const onUpdateEquipo = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteEquipo = /* GraphQL */ `
-  subscription OnDeleteEquipo {
-    onDeleteEquipo {
+  subscription OnDeleteEquipo($owner: String) {
+    onDeleteEquipo(owner: $owner) {
       id
       nombre
       descripcion
@@ -607,15 +464,17 @@ export const onDeleteEquipo = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onCreateCliente = /* GraphQL */ `
-  subscription OnCreateCliente {
-    onCreateCliente {
+  subscription OnCreateCliente($owner: String) {
+    onCreateCliente(owner: $owner) {
       id
       name
       numeroTelefono
@@ -631,6 +490,7 @@ export const onCreateCliente = /* GraphQL */ `
           equipoID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -642,17 +502,19 @@ export const onCreateCliente = /* GraphQL */ `
           clienteID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateCliente = /* GraphQL */ `
-  subscription OnUpdateCliente {
-    onUpdateCliente {
+  subscription OnUpdateCliente($owner: String) {
+    onUpdateCliente(owner: $owner) {
       id
       name
       numeroTelefono
@@ -668,6 +530,7 @@ export const onUpdateCliente = /* GraphQL */ `
           equipoID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -679,17 +542,19 @@ export const onUpdateCliente = /* GraphQL */ `
           clienteID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteCliente = /* GraphQL */ `
-  subscription OnDeleteCliente {
-    onDeleteCliente {
+  subscription OnDeleteCliente($owner: String) {
+    onDeleteCliente(owner: $owner) {
       id
       name
       numeroTelefono
@@ -705,6 +570,7 @@ export const onDeleteCliente = /* GraphQL */ `
           equipoID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -716,17 +582,19 @@ export const onDeleteCliente = /* GraphQL */ `
           clienteID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onCreateOrdenServicio = /* GraphQL */ `
-  subscription OnCreateOrdenServicio {
-    onCreateOrdenServicio {
+  subscription OnCreateOrdenServicio($owner: String) {
+    onCreateOrdenServicio(owner: $owner) {
       id
       numero
       estado
@@ -746,6 +614,7 @@ export const onCreateOrdenServicio = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -755,6 +624,7 @@ export const onCreateOrdenServicio = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       clienteID
       cliente {
@@ -770,6 +640,7 @@ export const onCreateOrdenServicio = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       fechaDeFinalizado
       equipoID
@@ -785,9 +656,11 @@ export const onCreateOrdenServicio = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         createdAt
         updatedAt
+        owner
       }
       piezas {
         id
@@ -799,12 +672,13 @@ export const onCreateOrdenServicio = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateOrdenServicio = /* GraphQL */ `
-  subscription OnUpdateOrdenServicio {
-    onUpdateOrdenServicio {
+  subscription OnUpdateOrdenServicio($owner: String) {
+    onUpdateOrdenServicio(owner: $owner) {
       id
       numero
       estado
@@ -824,6 +698,7 @@ export const onUpdateOrdenServicio = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -833,6 +708,7 @@ export const onUpdateOrdenServicio = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       clienteID
       cliente {
@@ -848,6 +724,7 @@ export const onUpdateOrdenServicio = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       fechaDeFinalizado
       equipoID
@@ -863,9 +740,11 @@ export const onUpdateOrdenServicio = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         createdAt
         updatedAt
+        owner
       }
       piezas {
         id
@@ -877,12 +756,13 @@ export const onUpdateOrdenServicio = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteOrdenServicio = /* GraphQL */ `
-  subscription OnDeleteOrdenServicio {
-    onDeleteOrdenServicio {
+  subscription OnDeleteOrdenServicio($owner: String) {
+    onDeleteOrdenServicio(owner: $owner) {
       id
       numero
       estado
@@ -902,6 +782,7 @@ export const onDeleteOrdenServicio = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -911,6 +792,7 @@ export const onDeleteOrdenServicio = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       clienteID
       cliente {
@@ -926,6 +808,7 @@ export const onDeleteOrdenServicio = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       fechaDeFinalizado
       equipoID
@@ -941,9 +824,11 @@ export const onDeleteOrdenServicio = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         createdAt
         updatedAt
+        owner
       }
       piezas {
         id
@@ -955,12 +840,13 @@ export const onDeleteOrdenServicio = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onCreateOfertaTrabajo = /* GraphQL */ `
-  subscription OnCreateOfertaTrabajo {
-    onCreateOfertaTrabajo {
+  subscription OnCreateOfertaTrabajo($owner: String) {
+    onCreateOfertaTrabajo(owner: $owner) {
       id
       tallerID
       taller {
@@ -983,13 +869,12 @@ export const onCreateOfertaTrabajo = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -1011,12 +896,13 @@ export const onCreateOfertaTrabajo = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateOfertaTrabajo = /* GraphQL */ `
-  subscription OnUpdateOfertaTrabajo {
-    onUpdateOfertaTrabajo {
+  subscription OnUpdateOfertaTrabajo($owner: String) {
+    onUpdateOfertaTrabajo(owner: $owner) {
       id
       tallerID
       taller {
@@ -1039,13 +925,12 @@ export const onUpdateOfertaTrabajo = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -1067,12 +952,13 @@ export const onUpdateOfertaTrabajo = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteOfertaTrabajo = /* GraphQL */ `
-  subscription OnDeleteOfertaTrabajo {
-    onDeleteOfertaTrabajo {
+  subscription OnDeleteOfertaTrabajo($owner: String) {
+    onDeleteOfertaTrabajo(owner: $owner) {
       id
       tallerID
       taller {
@@ -1095,13 +981,12 @@ export const onDeleteOfertaTrabajo = /* GraphQL */ `
           correo
           createdAt
           updatedAt
+          owner
         }
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -1123,6 +1008,7 @@ export const onDeleteOfertaTrabajo = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -1147,6 +1033,7 @@ export const onCreateAspirante = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -1159,6 +1046,7 @@ export const onCreateAspirante = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -1186,6 +1074,7 @@ export const onUpdateAspirante = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -1198,6 +1087,7 @@ export const onUpdateAspirante = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -1225,6 +1115,7 @@ export const onDeleteAspirante = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -1237,6 +1128,7 @@ export const onDeleteAspirante = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -1244,8 +1136,8 @@ export const onDeleteAspirante = /* GraphQL */ `
   }
 `;
 export const onCreateBlog = /* GraphQL */ `
-  subscription OnCreateBlog {
-    onCreateBlog {
+  subscription OnCreateBlog($owner: String) {
+    onCreateBlog(owner: $owner) {
       id
       name
       posts {
@@ -1257,17 +1149,19 @@ export const onCreateBlog = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateBlog = /* GraphQL */ `
-  subscription OnUpdateBlog {
-    onUpdateBlog {
+  subscription OnUpdateBlog($owner: String) {
+    onUpdateBlog(owner: $owner) {
       id
       name
       posts {
@@ -1279,17 +1173,19 @@ export const onUpdateBlog = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteBlog = /* GraphQL */ `
-  subscription OnDeleteBlog {
-    onDeleteBlog {
+  subscription OnDeleteBlog($owner: String) {
+    onDeleteBlog(owner: $owner) {
       id
       name
       posts {
@@ -1301,17 +1197,19 @@ export const onDeleteBlog = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onCreatePost = /* GraphQL */ `
-  subscription OnCreatePost {
-    onCreatePost {
+  subscription OnCreatePost($owner: String) {
+    onCreatePost(owner: $owner) {
       id
       title
       content
@@ -1324,6 +1222,7 @@ export const onCreatePost = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       answer {
         items {
@@ -1333,18 +1232,20 @@ export const onCreatePost = /* GraphQL */ `
           postID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       username
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdatePost = /* GraphQL */ `
-  subscription OnUpdatePost {
-    onUpdatePost {
+  subscription OnUpdatePost($owner: String) {
+    onUpdatePost(owner: $owner) {
       id
       title
       content
@@ -1357,6 +1258,7 @@ export const onUpdatePost = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       answer {
         items {
@@ -1366,18 +1268,20 @@ export const onUpdatePost = /* GraphQL */ `
           postID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       username
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeletePost = /* GraphQL */ `
-  subscription OnDeletePost {
-    onDeletePost {
+  subscription OnDeletePost($owner: String) {
+    onDeletePost(owner: $owner) {
       id
       title
       content
@@ -1390,6 +1294,7 @@ export const onDeletePost = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       answer {
         items {
@@ -1399,18 +1304,20 @@ export const onDeletePost = /* GraphQL */ `
           postID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       username
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onCreateAnswer = /* GraphQL */ `
-  subscription OnCreateAnswer {
-    onCreateAnswer {
+  subscription OnCreateAnswer($owner: String) {
+    onCreateAnswer(owner: $owner) {
       id
       content
       username
@@ -1425,6 +1332,7 @@ export const onCreateAnswer = /* GraphQL */ `
           name
           createdAt
           updatedAt
+          owner
         }
         answer {
           nextToken
@@ -1432,6 +1340,7 @@ export const onCreateAnswer = /* GraphQL */ `
         username
         createdAt
         updatedAt
+        owner
       }
       comments {
         items {
@@ -1441,17 +1350,19 @@ export const onCreateAnswer = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateAnswer = /* GraphQL */ `
-  subscription OnUpdateAnswer {
-    onUpdateAnswer {
+  subscription OnUpdateAnswer($owner: String) {
+    onUpdateAnswer(owner: $owner) {
       id
       content
       username
@@ -1466,6 +1377,7 @@ export const onUpdateAnswer = /* GraphQL */ `
           name
           createdAt
           updatedAt
+          owner
         }
         answer {
           nextToken
@@ -1473,6 +1385,7 @@ export const onUpdateAnswer = /* GraphQL */ `
         username
         createdAt
         updatedAt
+        owner
       }
       comments {
         items {
@@ -1482,17 +1395,19 @@ export const onUpdateAnswer = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteAnswer = /* GraphQL */ `
-  subscription OnDeleteAnswer {
-    onDeleteAnswer {
+  subscription OnDeleteAnswer($owner: String) {
+    onDeleteAnswer(owner: $owner) {
       id
       content
       username
@@ -1507,6 +1422,7 @@ export const onDeleteAnswer = /* GraphQL */ `
           name
           createdAt
           updatedAt
+          owner
         }
         answer {
           nextToken
@@ -1514,6 +1430,7 @@ export const onDeleteAnswer = /* GraphQL */ `
         username
         createdAt
         updatedAt
+        owner
       }
       comments {
         items {
@@ -1523,17 +1440,19 @@ export const onDeleteAnswer = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onCreateComment = /* GraphQL */ `
-  subscription OnCreateComment {
-    onCreateComment {
+  subscription OnCreateComment($owner: String) {
+    onCreateComment(owner: $owner) {
       id
       answerID
       answer {
@@ -1549,23 +1468,26 @@ export const onCreateComment = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         comments {
           nextToken
         }
         createdAt
         updatedAt
+        owner
       }
       content
       username
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateComment = /* GraphQL */ `
-  subscription OnUpdateComment {
-    onUpdateComment {
+  subscription OnUpdateComment($owner: String) {
+    onUpdateComment(owner: $owner) {
       id
       answerID
       answer {
@@ -1581,23 +1503,26 @@ export const onUpdateComment = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         comments {
           nextToken
         }
         createdAt
         updatedAt
+        owner
       }
       content
       username
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteComment = /* GraphQL */ `
-  subscription OnDeleteComment {
-    onDeleteComment {
+  subscription OnDeleteComment($owner: String) {
+    onDeleteComment(owner: $owner) {
       id
       answerID
       answer {
@@ -1613,17 +1538,20 @@ export const onDeleteComment = /* GraphQL */ `
           username
           createdAt
           updatedAt
+          owner
         }
         comments {
           nextToken
         }
         createdAt
         updatedAt
+        owner
       }
       content
       username
       createdAt
       updatedAt
+      owner
     }
   }
 `;

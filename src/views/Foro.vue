@@ -2,7 +2,7 @@
   <div class="px-3 mt-4">
     <v-row>
       <v-col class="d-none d-lg-flex d-xl-flex mt-3" cols="2">
-        <v-card flat>
+        <!-- <v-card flat>
           <v-list threeLine>
             <h2 class="ml-4">Más vistos</h2>
             <v-list-item-group>
@@ -14,7 +14,7 @@
               </v-list-item>
             </v-list-item-group>
           </v-list>
-        </v-card>
+        </v-card> -->
       </v-col>
       <v-col cols="mx-auto">
         <v-data-iterator
