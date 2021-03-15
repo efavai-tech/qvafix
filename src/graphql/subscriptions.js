@@ -50,17 +50,7 @@ export const onCreateTaller = /* GraphQL */ `
         }
         nextToken
       }
-      telefonos {
-        items {
-          id
-          numero
-          descripcion
-          tallerID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      telefonos
       administradorID
       createdAt
       updatedAt
@@ -116,17 +106,7 @@ export const onUpdateTaller = /* GraphQL */ `
         }
         nextToken
       }
-      telefonos {
-        items {
-          id
-          numero
-          descripcion
-          tallerID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      telefonos
       administradorID
       createdAt
       updatedAt
@@ -182,147 +162,8 @@ export const onDeleteTaller = /* GraphQL */ `
         }
         nextToken
       }
-      telefonos {
-        items {
-          id
-          numero
-          descripcion
-          tallerID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      telefonos
       administradorID
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateTelefono = /* GraphQL */ `
-  subscription OnCreateTelefono {
-    onCreateTelefono {
-      id
-      numero
-      descripcion
-      tallerID
-      taller {
-        id
-        name
-        direccion
-        correo
-        mision
-        vision
-        descripcionLaboral
-        otro
-        logo
-        tecnicos {
-          nextToken
-        }
-        clientes {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos {
-          nextToken
-        }
-        administradorID
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateTelefono = /* GraphQL */ `
-  subscription OnUpdateTelefono {
-    onUpdateTelefono {
-      id
-      numero
-      descripcion
-      tallerID
-      taller {
-        id
-        name
-        direccion
-        correo
-        mision
-        vision
-        descripcionLaboral
-        otro
-        logo
-        tecnicos {
-          nextToken
-        }
-        clientes {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos {
-          nextToken
-        }
-        administradorID
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteTelefono = /* GraphQL */ `
-  subscription OnDeleteTelefono {
-    onDeleteTelefono {
-      id
-      numero
-      descripcion
-      tallerID
-      taller {
-        id
-        name
-        direccion
-        correo
-        mision
-        vision
-        descripcionLaboral
-        otro
-        logo
-        tecnicos {
-          nextToken
-        }
-        clientes {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos {
-          nextToken
-        }
-        administradorID
-        createdAt
-        updatedAt
-      }
       createdAt
       updatedAt
     }
@@ -395,9 +236,7 @@ export const onCreateTecnico = /* GraphQL */ `
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -452,9 +291,7 @@ export const onUpdateTecnico = /* GraphQL */ `
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -509,9 +346,7 @@ export const onDeleteTecnico = /* GraphQL */ `
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -746,6 +581,7 @@ export const onCreateOrdenServicio = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -824,6 +660,7 @@ export const onUpdateOrdenServicio = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -902,6 +739,7 @@ export const onDeleteOrdenServicio = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -987,9 +825,7 @@ export const onCreateOfertaTrabajo = /* GraphQL */ `
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -1043,9 +879,7 @@ export const onUpdateOfertaTrabajo = /* GraphQL */ `
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -1099,9 +933,7 @@ export const onDeleteOfertaTrabajo = /* GraphQL */ `
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -1147,6 +979,7 @@ export const onCreateAspirante = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -1186,6 +1019,7 @@ export const onUpdateAspirante = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -1225,6 +1059,7 @@ export const onDeleteAspirante = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt

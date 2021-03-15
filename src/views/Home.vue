@@ -183,10 +183,12 @@ export default {
   created() {
     this.$store.commit("SET_LAYOUT", "Principal");
     this.getTalleres();
+    this.getTendenciasFromApi();
   },
   data: () => ({
     loading: false,
     talleres: [],
+    tendencias: [],
     itemsPerPageArray: [10, 20, 30],
     search: "",
     page: 1,

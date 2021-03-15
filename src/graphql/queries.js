@@ -1,14 +1,70 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getTelefono = /* GraphQL */ `
-  query GetTelefono($id: ID!) {
-    getTelefono(id: $id) {
+export const getTaller = /* GraphQL */ `
+  query GetTaller($id: ID!) {
+    getTaller(id: $id) {
       id
-      numero
-      descripcion
-      tallerID
-      taller {
+      name
+      direccion
+      correo
+      mision
+      vision
+      descripcionLaboral
+      otro
+      logo
+      tecnicos {
+        items {
+          id
+          name
+          cargo
+          tallerID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      clientes {
+        id
+        name
+        numeroTelefono
+        correo
+        ordenServicio {
+          nextToken
+        }
+        equipo {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      ofertasTrabajo {
+        items {
+          id
+          tallerID
+          titulo
+          contenido
+          fecha
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      telefonos
+      administradorID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listTallers = /* GraphQL */ `
+  query ListTallers(
+    $filter: ModelTallerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTallers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
         id
         name
         direccion
@@ -32,44 +88,8 @@ export const getTelefono = /* GraphQL */ `
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listTelefonos = /* GraphQL */ `
-  query ListTelefonos(
-    $filter: ModelTelefonoFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listTelefonos(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        numero
-        descripcion
-        tallerID
-        taller {
-          id
-          name
-          direccion
-          correo
-          mision
-          vision
-          descripcionLaboral
-          otro
-          logo
-          administradorID
-          createdAt
-          updatedAt
-        }
         createdAt
         updatedAt
       }
@@ -139,9 +159,7 @@ export const getTecnico = /* GraphQL */ `
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -187,6 +205,7 @@ export const listTecnicos = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -266,18 +285,10 @@ export const getCliente = /* GraphQL */ `
           id
           numero
           estado
-          tecnico
-          {
-            name
-            taller{
-              name
-            }
-          }
+          tecnicoID
+          clienteID
           fechaDeFinalizado
-          equipo
-          {
-            nombre
-          }
+          equipoID
           createdAt
           updatedAt
         }
@@ -346,6 +357,7 @@ export const getOrdenServicio = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -485,9 +497,7 @@ export const getOfertaTrabajo = /* GraphQL */ `
         ofertasTrabajo {
           nextToken
         }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
@@ -532,6 +542,7 @@ export const listOfertaTrabajos = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -570,6 +581,7 @@ export const getAspirante = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
@@ -845,114 +857,6 @@ export const listComments = /* GraphQL */ `
         }
         content
         username
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getTaller = /* GraphQL */ `
-  query GetTaller($id: ID!) {
-    getTaller(id: $id) {
-      id
-      name
-      direccion
-      correo
-      mision
-      vision
-      descripcionLaboral
-      otro
-      logo
-      tecnicos {
-        items {
-          id
-          name
-          cargo
-          tallerID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      clientes {
-        id
-        name
-        numeroTelefono
-        correo
-        ordenServicio {
-          nextToken
-        }
-        equipo {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      ofertasTrabajo {
-        items {
-          id
-          tallerID
-          titulo
-          contenido
-          fecha
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      telefonos {
-        items {
-          id
-          numero
-          descripcion
-          tallerID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      administradorID
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listTallers = /* GraphQL */ `
-  query ListTallers(
-    $filter: ModelTallerFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listTallers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        direccion
-        correo
-        mision
-        vision
-        descripcionLaboral
-        otro
-        logo
-        tecnicos {
-          nextToken
-        }
-        clientes {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos {
-          nextToken
-        }
-        administradorID
         createdAt
         updatedAt
       }

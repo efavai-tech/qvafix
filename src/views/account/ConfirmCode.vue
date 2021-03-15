@@ -4,6 +4,9 @@
       <v-toolbar-title>Confirmar Código</v-toolbar-title>
     </v-toolbar>
     <v-card-text>
+      <v-row justify="center">
+        <v-card-title>El código se le envió a su correo</v-card-title>
+      </v-row>
       <v-form v-model="valid">
         <v-text-field
           append-icon="mdi-lock"
@@ -52,26 +55,25 @@ export default {
   },
   methods: {
     async confirmSignUp() {
-        var email = localStorage.email;
-        try {
-          await Auth.confirmSignUp(email, this.codigo).then(() => {
+      var email = localStorage.email;
+      try {
+        await Auth.confirmSignUp(email, this.codigo).then(() => {
           this.$router.push("/Login");
         });
-        } catch (error) {
-          console.log("error confirming sign up", error);
-        }
+      } catch (error) {
+        console.log("error confirming sign up", error);
       }
     },
-    async resendConfirmationCode() {
-      try {
-        await Auth.resendSignUp(this.email);
-        console.log("code resent successfully");
-      } catch (err) {
-        console.log("error resending code: ", err);
-      }
-    },
-  }
+  },
+  async resendConfirmationCode() {
+    try {
+      await Auth.resendSignUp(this.email);
+      console.log("code resent successfully");
+    } catch (err) {
+      console.log("error resending code: ", err);
+    }
+  },
+};
 </script>
 
-<style>
-</style>
+<style></style>
