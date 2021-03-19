@@ -42,6 +42,7 @@ export default {
           file: reader.result,
           taller_id: this.tallerId,
         };
+        console.log(archivo);
       };
       reader.onerror = function (error) {
         console.log("Error: ", error);
