@@ -1,102 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getTaller = /* GraphQL */ `
-  query GetTaller($id: ID!) {
-    getTaller(id: $id) {
-      id
-      name
-      direccion
-      correo
-      mision
-      vision
-      descripcionLaboral
-      otro
-      logo
-      tecnicos {
-        items {
-          id
-          name
-          cargo
-          tallerID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      clientes {
-        id
-        name
-        numeroTelefono
-        correo
-        ordenServicio {
-          nextToken
-        }
-        equipo {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      ofertasTrabajo {
-        items {
-          id
-          tallerID
-          titulo
-          contenido
-          fecha
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      telefonos
-      administradorID
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listTallers = /* GraphQL */ `
-  query ListTallers(
-    $filter: ModelTallerFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listTallers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        direccion
-        correo
-        mision
-        vision
-        descripcionLaboral
-        otro
-        logo
-        tecnicos {
-          nextToken
-        }
-        clientes {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos
-        administradorID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
 export const getPiezas = /* GraphQL */ `
   query GetPiezas($id: ID!) {
     getPiezas(id: $id) {
@@ -128,14 +32,14 @@ export const listPiezass = /* GraphQL */ `
     }
   }
 `;
-export const getTecnico = /* GraphQL */ `
-  query GetTecnico($id: ID!) {
-    getTecnico(id: $id) {
-      id
-      name
-      cargo
-      tallerID
-      taller {
+export const listTallers = /* GraphQL */ `
+  query ListTallers(
+    $filter: ModelTallerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTallers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
         id
         name
         direccion
@@ -145,9 +49,6 @@ export const getTecnico = /* GraphQL */ `
         descripcionLaboral
         otro
         logo
-        tecnicos {
-          nextToken
-        }
         clientes {
           id
           name
@@ -156,30 +57,74 @@ export const getTecnico = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        ofertasTrabajo {
-          nextToken
-        }
         telefonos
         administradorID
         createdAt
         updatedAt
+        tecnicos {
+          nextToken
+        }
+        ofertasTrabajo {
+          nextToken
+        }
       }
-      ordenServicio {
+      nextToken
+    }
+  }
+`;
+export const getTaller = /* GraphQL */ `
+  query GetTaller($id: ID!) {
+    getTaller(id: $id) {
+      id
+      name
+      direccion
+      correo
+      mision
+      vision
+      descripcionLaboral
+      otro
+      logo
+      clientes {
+        id
+        name
+        numeroTelefono
+        correo
+        createdAt
+        updatedAt
+        equipo {
+          nextToken
+        }
+        ordenServicio {
+          nextToken
+        }
+      }
+      telefonos
+      administradorID
+      createdAt
+      updatedAt
+      tecnicos {
         items {
           id
-          numero
-          estado
-          tecnicoID
-          clienteID
-          fechaDeFinalizado
-          equipoID
+          name
+          cargo
+          tallerID
           createdAt
           updatedAt
         }
         nextToken
       }
-      createdAt
-      updatedAt
+      ofertasTrabajo {
+        items {
+          id
+          tallerID
+          titulo
+          contenido
+          fecha
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -195,6 +140,8 @@ export const listTecnicos = /* GraphQL */ `
         name
         cargo
         tallerID
+        createdAt
+        updatedAt
         taller {
           id
           name
@@ -213,36 +160,63 @@ export const listTecnicos = /* GraphQL */ `
         ordenServicio {
           nextToken
         }
-        createdAt
-        updatedAt
       }
       nextToken
     }
   }
 `;
-export const getEquipo = /* GraphQL */ `
-  query GetEquipo($id: ID!) {
-    getEquipo(id: $id) {
+export const getTecnico = /* GraphQL */ `
+  query GetTecnico($id: ID!) {
+    getTecnico(id: $id) {
       id
-      nombre
-      descripcion
-      clienteID
-      cliente {
-        id
-        name
-        numeroTelefono
-        correo
-        ordenServicio {
-          nextToken
-        }
-        equipo {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
+      name
+      cargo
+      tallerID
       createdAt
       updatedAt
+      taller {
+        id
+        name
+        direccion
+        correo
+        mision
+        vision
+        descripcionLaboral
+        otro
+        logo
+        clientes {
+          id
+          name
+          numeroTelefono
+          correo
+          createdAt
+          updatedAt
+        }
+        telefonos
+        administradorID
+        createdAt
+        updatedAt
+        tecnicos {
+          nextToken
+        }
+        ofertasTrabajo {
+          nextToken
+        }
+      }
+      ordenServicio {
+        items {
+          id
+          numero
+          estado
+          tecnicoID
+          clienteID
+          fechaDeFinalizado
+          equipoID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -258,6 +232,8 @@ export const listEquipos = /* GraphQL */ `
         nombre
         descripcion
         clienteID
+        createdAt
+        updatedAt
         cliente {
           id
           name
@@ -266,47 +242,34 @@ export const listEquipos = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        createdAt
-        updatedAt
       }
       nextToken
     }
   }
 `;
-export const getCliente = /* GraphQL */ `
-  query GetCliente($id: ID!) {
-    getCliente(id: $id) {
+export const getEquipo = /* GraphQL */ `
+  query GetEquipo($id: ID!) {
+    getEquipo(id: $id) {
       id
-      name
-      numeroTelefono
-      correo
-      ordenServicio {
-        items {
-          id
-          numero
-          estado
-          tecnicoID
-          clienteID
-          fechaDeFinalizado
-          equipoID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      equipo {
-        items {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      nombre
+      descripcion
+      clienteID
       createdAt
       updatedAt
+      cliente {
+        id
+        name
+        numeroTelefono
+        correo
+        createdAt
+        updatedAt
+        equipo {
+          nextToken
+        }
+        ordenServicio {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -322,16 +285,53 @@ export const listClientes = /* GraphQL */ `
         name
         numeroTelefono
         correo
-        ordenServicio {
-          nextToken
-        }
+        createdAt
+        updatedAt
         equipo {
           nextToken
         }
-        createdAt
-        updatedAt
+        ordenServicio {
+          nextToken
+        }
       }
       nextToken
+    }
+  }
+`;
+export const getCliente = /* GraphQL */ `
+  query GetCliente($id: ID!) {
+    getCliente(id: $id) {
+      id
+      name
+      numeroTelefono
+      correo
+      createdAt
+      updatedAt
+      equipo {
+        items {
+          id
+          nombre
+          descripcion
+          clienteID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      ordenServicio {
+        items {
+          id
+          numero
+          estado
+          tecnicoID
+          clienteID
+          fechaDeFinalizado
+          equipoID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -342,11 +342,26 @@ export const getOrdenServicio = /* GraphQL */ `
       numero
       estado
       tecnicoID
+      clienteID
+      fechaDeFinalizado
+      equipoID
+      piezas {
+        id
+        nombre
+        precio
+        cantidad
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
       tecnico {
         id
         name
         cargo
         tallerID
+        createdAt
+        updatedAt
         taller {
           id
           name
@@ -365,31 +380,14 @@ export const getOrdenServicio = /* GraphQL */ `
         ordenServicio {
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      clienteID
-      cliente {
-        id
-        name
-        numeroTelefono
-        correo
-        ordenServicio {
-          nextToken
-        }
-        equipo {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      fechaDeFinalizado
-      equipoID
       equipo {
         id
         nombre
         descripcion
         clienteID
+        createdAt
+        updatedAt
         cliente {
           id
           name
@@ -398,19 +396,21 @@ export const getOrdenServicio = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        createdAt
-        updatedAt
       }
-      piezas {
+      cliente {
         id
-        nombre
-        precio
-        cantidad
+        name
+        numeroTelefono
+        correo
         createdAt
         updatedAt
+        equipo {
+          nextToken
+        }
+        ordenServicio {
+          nextToken
+        }
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -426,33 +426,9 @@ export const listOrdenServicios = /* GraphQL */ `
         numero
         estado
         tecnicoID
-        tecnico {
-          id
-          name
-          cargo
-          tallerID
-          createdAt
-          updatedAt
-        }
         clienteID
-        cliente {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
         fechaDeFinalizado
         equipoID
-        equipo {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
-        }
         piezas {
           id
           nombre
@@ -463,62 +439,32 @@ export const listOrdenServicios = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        tecnico {
+          id
+          name
+          cargo
+          tallerID
+          createdAt
+          updatedAt
+        }
+        equipo {
+          id
+          nombre
+          descripcion
+          clienteID
+          createdAt
+          updatedAt
+        }
+        cliente {
+          id
+          name
+          numeroTelefono
+          correo
+          createdAt
+          updatedAt
+        }
       }
       nextToken
-    }
-  }
-`;
-export const getOfertaTrabajo = /* GraphQL */ `
-  query GetOfertaTrabajo($id: ID!) {
-    getOfertaTrabajo(id: $id) {
-      id
-      tallerID
-      taller {
-        id
-        name
-        direccion
-        correo
-        mision
-        vision
-        descripcionLaboral
-        otro
-        logo
-        tecnicos {
-          nextToken
-        }
-        clientes {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos
-        administradorID
-        createdAt
-        updatedAt
-      }
-      titulo
-      contenido
-      fecha
-      aspirantes {
-        items {
-          id
-          name
-          numeroTelefono
-          correo
-          ofertaTrabajoID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -532,6 +478,11 @@ export const listOfertaTrabajos = /* GraphQL */ `
       items {
         id
         tallerID
+        titulo
+        contenido
+        fecha
+        createdAt
+        updatedAt
         taller {
           id
           name
@@ -547,16 +498,65 @@ export const listOfertaTrabajos = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        titulo
-        contenido
-        fecha
         aspirantes {
           nextToken
         }
-        createdAt
-        updatedAt
       }
       nextToken
+    }
+  }
+`;
+export const getOfertaTrabajo = /* GraphQL */ `
+  query GetOfertaTrabajo($id: ID!) {
+    getOfertaTrabajo(id: $id) {
+      id
+      tallerID
+      titulo
+      contenido
+      fecha
+      createdAt
+      updatedAt
+      taller {
+        id
+        name
+        direccion
+        correo
+        mision
+        vision
+        descripcionLaboral
+        otro
+        logo
+        clientes {
+          id
+          name
+          numeroTelefono
+          correo
+          createdAt
+          updatedAt
+        }
+        telefonos
+        administradorID
+        createdAt
+        updatedAt
+        tecnicos {
+          nextToken
+        }
+        ofertasTrabajo {
+          nextToken
+        }
+      }
+      aspirantes {
+        items {
+          id
+          name
+          numeroTelefono
+          correo
+          ofertaTrabajoID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -568,9 +568,16 @@ export const getAspirante = /* GraphQL */ `
       numeroTelefono
       correo
       ofertaTrabajoID
+      createdAt
+      updatedAt
       ofertaTrabajo {
         id
         tallerID
+        titulo
+        contenido
+        fecha
+        createdAt
+        updatedAt
         taller {
           id
           name
@@ -586,17 +593,10 @@ export const getAspirante = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        titulo
-        contenido
-        fecha
         aspirantes {
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -613,6 +613,8 @@ export const listAspirantes = /* GraphQL */ `
         numeroTelefono
         correo
         ofertaTrabajoID
+        createdAt
+        updatedAt
         ofertaTrabajo {
           id
           tallerID
@@ -622,32 +624,8 @@ export const listAspirantes = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        createdAt
-        updatedAt
       }
       nextToken
-    }
-  }
-`;
-export const getBlog = /* GraphQL */ `
-  query GetBlog($id: ID!) {
-    getBlog(id: $id) {
-      id
-      name
-      posts {
-        items {
-          id
-          title
-          content
-          blogID
-          username
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -661,46 +639,35 @@ export const listBlogs = /* GraphQL */ `
       items {
         id
         name
+        createdAt
+        updatedAt
         posts {
           nextToken
         }
-        createdAt
-        updatedAt
       }
       nextToken
     }
   }
 `;
-export const getPost = /* GraphQL */ `
-  query GetPost($id: ID!) {
-    getPost(id: $id) {
+export const getBlog = /* GraphQL */ `
+  query GetBlog($id: ID!) {
+    getBlog(id: $id) {
       id
-      title
-      content
-      blogID
-      blog {
-        id
-        name
-        posts {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      answer {
+      name
+      createdAt
+      updatedAt
+      posts {
         items {
           id
+          title
           content
+          blogID
           username
-          postID
           createdAt
           updatedAt
         }
         nextToken
       }
-      username
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -716,6 +683,9 @@ export const listPosts = /* GraphQL */ `
         title
         content
         blogID
+        username
+        createdAt
+        updatedAt
         blog {
           id
           name
@@ -725,52 +695,47 @@ export const listPosts = /* GraphQL */ `
         answer {
           nextToken
         }
-        username
-        createdAt
-        updatedAt
       }
       nextToken
     }
   }
 `;
-export const getAnswer = /* GraphQL */ `
-  query GetAnswer($id: ID!) {
-    getAnswer(id: $id) {
+export const getPost = /* GraphQL */ `
+  query GetPost($id: ID!) {
+    getPost(id: $id) {
       id
+      title
       content
+      blogID
       username
-      postID
-      post {
+      createdAt
+      updatedAt
+      blog {
         id
-        title
-        content
-        blogID
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        answer {
-          nextToken
-        }
-        username
+        name
         createdAt
         updatedAt
+        posts {
+          nextToken
+        }
       }
-      comments {
+      answer {
         items {
           id
-          answerID
           content
           username
           createdAt
           updatedAt
+          comments{
+            items{
+              id
+              content
+              username
+            }
+          }
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -786,6 +751,8 @@ export const listAnswers = /* GraphQL */ `
         content
         username
         postID
+        createdAt
+        updatedAt
         post {
           id
           title
@@ -798,10 +765,49 @@ export const listAnswers = /* GraphQL */ `
         comments {
           nextToken
         }
-        createdAt
-        updatedAt
       }
       nextToken
+    }
+  }
+`;
+export const getAnswer = /* GraphQL */ `
+  query GetAnswer($id: ID!) {
+    getAnswer(id: $id) {
+      id
+      content
+      username
+      postID
+      createdAt
+      updatedAt
+      post {
+        id
+        title
+        content
+        blogID
+        username
+        createdAt
+        updatedAt
+        blog {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        answer {
+          nextToken
+        }
+      }
+      comments {
+        items {
+          id
+          answerID
+          content
+          username
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -810,11 +816,17 @@ export const getComment = /* GraphQL */ `
     getComment(id: $id) {
       id
       answerID
+      content
+      username
+      createdAt
+      updatedAt
       answer {
         id
         content
         username
         postID
+        createdAt
+        updatedAt
         post {
           id
           title
@@ -827,13 +839,7 @@ export const getComment = /* GraphQL */ `
         comments {
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      content
-      username
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -847,6 +853,10 @@ export const listComments = /* GraphQL */ `
       items {
         id
         answerID
+        content
+        username
+        createdAt
+        updatedAt
         answer {
           id
           content
@@ -855,10 +865,6 @@ export const listComments = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        content
-        username
-        createdAt
-        updatedAt
       }
       nextToken
     }

@@ -128,6 +128,11 @@ export default {
         icon: "mdi-account-group",
         link: "/clientes",
       },
+      {
+        title: "Importar Datos",
+        icon: "mdi-account-group",
+        link: "/importarDatos",
+      },
     ],
   }),
   created() {
