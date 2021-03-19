@@ -29,14 +29,8 @@
           a través de:
         </p></v-col
       ><v-col cols="12" sm="4">
-        <div
-          class="font-weight-light title mb-2"
-          align="center"
-          justify="center"
-          v-for="telefono in taller.telefonos.items"
-          :key="telefono.id"
-        >
-          <v-icon>mdi-cellphone-android</v-icon>{{ telefono.numero }}
+        <div class="font-weight-light title mb-2" align="center" justify="center">
+          <v-icon>mdi-cellphone-android</v-icon>{{ taller.telefonos }}
         </div>
       </v-col>
       <v-col cols="12" sm="4">

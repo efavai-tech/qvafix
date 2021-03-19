@@ -1,9 +1,11 @@
 type Taller @model  @auth(
     rules: [
-      { allow: groups, groups: ["admin"], queries: [get,list], mutations: [create, update, delete] }
-      { allow: public, queries: [get, list], mutations: null }
-    ]) {
-     id: ID!
+      { allow: public, provider: apiKey },
+      { allow: groups, groups: ["admin"], operations: [create, update] },
+      { allow: groups, groups: ["user"], operations: [read] }
+    ])
+  {
+  id: ID!
   name: String!
   direccion: String
   correo: AWSEmail
@@ -15,23 +17,25 @@ type Taller @model  @auth(
   tecnicos:[Tecnico] @connection(keyName: "byTaller", fields: ["id"])
   clientes: [Cliente]
   ofertasTrabajo: [OfertaTrabajo] @connection(keyName: "byTaller", fields: ["id"])
-  telefonos: [Telefono] @connection(keyName: "byTaller", fields: ["id"])
-  administradorID:ID
-}
-type Telefono @model @key(name: "byTaller", fields: ["tallerID"]){
-  id: ID!
-  numero: String!
-  descripcion: String
-  tallerID: ID!
-  taller: Taller @connection(fields: ["tallerID"])
-}
+  telefonos: String
+  administradorID:AWSEmail
+    }
+
 type Piezas @model{
   id: ID!
   nombre: String
   precio: Int
   cantidad: Int
 }
-type Tecnico @model @key(name: "byTaller", fields: ["tallerID"]){  
+
+type Tecnico @model @key(name: "byTaller", fields: ["tallerID"])
+@auth(
+    rules: [
+      { allow: public, provider: apiKey },
+      { allow: groups, groups: ["admin"], operations: [create, update] },
+      { allow: groups, groups: ["user"], operations: [read] }
+    ])
+{  
   id: ID!
   name: String!
   cargo: String
@@ -39,14 +43,29 @@ type Tecnico @model @key(name: "byTaller", fields: ["tallerID"]){
   taller: Taller @connection(fields: ["tallerID"])
   ordenServicio: [OrdenServicio] @connection(keyName: "byCliente", fields: ["id"])
   }
-type Equipo @model @key(name: "byCliente", fields: ["clienteID"]){
+
+type Equipo @model @key(name: "byCliente", fields: ["clienteID"])
+@auth(
+    rules: [
+      { allow: public, provider: apiKey },
+      { allow: groups, groups: ["admin"], operations: [create, update] },
+      { allow: groups, groups: ["user"], operations: [read] }
+    ])
+{
   id: ID!
   nombre: String!
   descripcion: String
   clienteID: ID!
   cliente: Cliente @connection(fields: ["clienteID"])
 }
-type Cliente @model{
+
+type Cliente @model
+@auth(
+    rules: [
+      { allow: groups, groups: ["admin"], operations: [create, update] },
+      { allow: groups, groups: ["user"], operations: [read] }
+    ])
+{
   id: ID!
   name: String!
   numeroTelefono: AWSPhone
@@ -54,7 +73,14 @@ type Cliente @model{
   ordenServicio: [OrdenServicio] @connection(keyName: "byCliente", fields: ["id"])
   equipo: [Equipo] @connection(keyName: "byCliente", fields: ["id"])
 }
-type OrdenServicio @model @key(name: "byCliente", fields: ["clienteID"]){
+
+type OrdenServicio @model @key(name: "byCliente", fields: ["clienteID"])
+@auth(
+    rules: [
+      { allow: groups, groups: ["admin"], operations: [create, update] },
+      { allow: groups, groups: ["user"], operations: [read] }
+    ])
+{
   id: ID!
   numero:Int
   estado: String!
@@ -67,7 +93,15 @@ type OrdenServicio @model @key(name: "byCliente", fields: ["clienteID"]){
   equipo: Equipo @connection(fields: ["equipoID"])
   piezas:[Piezas]
 }
-type OfertaTrabajo @model @key(name: "byTaller", fields: ["tallerID"]){
+
+type OfertaTrabajo @model @key(name: "byTaller", fields: ["tallerID"])
+@auth(
+    rules: [
+      { allow: public, provider: apiKey },
+      { allow: groups, groups: ["admin"], operations: [create, update] },
+      { allow: groups, groups: ["user"], operations: [read] }
+    ])
+{
   id: ID!
   tallerID: ID!
   taller: Taller @connection(fields: ["tallerID"])
@@ -76,7 +110,13 @@ type OfertaTrabajo @model @key(name: "byTaller", fields: ["tallerID"]){
   fecha:AWSDateTime
   aspirantes: [Aspirante] @connection(keyName: "byOfertaTrabajo", fields: ["id"])
 }
-type Aspirante @model @key(name: "byOfertaTrabajo", fields: ["ofertaTrabajoID"]) {
+type Aspirante @model @key(name: "byOfertaTrabajo", fields: ["ofertaTrabajoID"])
+@auth(
+    rules: [
+      { allow: groups, groups: ["admin"], operations: [create, update] },
+      { allow: groups, groups: ["user"], operations: [read,create] }
+    ])
+  {
   id: ID!
   name: String!
   numeroTelefono: AWSPhone
@@ -84,13 +124,30 @@ type Aspirante @model @key(name: "byOfertaTrabajo", fields: ["ofertaTrabajoID"])
   ofertaTrabajoID: ID!
   ofertaTrabajo: OfertaTrabajo @connection(fields: ["ofertaTrabajoID"])
 }
-type Blog @model{
+
+type Blog @model
+@auth(
+    rules: [
+      { allow: public, provider: apiKey },
+      { allow: groups, groups: ["admin"], operations: [create, update] },
+      { allow: groups, groups: ["adminPost"], operations: [create, update] },
+      { allow: groups, groups: ["user"], operations: [read] }
+    ])
+{
   id: ID!
   name: String!
   posts: [Post] @connection(keyName: "byBlog", fields: ["id"])
 }
 
-type Post @model @key(name: "byBlog", fields: ["blogID"]) {
+type Post @model @key(name: "byBlog", fields: ["blogID"]) 
+@auth(
+    rules: [
+      { allow: public, provider: apiKey },
+      { allow: groups, groups: ["admin"], operations: [create, update] },
+      { allow: groups, groups: ["adminPost"], operations: [create, update] },
+      { allow: groups, groups: ["user"], operations: [read,create, update] }
+    ])
+{
   id: ID!
   title: String!
   content: String
@@ -99,7 +156,15 @@ type Post @model @key(name: "byBlog", fields: ["blogID"]) {
   answer: [Answer] @connection(keyName: "byPost", fields: ["id"])
   username:String
 }
-type Answer @model @key(name: "byPost", fields: ["postID", "content"]) {
+type Answer @model @key(name: "byPost", fields: ["postID", "content"])
+@auth(
+    rules: [
+      { allow: public, provider: apiKey },
+      { allow: groups, groups: ["admin"], operations: [create, update] },
+      { allow: groups, groups: ["adminPost"], operations: [create, update] },
+      { allow: groups, groups: ["user"], operations: [read] }
+    ])
+ {
   id: ID!
   content: String
   username:String
@@ -107,27 +172,18 @@ type Answer @model @key(name: "byPost", fields: ["postID", "content"]) {
   post: Post @connection(fields: ["postID"])
   comments: [Comment] @connection(keyName: "byAnswer", fields: ["id"])
 }
-type Comment @model @key(name: "byAnswer", fields: ["answerID"]) {
+type Comment @model @key(name: "byAnswer", fields: ["answerID"])
+@auth(
+    rules: [
+      { allow: public, provider: apiKey },
+      { allow: groups, groups: ["admin"], operations: [create, update] },
+      { allow: groups, groups: ["adminPost"], operations: [create, update] },
+      { allow: groups, groups: ["user"], operations: [read,create, update] }
+    ])
+ {
   id: ID!
   answerID: ID!
   answer: Answer @connection(fields: ["answerID"])
   content: String
   username:String
 }
-# type Task
-#   @model
-#   @auth(
-#     rules: [
-#       { allow: groups, groups: ["Managers"], queries: null, mutations: [create, update, delete] }
-#       { allow: groups, groups: ["Employees"], queries: [get, list], mutations: null }
-#     ]
-#   ) {
-#   id: ID!
-#   title: String!
-#   description: String
-#   status: String
-# }
-# type PrivateNote @model @auth(rules: [{ allow: owner }]) {
-#   id: ID!
-#   content: String!
-# }

@@ -1,333 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateTaller = /* GraphQL */ `
-  subscription OnCreateTaller {
-    onCreateTaller {
-      id
-      name
-      direccion
-      correo
-      mision
-      vision
-      descripcionLaboral
-      otro
-      logo
-      tecnicos {
-        items {
-          id
-          name
-          cargo
-          tallerID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      clientes {
-        id
-        name
-        numeroTelefono
-        correo
-        ordenServicio {
-          nextToken
-        }
-        equipo {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      ofertasTrabajo {
-        items {
-          id
-          tallerID
-          titulo
-          contenido
-          fecha
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      telefonos {
-        items {
-          id
-          numero
-          descripcion
-          tallerID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      administradorID
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateTaller = /* GraphQL */ `
-  subscription OnUpdateTaller {
-    onUpdateTaller {
-      id
-      name
-      direccion
-      correo
-      mision
-      vision
-      descripcionLaboral
-      otro
-      logo
-      tecnicos {
-        items {
-          id
-          name
-          cargo
-          tallerID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      clientes {
-        id
-        name
-        numeroTelefono
-        correo
-        ordenServicio {
-          nextToken
-        }
-        equipo {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      ofertasTrabajo {
-        items {
-          id
-          tallerID
-          titulo
-          contenido
-          fecha
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      telefonos {
-        items {
-          id
-          numero
-          descripcion
-          tallerID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      administradorID
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteTaller = /* GraphQL */ `
-  subscription OnDeleteTaller {
-    onDeleteTaller {
-      id
-      name
-      direccion
-      correo
-      mision
-      vision
-      descripcionLaboral
-      otro
-      logo
-      tecnicos {
-        items {
-          id
-          name
-          cargo
-          tallerID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      clientes {
-        id
-        name
-        numeroTelefono
-        correo
-        ordenServicio {
-          nextToken
-        }
-        equipo {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      ofertasTrabajo {
-        items {
-          id
-          tallerID
-          titulo
-          contenido
-          fecha
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      telefonos {
-        items {
-          id
-          numero
-          descripcion
-          tallerID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      administradorID
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateTelefono = /* GraphQL */ `
-  subscription OnCreateTelefono {
-    onCreateTelefono {
-      id
-      numero
-      descripcion
-      tallerID
-      taller {
-        id
-        name
-        direccion
-        correo
-        mision
-        vision
-        descripcionLaboral
-        otro
-        logo
-        tecnicos {
-          nextToken
-        }
-        clientes {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos {
-          nextToken
-        }
-        administradorID
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateTelefono = /* GraphQL */ `
-  subscription OnUpdateTelefono {
-    onUpdateTelefono {
-      id
-      numero
-      descripcion
-      tallerID
-      taller {
-        id
-        name
-        direccion
-        correo
-        mision
-        vision
-        descripcionLaboral
-        otro
-        logo
-        tecnicos {
-          nextToken
-        }
-        clientes {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos {
-          nextToken
-        }
-        administradorID
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteTelefono = /* GraphQL */ `
-  subscription OnDeleteTelefono {
-    onDeleteTelefono {
-      id
-      numero
-      descripcion
-      tallerID
-      taller {
-        id
-        name
-        direccion
-        correo
-        mision
-        vision
-        descripcionLaboral
-        otro
-        logo
-        tecnicos {
-          nextToken
-        }
-        clientes {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos {
-          nextToken
-        }
-        administradorID
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const onCreatePiezas = /* GraphQL */ `
   subscription OnCreatePiezas {
     onCreatePiezas {
@@ -364,6 +37,174 @@ export const onDeletePiezas = /* GraphQL */ `
     }
   }
 `;
+export const onCreateTaller = /* GraphQL */ `
+  subscription OnCreateTaller {
+    onCreateTaller {
+      id
+      name
+      direccion
+      correo
+      mision
+      vision
+      descripcionLaboral
+      otro
+      logo
+      clientes {
+        id
+        name
+        numeroTelefono
+        correo
+        createdAt
+        updatedAt
+        equipo {
+          nextToken
+        }
+        ordenServicio {
+          nextToken
+        }
+      }
+      telefonos
+      administradorID
+      createdAt
+      updatedAt
+      tecnicos {
+        items {
+          id
+          name
+          cargo
+          tallerID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      ofertasTrabajo {
+        items {
+          id
+          tallerID
+          titulo
+          contenido
+          fecha
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onUpdateTaller = /* GraphQL */ `
+  subscription OnUpdateTaller {
+    onUpdateTaller {
+      id
+      name
+      direccion
+      correo
+      mision
+      vision
+      descripcionLaboral
+      otro
+      logo
+      clientes {
+        id
+        name
+        numeroTelefono
+        correo
+        createdAt
+        updatedAt
+        equipo {
+          nextToken
+        }
+        ordenServicio {
+          nextToken
+        }
+      }
+      telefonos
+      administradorID
+      createdAt
+      updatedAt
+      tecnicos {
+        items {
+          id
+          name
+          cargo
+          tallerID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      ofertasTrabajo {
+        items {
+          id
+          tallerID
+          titulo
+          contenido
+          fecha
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteTaller = /* GraphQL */ `
+  subscription OnDeleteTaller {
+    onDeleteTaller {
+      id
+      name
+      direccion
+      correo
+      mision
+      vision
+      descripcionLaboral
+      otro
+      logo
+      clientes {
+        id
+        name
+        numeroTelefono
+        correo
+        createdAt
+        updatedAt
+        equipo {
+          nextToken
+        }
+        ordenServicio {
+          nextToken
+        }
+      }
+      telefonos
+      administradorID
+      createdAt
+      updatedAt
+      tecnicos {
+        items {
+          id
+          name
+          cargo
+          tallerID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      ofertasTrabajo {
+        items {
+          id
+          tallerID
+          titulo
+          contenido
+          fecha
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
 export const onCreateTecnico = /* GraphQL */ `
   subscription OnCreateTecnico {
     onCreateTecnico {
@@ -371,6 +212,8 @@ export const onCreateTecnico = /* GraphQL */ `
       name
       cargo
       tallerID
+      createdAt
+      updatedAt
       taller {
         id
         name
@@ -381,9 +224,6 @@ export const onCreateTecnico = /* GraphQL */ `
         descripcionLaboral
         otro
         logo
-        tecnicos {
-          nextToken
-        }
         clientes {
           id
           name
@@ -392,15 +232,16 @@ export const onCreateTecnico = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
+        tecnicos {
+          nextToken
+        }
+        ofertasTrabajo {
+          nextToken
+        }
       }
       ordenServicio {
         items {
@@ -416,8 +257,6 @@ export const onCreateTecnico = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -428,6 +267,8 @@ export const onUpdateTecnico = /* GraphQL */ `
       name
       cargo
       tallerID
+      createdAt
+      updatedAt
       taller {
         id
         name
@@ -438,9 +279,6 @@ export const onUpdateTecnico = /* GraphQL */ `
         descripcionLaboral
         otro
         logo
-        tecnicos {
-          nextToken
-        }
         clientes {
           id
           name
@@ -449,15 +287,16 @@ export const onUpdateTecnico = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
+        tecnicos {
+          nextToken
+        }
+        ofertasTrabajo {
+          nextToken
+        }
       }
       ordenServicio {
         items {
@@ -473,8 +312,6 @@ export const onUpdateTecnico = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -485,6 +322,8 @@ export const onDeleteTecnico = /* GraphQL */ `
       name
       cargo
       tallerID
+      createdAt
+      updatedAt
       taller {
         id
         name
@@ -495,9 +334,6 @@ export const onDeleteTecnico = /* GraphQL */ `
         descripcionLaboral
         otro
         logo
-        tecnicos {
-          nextToken
-        }
         clientes {
           id
           name
@@ -506,15 +342,16 @@ export const onDeleteTecnico = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
+        tecnicos {
+          nextToken
+        }
+        ofertasTrabajo {
+          nextToken
+        }
       }
       ordenServicio {
         items {
@@ -530,8 +367,6 @@ export const onDeleteTecnico = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -542,22 +377,22 @@ export const onCreateEquipo = /* GraphQL */ `
       nombre
       descripcion
       clienteID
+      createdAt
+      updatedAt
       cliente {
         id
         name
         numeroTelefono
         correo
-        ordenServicio {
-          nextToken
-        }
+        createdAt
+        updatedAt
         equipo {
           nextToken
         }
-        createdAt
-        updatedAt
+        ordenServicio {
+          nextToken
+        }
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -568,22 +403,22 @@ export const onUpdateEquipo = /* GraphQL */ `
       nombre
       descripcion
       clienteID
+      createdAt
+      updatedAt
       cliente {
         id
         name
         numeroTelefono
         correo
-        ordenServicio {
-          nextToken
-        }
+        createdAt
+        updatedAt
         equipo {
           nextToken
         }
-        createdAt
-        updatedAt
+        ordenServicio {
+          nextToken
+        }
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -594,22 +429,22 @@ export const onDeleteEquipo = /* GraphQL */ `
       nombre
       descripcion
       clienteID
+      createdAt
+      updatedAt
       cliente {
         id
         name
         numeroTelefono
         correo
-        ordenServicio {
-          nextToken
-        }
+        createdAt
+        updatedAt
         equipo {
           nextToken
         }
-        createdAt
-        updatedAt
+        ordenServicio {
+          nextToken
+        }
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -620,6 +455,19 @@ export const onCreateCliente = /* GraphQL */ `
       name
       numeroTelefono
       correo
+      createdAt
+      updatedAt
+      equipo {
+        items {
+          id
+          nombre
+          descripcion
+          clienteID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       ordenServicio {
         items {
           id
@@ -634,19 +482,6 @@ export const onCreateCliente = /* GraphQL */ `
         }
         nextToken
       }
-      equipo {
-        items {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -657,6 +492,19 @@ export const onUpdateCliente = /* GraphQL */ `
       name
       numeroTelefono
       correo
+      createdAt
+      updatedAt
+      equipo {
+        items {
+          id
+          nombre
+          descripcion
+          clienteID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       ordenServicio {
         items {
           id
@@ -671,19 +519,6 @@ export const onUpdateCliente = /* GraphQL */ `
         }
         nextToken
       }
-      equipo {
-        items {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -694,6 +529,19 @@ export const onDeleteCliente = /* GraphQL */ `
       name
       numeroTelefono
       correo
+      createdAt
+      updatedAt
+      equipo {
+        items {
+          id
+          nombre
+          descripcion
+          clienteID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       ordenServicio {
         items {
           id
@@ -708,19 +556,6 @@ export const onDeleteCliente = /* GraphQL */ `
         }
         nextToken
       }
-      equipo {
-        items {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -731,64 +566,9 @@ export const onCreateOrdenServicio = /* GraphQL */ `
       numero
       estado
       tecnicoID
-      tecnico {
-        id
-        name
-        cargo
-        tallerID
-        taller {
-          id
-          name
-          direccion
-          correo
-          mision
-          vision
-          descripcionLaboral
-          otro
-          logo
-          administradorID
-          createdAt
-          updatedAt
-        }
-        ordenServicio {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
       clienteID
-      cliente {
-        id
-        name
-        numeroTelefono
-        correo
-        ordenServicio {
-          nextToken
-        }
-        equipo {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
       fechaDeFinalizado
       equipoID
-      equipo {
-        id
-        nombre
-        descripcion
-        clienteID
-        cliente {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
       piezas {
         id
         nombre
@@ -799,6 +579,62 @@ export const onCreateOrdenServicio = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      tecnico {
+        id
+        name
+        cargo
+        tallerID
+        createdAt
+        updatedAt
+        taller {
+          id
+          name
+          direccion
+          correo
+          mision
+          vision
+          descripcionLaboral
+          otro
+          logo
+          telefonos
+          administradorID
+          createdAt
+          updatedAt
+        }
+        ordenServicio {
+          nextToken
+        }
+      }
+      equipo {
+        id
+        nombre
+        descripcion
+        clienteID
+        createdAt
+        updatedAt
+        cliente {
+          id
+          name
+          numeroTelefono
+          correo
+          createdAt
+          updatedAt
+        }
+      }
+      cliente {
+        id
+        name
+        numeroTelefono
+        correo
+        createdAt
+        updatedAt
+        equipo {
+          nextToken
+        }
+        ordenServicio {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -809,64 +645,9 @@ export const onUpdateOrdenServicio = /* GraphQL */ `
       numero
       estado
       tecnicoID
-      tecnico {
-        id
-        name
-        cargo
-        tallerID
-        taller {
-          id
-          name
-          direccion
-          correo
-          mision
-          vision
-          descripcionLaboral
-          otro
-          logo
-          administradorID
-          createdAt
-          updatedAt
-        }
-        ordenServicio {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
       clienteID
-      cliente {
-        id
-        name
-        numeroTelefono
-        correo
-        ordenServicio {
-          nextToken
-        }
-        equipo {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
       fechaDeFinalizado
       equipoID
-      equipo {
-        id
-        nombre
-        descripcion
-        clienteID
-        cliente {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
       piezas {
         id
         nombre
@@ -877,6 +658,62 @@ export const onUpdateOrdenServicio = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      tecnico {
+        id
+        name
+        cargo
+        tallerID
+        createdAt
+        updatedAt
+        taller {
+          id
+          name
+          direccion
+          correo
+          mision
+          vision
+          descripcionLaboral
+          otro
+          logo
+          telefonos
+          administradorID
+          createdAt
+          updatedAt
+        }
+        ordenServicio {
+          nextToken
+        }
+      }
+      equipo {
+        id
+        nombre
+        descripcion
+        clienteID
+        createdAt
+        updatedAt
+        cliente {
+          id
+          name
+          numeroTelefono
+          correo
+          createdAt
+          updatedAt
+        }
+      }
+      cliente {
+        id
+        name
+        numeroTelefono
+        correo
+        createdAt
+        updatedAt
+        equipo {
+          nextToken
+        }
+        ordenServicio {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -887,64 +724,9 @@ export const onDeleteOrdenServicio = /* GraphQL */ `
       numero
       estado
       tecnicoID
-      tecnico {
-        id
-        name
-        cargo
-        tallerID
-        taller {
-          id
-          name
-          direccion
-          correo
-          mision
-          vision
-          descripcionLaboral
-          otro
-          logo
-          administradorID
-          createdAt
-          updatedAt
-        }
-        ordenServicio {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
       clienteID
-      cliente {
-        id
-        name
-        numeroTelefono
-        correo
-        ordenServicio {
-          nextToken
-        }
-        equipo {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
       fechaDeFinalizado
       equipoID
-      equipo {
-        id
-        nombre
-        descripcion
-        clienteID
-        cliente {
-          id
-          name
-          numeroTelefono
-          correo
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
       piezas {
         id
         nombre
@@ -955,6 +737,62 @@ export const onDeleteOrdenServicio = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      tecnico {
+        id
+        name
+        cargo
+        tallerID
+        createdAt
+        updatedAt
+        taller {
+          id
+          name
+          direccion
+          correo
+          mision
+          vision
+          descripcionLaboral
+          otro
+          logo
+          telefonos
+          administradorID
+          createdAt
+          updatedAt
+        }
+        ordenServicio {
+          nextToken
+        }
+      }
+      equipo {
+        id
+        nombre
+        descripcion
+        clienteID
+        createdAt
+        updatedAt
+        cliente {
+          id
+          name
+          numeroTelefono
+          correo
+          createdAt
+          updatedAt
+        }
+      }
+      cliente {
+        id
+        name
+        numeroTelefono
+        correo
+        createdAt
+        updatedAt
+        equipo {
+          nextToken
+        }
+        ordenServicio {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -963,6 +801,11 @@ export const onCreateOfertaTrabajo = /* GraphQL */ `
     onCreateOfertaTrabajo {
       id
       tallerID
+      titulo
+      contenido
+      fecha
+      createdAt
+      updatedAt
       taller {
         id
         name
@@ -973,9 +816,6 @@ export const onCreateOfertaTrabajo = /* GraphQL */ `
         descripcionLaboral
         otro
         logo
-        tecnicos {
-          nextToken
-        }
         clientes {
           id
           name
@@ -984,19 +824,17 @@ export const onCreateOfertaTrabajo = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
+        tecnicos {
+          nextToken
+        }
+        ofertasTrabajo {
+          nextToken
+        }
       }
-      titulo
-      contenido
-      fecha
       aspirantes {
         items {
           id
@@ -1009,8 +847,6 @@ export const onCreateOfertaTrabajo = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1019,6 +855,11 @@ export const onUpdateOfertaTrabajo = /* GraphQL */ `
     onUpdateOfertaTrabajo {
       id
       tallerID
+      titulo
+      contenido
+      fecha
+      createdAt
+      updatedAt
       taller {
         id
         name
@@ -1029,9 +870,6 @@ export const onUpdateOfertaTrabajo = /* GraphQL */ `
         descripcionLaboral
         otro
         logo
-        tecnicos {
-          nextToken
-        }
         clientes {
           id
           name
@@ -1040,19 +878,17 @@ export const onUpdateOfertaTrabajo = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
+        tecnicos {
+          nextToken
+        }
+        ofertasTrabajo {
+          nextToken
+        }
       }
-      titulo
-      contenido
-      fecha
       aspirantes {
         items {
           id
@@ -1065,8 +901,6 @@ export const onUpdateOfertaTrabajo = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1075,6 +909,11 @@ export const onDeleteOfertaTrabajo = /* GraphQL */ `
     onDeleteOfertaTrabajo {
       id
       tallerID
+      titulo
+      contenido
+      fecha
+      createdAt
+      updatedAt
       taller {
         id
         name
@@ -1085,9 +924,6 @@ export const onDeleteOfertaTrabajo = /* GraphQL */ `
         descripcionLaboral
         otro
         logo
-        tecnicos {
-          nextToken
-        }
         clientes {
           id
           name
@@ -1096,19 +932,17 @@ export const onDeleteOfertaTrabajo = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        ofertasTrabajo {
-          nextToken
-        }
-        telefonos {
-          nextToken
-        }
+        telefonos
         administradorID
         createdAt
         updatedAt
+        tecnicos {
+          nextToken
+        }
+        ofertasTrabajo {
+          nextToken
+        }
       }
-      titulo
-      contenido
-      fecha
       aspirantes {
         items {
           id
@@ -1121,8 +955,6 @@ export const onDeleteOfertaTrabajo = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1134,9 +966,16 @@ export const onCreateAspirante = /* GraphQL */ `
       numeroTelefono
       correo
       ofertaTrabajoID
+      createdAt
+      updatedAt
       ofertaTrabajo {
         id
         tallerID
+        titulo
+        contenido
+        fecha
+        createdAt
+        updatedAt
         taller {
           id
           name
@@ -1147,21 +986,15 @@ export const onCreateAspirante = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
         }
-        titulo
-        contenido
-        fecha
         aspirantes {
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1173,9 +1006,16 @@ export const onUpdateAspirante = /* GraphQL */ `
       numeroTelefono
       correo
       ofertaTrabajoID
+      createdAt
+      updatedAt
       ofertaTrabajo {
         id
         tallerID
+        titulo
+        contenido
+        fecha
+        createdAt
+        updatedAt
         taller {
           id
           name
@@ -1186,21 +1026,15 @@ export const onUpdateAspirante = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
         }
-        titulo
-        contenido
-        fecha
         aspirantes {
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1212,9 +1046,16 @@ export const onDeleteAspirante = /* GraphQL */ `
       numeroTelefono
       correo
       ofertaTrabajoID
+      createdAt
+      updatedAt
       ofertaTrabajo {
         id
         tallerID
+        titulo
+        contenido
+        fecha
+        createdAt
+        updatedAt
         taller {
           id
           name
@@ -1225,21 +1066,15 @@ export const onDeleteAspirante = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          telefonos
           administradorID
           createdAt
           updatedAt
         }
-        titulo
-        contenido
-        fecha
         aspirantes {
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1248,6 +1083,8 @@ export const onCreateBlog = /* GraphQL */ `
     onCreateBlog {
       id
       name
+      createdAt
+      updatedAt
       posts {
         items {
           id
@@ -1260,8 +1097,6 @@ export const onCreateBlog = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1270,6 +1105,8 @@ export const onUpdateBlog = /* GraphQL */ `
     onUpdateBlog {
       id
       name
+      createdAt
+      updatedAt
       posts {
         items {
           id
@@ -1282,8 +1119,6 @@ export const onUpdateBlog = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1292,6 +1127,8 @@ export const onDeleteBlog = /* GraphQL */ `
     onDeleteBlog {
       id
       name
+      createdAt
+      updatedAt
       posts {
         items {
           id
@@ -1304,8 +1141,6 @@ export const onDeleteBlog = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1316,14 +1151,17 @@ export const onCreatePost = /* GraphQL */ `
       title
       content
       blogID
+      username
+      createdAt
+      updatedAt
       blog {
         id
         name
+        createdAt
+        updatedAt
         posts {
           nextToken
         }
-        createdAt
-        updatedAt
       }
       answer {
         items {
@@ -1336,9 +1174,6 @@ export const onCreatePost = /* GraphQL */ `
         }
         nextToken
       }
-      username
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1349,14 +1184,17 @@ export const onUpdatePost = /* GraphQL */ `
       title
       content
       blogID
+      username
+      createdAt
+      updatedAt
       blog {
         id
         name
+        createdAt
+        updatedAt
         posts {
           nextToken
         }
-        createdAt
-        updatedAt
       }
       answer {
         items {
@@ -1369,9 +1207,6 @@ export const onUpdatePost = /* GraphQL */ `
         }
         nextToken
       }
-      username
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1382,14 +1217,17 @@ export const onDeletePost = /* GraphQL */ `
       title
       content
       blogID
+      username
+      createdAt
+      updatedAt
       blog {
         id
         name
+        createdAt
+        updatedAt
         posts {
           nextToken
         }
-        createdAt
-        updatedAt
       }
       answer {
         items {
@@ -1402,9 +1240,6 @@ export const onDeletePost = /* GraphQL */ `
         }
         nextToken
       }
-      username
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1415,11 +1250,16 @@ export const onCreateAnswer = /* GraphQL */ `
       content
       username
       postID
+      createdAt
+      updatedAt
       post {
         id
         title
         content
         blogID
+        username
+        createdAt
+        updatedAt
         blog {
           id
           name
@@ -1429,9 +1269,6 @@ export const onCreateAnswer = /* GraphQL */ `
         answer {
           nextToken
         }
-        username
-        createdAt
-        updatedAt
       }
       comments {
         items {
@@ -1444,8 +1281,6 @@ export const onCreateAnswer = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1456,11 +1291,16 @@ export const onUpdateAnswer = /* GraphQL */ `
       content
       username
       postID
+      createdAt
+      updatedAt
       post {
         id
         title
         content
         blogID
+        username
+        createdAt
+        updatedAt
         blog {
           id
           name
@@ -1470,9 +1310,6 @@ export const onUpdateAnswer = /* GraphQL */ `
         answer {
           nextToken
         }
-        username
-        createdAt
-        updatedAt
       }
       comments {
         items {
@@ -1485,8 +1322,6 @@ export const onUpdateAnswer = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1497,11 +1332,16 @@ export const onDeleteAnswer = /* GraphQL */ `
       content
       username
       postID
+      createdAt
+      updatedAt
       post {
         id
         title
         content
         blogID
+        username
+        createdAt
+        updatedAt
         blog {
           id
           name
@@ -1511,9 +1351,6 @@ export const onDeleteAnswer = /* GraphQL */ `
         answer {
           nextToken
         }
-        username
-        createdAt
-        updatedAt
       }
       comments {
         items {
@@ -1526,8 +1363,6 @@ export const onDeleteAnswer = /* GraphQL */ `
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1536,11 +1371,17 @@ export const onCreateComment = /* GraphQL */ `
     onCreateComment {
       id
       answerID
+      content
+      username
+      createdAt
+      updatedAt
       answer {
         id
         content
         username
         postID
+        createdAt
+        updatedAt
         post {
           id
           title
@@ -1553,13 +1394,7 @@ export const onCreateComment = /* GraphQL */ `
         comments {
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      content
-      username
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1568,11 +1403,17 @@ export const onUpdateComment = /* GraphQL */ `
     onUpdateComment {
       id
       answerID
+      content
+      username
+      createdAt
+      updatedAt
       answer {
         id
         content
         username
         postID
+        createdAt
+        updatedAt
         post {
           id
           title
@@ -1585,13 +1426,7 @@ export const onUpdateComment = /* GraphQL */ `
         comments {
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      content
-      username
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1600,11 +1435,17 @@ export const onDeleteComment = /* GraphQL */ `
     onDeleteComment {
       id
       answerID
+      content
+      username
+      createdAt
+      updatedAt
       answer {
         id
         content
         username
         postID
+        createdAt
+        updatedAt
         post {
           id
           title
@@ -1617,13 +1458,7 @@ export const onDeleteComment = /* GraphQL */ `
         comments {
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      content
-      username
-      createdAt
-      updatedAt
     }
   }
 `;

@@ -1,15 +1,119 @@
 {
   "providers": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-qvafix-dev-144558-authRole",
-      "UnauthRoleArn": "arn:aws:iam::529173520750:role/amplify-qvafix-dev-144558-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::529173520750:role/amplify-qvafix-dev-144558-authRole",
+      "AuthRoleName": "amplify-qvafix-dev-182546-authRole",
+      "UnauthRoleArn": "arn:aws:iam::529173520750:role/amplify-qvafix-dev-182546-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::529173520750:role/amplify-qvafix-dev-182546-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-qvafix-dev-144558-deployment",
-      "UnauthRoleName": "amplify-qvafix-dev-144558-unauthRole",
-      "StackName": "amplify-qvafix-dev-144558",
-      "StackId": "arn:aws:cloudformation:us-east-1:529173520750:stack/amplify-qvafix-dev-144558/c32e52e0-64c5-11eb-89bc-0e72707fff19",
-      "AmplifyAppId": "d1s9ut62kvaa02"
+      "DeploymentBucketName": "amplify-qvafix-dev-182546-deployment",
+      "UnauthRoleName": "amplify-qvafix-dev-182546-unauthRole",
+      "StackName": "amplify-qvafix-dev-182546",
+      "StackId": "arn:aws:cloudformation:us-east-1:529173520750:stack/amplify-qvafix-dev-182546/673efd20-85dd-11eb-b4ad-0ed214eae2e5",
+      "AmplifyAppId": "d39fkexhtz8hec"
+    }
+  },
+  "function": {
+    "qvafixCustomMessage": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "lastBuildTimeStamp": "2021-03-15T22:32:48.920Z",
+      "lastPackageTimeStamp": "2021-03-15T22:32:49.021Z",
+      "distZipFilename": "qvafixCustomMessage-75697348374879776132-build.zip",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-qvafix-dev-182546-deployment/amplify-cfn-templates/function/qvafixCustomMessage-cloudformation-template.json",
+        "logicalId": "functionqvafixCustomMessage"
+      },
+      "lastPushTimeStamp": "2021-03-19T20:10:52.517Z",
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:529173520750:function:qvafixCustomMessage-dev",
+        "Name": "qvafixCustomMessage-dev",
+        "LambdaExecutionRole": "qvafixCustomMessage-dev"
+      },
+      "lastPushDirHash": "NJ+IsK10D2Vhbhv5ESgXguKn8xo="
+    },
+    "qvafixPostConfirmation": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "lastBuildTimeStamp": "2021-03-15T22:32:48.926Z",
+      "lastPackageTimeStamp": "2021-03-15T22:32:49.149Z",
+      "distZipFilename": "qvafixPostConfirmation-5473694143386c394a69-build.zip",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-qvafix-dev-182546-deployment/amplify-cfn-templates/function/qvafixPostConfirmation-cloudformation-template.json",
+        "logicalId": "functionqvafixPostConfirmation"
+      },
+      "lastPushTimeStamp": "2021-03-19T20:10:52.526Z",
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:529173520750:function:qvafixPostConfirmation-dev",
+        "Name": "qvafixPostConfirmation-dev",
+        "LambdaExecutionRole": "qvafixPostConfirmation-dev"
+      },
+      "lastPushDirHash": "f8nQSl6hpqJ+8Qpejfd6X11Sgf4="
+    }
+  },
+  "auth": {
+    "userPoolGroups": {
+      "service": "Cognito-UserPool-Groups",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "qvafix",
+          "attributes": [
+            "UserPoolId",
+            "AppClientIDWeb",
+            "AppClientID"
+          ]
+        }
+      ],
+      "lastPushTimeStamp": "2021-03-19T20:10:52.530Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-qvafix-dev-182546-deployment/amplify-cfn-templates/auth/template.json",
+        "logicalId": "authuserPoolGroups"
+      },
+      "output": {},
+      "lastPushDirHash": "xRadw3ElKJpxAe+lsj74D5oKcOo="
+    },
+    "qvafix": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "qvafixCustomMessage",
+          "triggerProvider": "Cognito",
+          "attributes": [
+            "Arn",
+            "Name"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "qvafixPostConfirmation",
+          "triggerProvider": "Cognito",
+          "attributes": [
+            "Arn",
+            "Name"
+          ]
+        }
+      ],
+      "customAuth": false,
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-qvafix-dev-182546-deployment/amplify-cfn-templates/auth/qvafix-cloudformation-template.yml",
+        "logicalId": "authqvafix"
+      },
+      "lastPushTimeStamp": "2021-03-19T20:10:52.536Z",
+      "output": {
+        "AppClientSecret": "19itcr1g6tmmbomahvfv5cts872iar3ogk1cs2l8kptlp0mqunvf",
+        "UserPoolId": "us-east-1_Ik3eF3PMj",
+        "AppClientIDWeb": "1ctl1vgogf4i0vq1s9f4v7l0nr",
+        "AppClientID": "7t4ahjpm1v7lk05d1iesh9neb3",
+        "UserPoolName": "qvafixuserpool"
+      },
+      "lastPushDirHash": "IsR7RPengXQwBf6HcG+VxPW6TzM="
     }
   },
   "api": {
@@ -21,79 +125,29 @@
           "defaultAuthentication": {
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
-              "apiKeyExpirationDays": 7,
-              "description": "qvafix"
+              "apiKeyExpirationDays": 365,
+              "description": "qvafixapi"
             }
           },
           "additionalAuthenticationProviders": [
             {
               "authenticationType": "AMAZON_COGNITO_USER_POOLS",
               "userPoolConfig": {
-                "userPoolId": "authqvafixbb67c3fb"
+                "userPoolId": "authqvafix"
               }
             }
           ]
         },
-        "GraphQLAPIIdOutput": "pbf66trvzvd2fagvx674b4md2m",
-        "GraphQLAPIEndpointOutput": "https://6hzuf5v7vba2xgczs3fqf7okje.appsync-api.us-east-1.amazonaws.com/graphql",
-        "GraphQLAPIKeyOutput": "da2-7tfmwv2p25a27ceo6hg6lxhuim"
+        "GraphQLAPIIdOutput": "b4rnjyslknbdxnya4onlwi5qum",
+        "GraphQLAPIEndpointOutput": "https://khzzrl2onzhvnnhuta27lkxjj4.appsync-api.us-east-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-rxkftiot5bhnxfpcpcgavuo7se"
       },
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-qvafix-dev-144558-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-qvafix-dev-182546-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiqvafix"
       },
-      "lastPushTimeStamp": "2021-02-19T17:12:35.719Z",
-      "lastPushDirHash": "DMzAAdKUG2pYgBZS5H7Ssl1cjMs="
+      "lastPushTimeStamp": "2021-03-19T20:10:58.189Z",
+      "lastPushDirHash": "brhsOOVd40w962SNAiBFikdhAh4="
     }
-  },
-  "auth": {
-    "qvafixbb67c3fb": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "customAuth": false,
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-qvafix-dev-144558-deployment/amplify-cfn-templates/auth/qvafixbb67c3fb-cloudformation-template.yml",
-        "logicalId": "authqvafixbb67c3fb"
-      },
-      "lastPushTimeStamp": "2021-02-19T17:12:31.026Z",
-      "output": {
-        "AppClientSecret": "lfc8gmojv7lhnit04tb4tbukti9ner5p9j1f44orpdcf8iqnr76",
-        "UserPoolId": "us-east-1_X7L4aojpb",
-        "AppClientIDWeb": "3n22mr9rfc08498mdfqfrf1ada",
-        "AppClientID": "7125bmlbgf8m8b27962up2l92i",
-        "IdentityPoolId": "us-east-1:51bd3dea-05b1-4a07-9172-a786845603c4",
-        "IdentityPoolName": "qvafixbb67c3fb_identitypool_bb67c3fb__dev",
-        "UserPoolName": "qvafixbb67c3fb_userpool_bb67c3fb"
-      },
-      "lastPushDirHash": "756gtN+gnBZPcjpxmvLFFJ54GH4="
-    },
-    "userPoolGroups": {
-      "service": "Cognito-UserPool-Groups",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "qvafixbb67c3fb",
-          "attributes": [
-            "UserPoolId",
-            "AppClientIDWeb",
-            "AppClientID",
-            "IdentityPoolId"
-          ]
-        }
-      ],
-      "lastPushTimeStamp": "2021-02-19T17:12:31.031Z",
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-qvafix-dev-144558-deployment/amplify-cfn-templates/auth/template.json",
-        "logicalId": "authuserPoolGroups"
-      },
-      "output": {
-        "userGroupRole": "arn:aws:iam::529173520750:role/us-east-1_X7L4aojpb-userGroupRole",
-        "adminGroupRole": "arn:aws:iam::529173520750:role/us-east-1_X7L4aojpb-adminGroupRole"
-      },
-      "lastPushDirHash": "5LpijyCBozGw+RKMtFZgaL7IzJ4="
-    }
-  },
-  "function": {}
+  }
 }
