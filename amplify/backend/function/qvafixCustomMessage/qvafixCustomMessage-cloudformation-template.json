@@ -119,7 +119,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-qvafix-dev-182546-deployment",
-          "S3Key": "amplify-builds/qvafixCustomMessage-75697348374879776132-build.zip"
+          "S3Key": "amplify-builds/qvafixCustomMessage-4e2f3256304b78417555-build.zip"
         }
       }
     },
