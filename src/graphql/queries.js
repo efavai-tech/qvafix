@@ -724,15 +724,9 @@ export const getPost = /* GraphQL */ `
           id
           content
           username
+          postID
           createdAt
           updatedAt
-          comments{
-            items{
-              id
-              content
-              username
-            }
-          }
         }
         nextToken
       }
