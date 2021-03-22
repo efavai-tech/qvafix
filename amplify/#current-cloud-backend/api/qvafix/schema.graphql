@@ -1,4 +1,10 @@
-type Taller @model {
+type Taller @model  @auth(
+    rules: [
+      { allow: public, provider: apiKey },
+      { allow: groups, groups: ["admin"], operations: [create, update] },
+      { allow: groups, groups: ["user"], operations: [read] }
+    ])
+  {
   id: ID!
   name: String!
   direccion: String

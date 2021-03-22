@@ -120,13 +120,18 @@ export default {
       },
       {
         title: "Talleres",
-        icon: "mdi-account-group",
+        icon: "mdi-clipboard-text-multiple-outline",
         link: "/talleres",
       },
       {
         title: "Clientes",
-        icon: "mdi-account-group",
+        icon: "mdi-account-group-outline",
         link: "/clientes",
+      },
+      {
+        title: "Importar Datos",
+        icon: "mdi-clipboard-flow-outline",
+        link: "/importarDatos",
       },
     ],
   }),

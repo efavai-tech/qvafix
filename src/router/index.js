@@ -126,7 +126,20 @@ const routes = [{
         path: '/talleres',
         name: 'Talleres',
         component: () =>
-            import ( /* webpackChunkName: "about" */ '../views/Talleres.vue'),
+            import ( /* webpackChunkName: "about" */ '../views/admin/Talleres.vue'),
+        beforeEnter: (to, from, next) => {
+            if (!JSON.parse(localStorage.getItem('login'))) {
+                next("Login");
+            } else {
+                next();
+            }
+        }
+    },
+    {
+        path: '/crearTaller',
+        name: 'CrearTaller',
+        component: () =>
+            import ( /* webpackChunkName: "about" */ '../views/admin/CrearTaller.vue'),
         beforeEnter: (to, from, next) => {
             if (!JSON.parse(localStorage.getItem('login'))) {
                 next("Login");
@@ -140,6 +153,19 @@ const routes = [{
         name: 'SolicitudesEmpleo',
         component: () =>
             import ( /* webpackChunkName: "about" */ '../views/admin/SolicitudesEmpleo.vue'),
+        beforeEnter: (to, from, next) => {
+            if (!JSON.parse(localStorage.getItem('login'))) {
+                next("Login");
+            } else {
+                next();
+            }
+        }
+    },
+    {
+        path: '/importarDatos',
+        name: 'ImportarDatos',
+        component: () =>
+            import ( /* webpackChunkName: "about" */ '../views/admin/ImportarDatos.vue'),
         beforeEnter: (to, from, next) => {
             if (!JSON.parse(localStorage.getItem('login'))) {
                 next("Login");
