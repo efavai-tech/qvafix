@@ -21,11 +21,32 @@ type Taller @model  @auth(
   administradorID:AWSEmail
     }
 
-type Piezas @model{
+type Piezas @model
+@auth(
+    rules: [
+      { allow: public, provider: apiKey },
+      { allow: groups, groups: ["admin"], operations: [create, update] },
+      { allow: groups, groups: ["user"], operations: [read] }
+    ])
+{
   id: ID!
   nombre: String
   precio: Int
   cantidad: Int
+}
+
+enum OrdenStatus {
+    creada
+    en_revision
+    sin_revision
+    finalizada
+    cancelada
+}
+
+type State {
+  status: OrdenStatus!
+  fecha: AWSDateTime!
+  descripcion: String
 }
 
 type Tecnico @model @key(name: "byTaller", fields: ["tallerID"])
@@ -35,7 +56,7 @@ type Tecnico @model @key(name: "byTaller", fields: ["tallerID"])
       { allow: groups, groups: ["admin"], operations: [create, update] },
       { allow: groups, groups: ["user"], operations: [read] }
     ])
-{  
+{
   id: ID!
   name: String!
   cargo: String
@@ -44,7 +65,7 @@ type Tecnico @model @key(name: "byTaller", fields: ["tallerID"])
   ordenServicio: [OrdenServicio] @connection(keyName: "byCliente", fields: ["id"])
   }
 
-type Equipo @model @key(name: "byCliente", fields: ["clienteID"])
+type Equipo @model
 @auth(
     rules: [
       { allow: public, provider: apiKey },
@@ -53,10 +74,10 @@ type Equipo @model @key(name: "byCliente", fields: ["clienteID"])
     ])
 {
   id: ID!
-  nombre: String!
-  descripcion: String
-  clienteID: ID!
-  cliente: Cliente @connection(fields: ["clienteID"])
+  tipo: String!
+  marca: String!
+  modelo: String!
+  serie: String
 }
 
 type Cliente @model
@@ -67,11 +88,11 @@ type Cliente @model
     ])
 {
   id: ID!
+  identidad: String
   name: String!
   numeroTelefono: AWSPhone
   correo: AWSEmail
   ordenServicio: [OrdenServicio] @connection(keyName: "byCliente", fields: ["id"])
-  equipo: [Equipo] @connection(keyName: "byCliente", fields: ["id"])
 }
 
 type OrdenServicio @model @key(name: "byCliente", fields: ["clienteID"])
@@ -82,12 +103,13 @@ type OrdenServicio @model @key(name: "byCliente", fields: ["clienteID"])
     ])
 {
   id: ID!
-  numero:Int
-  estado: String!
-  tecnicoID: ID!
-  tecnico: Tecnico @connection(fields: ["tecnicoID"])
+  numero:Int!
+  estados: [State]
   clienteID: ID!
   cliente: Cliente @connection(fields: ["clienteID"])
+  tallerID: ID!
+  taller: Taller @connection(fields: ["tallerID"])
+  tecnico: Tecnico
   fechaDeFinalizado: AWSDateTime
   equipoID: ID!
   equipo: Equipo @connection(fields: ["equipoID"])

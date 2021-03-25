@@ -17,41 +17,41 @@
 			"build": true,
 			"providerPlugin": "awscloudformation",
 			"service": "Lambda",
-			"lastBuildTimeStamp": "2021-03-15T22:32:48.920Z",
-			"lastPackageTimeStamp": "2021-03-15T22:32:49.021Z",
-			"distZipFilename": "qvafixCustomMessage-75697348374879776132-build.zip",
+			"lastBuildTimeStamp": "2021-03-25T14:35:52.341Z",
+			"lastPackageTimeStamp": "2021-03-25T14:35:52.439Z",
+			"distZipFilename": "qvafixCustomMessage-67716f625a3338445532-build.zip",
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-qvafix-dev-182546-deployment/amplify-cfn-templates/function/qvafixCustomMessage-cloudformation-template.json",
 				"logicalId": "functionqvafixCustomMessage"
 			},
-			"lastPushTimeStamp": "2021-03-20T21:00:28.878Z",
+			"lastPushTimeStamp": "2021-03-25T14:41:19.677Z",
 			"output": {
 				"Region": "us-east-1",
 				"Arn": "arn:aws:lambda:us-east-1:529173520750:function:qvafixCustomMessage-dev",
 				"Name": "qvafixCustomMessage-dev",
 				"LambdaExecutionRole": "qvafixCustomMessage-dev"
 			},
-			"lastPushDirHash": "NJ+IsK10D2Vhbhv5ESgXguKn8xo="
+			"lastPushDirHash": "Ofwl38Fs2GagklP5EI4IgCP7vpo="
 		},
 		"qvafixPostConfirmation": {
 			"build": true,
 			"providerPlugin": "awscloudformation",
 			"service": "Lambda",
-			"lastBuildTimeStamp": "2021-03-15T22:32:48.926Z",
-			"lastPackageTimeStamp": "2021-03-15T22:32:49.149Z",
-			"distZipFilename": "qvafixPostConfirmation-5473694143386c394a69-build.zip",
+			"lastBuildTimeStamp": "2021-03-25T14:35:52.345Z",
+			"lastPackageTimeStamp": "2021-03-25T14:35:52.620Z",
+			"distZipFilename": "qvafixPostConfirmation-536b4668717074494865-build.zip",
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-qvafix-dev-182546-deployment/amplify-cfn-templates/function/qvafixPostConfirmation-cloudformation-template.json",
 				"logicalId": "functionqvafixPostConfirmation"
 			},
-			"lastPushTimeStamp": "2021-03-20T21:00:28.879Z",
+			"lastPushTimeStamp": "2021-03-25T14:41:19.677Z",
 			"output": {
 				"Region": "us-east-1",
 				"Arn": "arn:aws:lambda:us-east-1:529173520750:function:qvafixPostConfirmation-dev",
 				"Name": "qvafixPostConfirmation-dev",
 				"LambdaExecutionRole": "qvafixPostConfirmation-dev"
 			},
-			"lastPushDirHash": "f8nQSl6hpqJ+8Qpejfd6X11Sgf4="
+			"lastPushDirHash": "cuA1QfHJOYPuVxZDnX2wL+3XBAM="
 		}
 	},
 	"auth": {
@@ -69,7 +69,7 @@
 					]
 				}
 			],
-			"lastPushTimeStamp": "2021-03-20T21:00:28.880Z",
+			"lastPushTimeStamp": "2021-03-25T14:41:19.672Z",
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-qvafix-dev-182546-deployment/amplify-cfn-templates/auth/template.json",
 				"logicalId": "authuserPoolGroups"
@@ -105,7 +105,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-qvafix-dev-182546-deployment/amplify-cfn-templates/auth/qvafix-cloudformation-template.yml",
 				"logicalId": "authqvafix"
 			},
-			"lastPushTimeStamp": "2021-03-20T21:00:28.881Z",
+			"lastPushTimeStamp": "2021-03-25T14:41:19.677Z",
 			"output": {
 				"AppClientSecret": "19itcr1g6tmmbomahvfv5cts872iar3ogk1cs2l8kptlp0mqunvf",
 				"UserPoolId": "us-east-1_Ik3eF3PMj",
@@ -113,7 +113,7 @@
 				"AppClientID": "7t4ahjpm1v7lk05d1iesh9neb3",
 				"UserPoolName": "qvafixuserpool"
 			},
-			"lastPushDirHash": "IsR7RPengXQwBf6HcG+VxPW6TzM="
+			"lastPushDirHash": "kGNDxEO3pIhBpFbJu5N4NTnOzEE="
 		}
 	},
 	"api": {
@@ -146,8 +146,8 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-qvafix-dev-182546-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"logicalId": "apiqvafix"
 			},
-			"lastPushTimeStamp": "2021-03-20T21:00:39.311Z",
-			"lastPushDirHash": "GqDKdwz6nlirlEaONSs6iz6n4J4="
+			"lastPushTimeStamp": "2021-03-25T14:41:19.677Z",
+			"lastPushDirHash": "Abk0Y1CowlIhme4n7DH1Pj/sYzE="
 		}
 	}
 }

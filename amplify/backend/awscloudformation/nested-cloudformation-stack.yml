@@ -139,10 +139,10 @@
 					"autoVerifiedAttributes": "email",
 					"mfaConfiguration": "OFF",
 					"mfaTypes": "SMS Text Message",
-					"smsAuthenticationMessage": "Your authentication code is {####}",
-					"smsVerificationMessage": "Your verification code is {####}",
-					"emailVerificationSubject": "Your verification code",
-					"emailVerificationMessage": "Your verification code is {####}",
+					"smsAuthenticationMessage": "Tu código de autenticación es {####}",
+					"smsVerificationMessage": "Tu código de verificación es {####}",
+					"emailVerificationSubject": "Tu código de verificación",
+					"emailVerificationMessage": "Tu código de verificación es {####}",
 					"defaultPasswordPolicy": false,
 					"passwordPolicyMinLength": 8,
 					"passwordPolicyCharacters": "",
@@ -227,7 +227,7 @@
 						]
 					},
 					"S3DeploymentBucket": "amplify-qvafix-dev-182546-deployment",
-					"S3DeploymentRootKey": "amplify-appsync-files/be1bc92c48d77a329a5fe54162e59c705b062bd0",
+					"S3DeploymentRootKey": "amplify-appsync-files/f43dc3107c52ec7e7a9612a8cc1b91c255625194",
 					"env": "dev"
 				}
 			}
