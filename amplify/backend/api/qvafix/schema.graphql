@@ -114,6 +114,8 @@ type OrdenServicio @model @key(name: "byCliente", fields: ["clienteID"])
   taller: Taller @connection(fields: ["tallerID"])
   tecnico: Tecnico
   fechaDeFinalizado: AWSDateTime
+  fechaPrometida: AWSDateTime
+  garantia: Int
   equipoID: ID!
   equipo: Equipo @connection(fields: ["equipoID"])
   piezas:[Piezas]

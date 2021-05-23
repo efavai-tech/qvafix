@@ -5,7 +5,7 @@ import traceback
 from pathlib import Path
 import unittest
 import unittest.mock
-from src import index
+from ...src import  index
 
 
 class TestImporterLambda(unittest.TestCase):

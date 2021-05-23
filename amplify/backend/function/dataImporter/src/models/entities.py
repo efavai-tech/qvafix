@@ -19,9 +19,12 @@ class OrdenState:
     fecha: datetime
     descripcion: str
 
-    def __init__(self, status, fecha: str, descripcion = '') -> None:
+    def __init__(self, status, fecha, descripcion = '') -> None:
         self.status = OrdenStatus(status)
-        self.fecha = datetime.strftime(fecha)
+        if isinstance(fecha, str):
+            self.fecha = datetime.strptime(fecha,'%Y-%m-%dT%H:%M:%S')
+        else:
+            self.fecha = fecha
         self.descripcion = descripcion
 
 
@@ -51,6 +54,10 @@ class Equipo(object):
     serie: str
 
     def __init__(self, **kargs):
+        if 'id' in kargs:
+            self.id = kargs['id']
+        else:
+            self.id = kargs['serie']
         self.tipo = kargs['tipo']
         self.marca = kargs['marca']
         self.modelo = kargs['modelo']
@@ -63,6 +70,8 @@ class Order(object):
     clienteId: str
     tallerId: str
     fechaDeFinalizado: datetime
+    fechaPrometida: datetime
+    garantia: int
     equipo: Equipo
 
     def __init__(self,**kargs) -> None:
@@ -70,9 +79,20 @@ class Order(object):
         self.numero = kargs['numero']
         self.clienteId = kargs['clienteID']
         self.tallerId = kargs['tallerID']
-        self.fechaDeFinalizado = kargs['fechaDeFinalizado'] if 'fechaDeFinalizado' in kargs else None
+        fechaDeFinalizado = kargs['fechaDeFinalizado'] if 'fechaDeFinalizado' in kargs else None
+        if isinstance(fechaDeFinalizado, str):
+            fechaDeFinalizado = datetime.strptime(fechaDeFinalizado,'%Y-%m-%dT%H:%M:%S')
+        self.fechaDeFinalizado = fechaDeFinalizado
+        fechaPrometida = kargs['fechaPrometida'] if 'fechaPrometida' in kargs else datetime.utcnow()
+        if isinstance(fechaPrometida, str):
+            fechaPrometida = datetime.strptime(fechaPrometida,'%Y-%m-%dT%H:%M:%S')
+        self.fechaPrometida = fechaPrometida
         if 'equipo' in kargs:
             self.equipo = Equipo(**kargs['equipo'])
+        if 'garantia' in kargs:
+            self.garantia = kargs['garantia']
+        else:
+            self.garantia = 0
         if 'estados' in kargs:
             self.estados = [OrdenState(x['status'], x['fecha'], x['descripcion']) for x in kargs['estados']]
         else:

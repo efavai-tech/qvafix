@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 import json
 import os
 import base64
@@ -5,7 +6,7 @@ import csv
 from .repositories.inventory_repository import InventoryRepository
 from .repositories.order_repository import OrderRepository
 from .repositories.client_repository import ClientRepository
-from .models.entities import Client, ImportTypes, Inventory, Order
+from .models.entities import Client, ImportTypes, Inventory, Order, OrdenStatus
 
 def handler(event, context):
     """Servicio de Importacion de datos
@@ -60,10 +61,18 @@ def handler(event, context):
                         else:
                             client_repo.Create(client)
                     elif type == ImportTypes.ORDER:
+                        estado = row[2]
+                        fecha_recepcion = datetime.strptime(row[3],'%d/%m/%Y') if row[3] != '' else datetime.utcnow()
+                        fecha_prometida = datetime.strptime(row[4],'%d/%m/%Y') if row[4] != '' else fecha_recepcion + timedelta(days=5)
+                        fecha_entrega = datetime.strptime(row[5],'%d/%m/%Y') if row[5] != '' else None
+                        fecha_terminado = datetime.strptime(row[6],'%d/%m/%Y') if row[6] != '' else None
+                        garantia = int(row[7]) if row[7] != '' else 0
                         data['id']= '{}-{}'.format(taller_id,row[0])
                         data['clienteID'] = '{}-{}'.format(taller_id,row[1])
-                        data['fechaDeFinalizado'] = row[6]
+                        data['fechaDeFinalizado'] = fecha_terminado
+                        data['fechaPrometida'] = fecha_prometida
                         data['numero'] = data['id']
+                        data['garantia'] = garantia
                         data['equipo'] = {
                             'tipo': row[8],
                             'marca': row[10],
@@ -71,7 +80,32 @@ def handler(event, context):
                             'serie': row[9]
                         }
                         estados = []
-
+                        # Llenando estados
+                        if fecha_recepcion is not None:
+                            estados.append({
+                                'status': OrdenStatus.EN_PROCESO,
+                                'fecha': fecha_recepcion,
+                                'descripcion': '',
+                            })
+                        if fecha_terminado is not None:
+                            estados.append({
+                                'status': OrdenStatus.TERMINADA,
+                                'fecha': fecha_terminado,
+                                'descripcion': '',
+                            })
+                        if fecha_entrega is not None:
+                            estados.append({
+                                'status': OrdenStatus.ENTREGADO,
+                                'fecha': fecha_entrega,
+                                'descripcion': '',
+                            })
+                        if estado == 'cancelada':
+                            estados.append({
+                                'status': OrdenStatus.CANCELADA,
+                                'fecha': fecha_terminado,
+                                'descripcion': '',
+                            })
+                        data['estados'] = estados
                         order = Order(**data)
                         if order_repo.Get(order.id) is not None:
                             order_repo.Update(order)
