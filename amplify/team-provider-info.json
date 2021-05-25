@@ -15,6 +15,12 @@
       "auth": {
         "userPoolGroups": {},
         "qvafix": {}
+      },
+      "function": {
+        "dataImporter": {
+          "deploymentBucketName": "amplify-qvafix-dev-182546-deployment",
+          "s3Key": "amplify-builds/dataImporter-6173614e322b566b737a-build.zip"
+        }
       }
     }
   }

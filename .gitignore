@@ -40,3 +40,5 @@ node_modules/
 # amplify-gradle-config.json
 # amplifytools.xcconfig
 # .secret-* 
+virtualenv/
+__pycache__/

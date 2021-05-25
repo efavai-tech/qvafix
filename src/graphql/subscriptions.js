@@ -1,42 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreatePiezas = /* GraphQL */ `
-  subscription OnCreatePiezas {
-    onCreatePiezas {
-      id
-      nombre
-      precio
-      cantidad
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdatePiezas = /* GraphQL */ `
-  subscription OnUpdatePiezas {
-    onUpdatePiezas {
-      id
-      nombre
-      precio
-      cantidad
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeletePiezas = /* GraphQL */ `
-  subscription OnDeletePiezas {
-    onDeletePiezas {
-      id
-      nombre
-      precio
-      cantidad
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const onCreateTaller = /* GraphQL */ `
   subscription OnCreateTaller {
     onCreateTaller {
@@ -49,16 +13,17 @@ export const onCreateTaller = /* GraphQL */ `
       descripcionLaboral
       otro
       logo
+      redesSociales
+      catalogo
       clientes {
         id
+        identidad
         name
+        direccion
         numeroTelefono
         correo
         createdAt
         updatedAt
-        equipo {
-          nextToken
-        }
         ordenServicio {
           nextToken
         }
@@ -105,16 +70,17 @@ export const onUpdateTaller = /* GraphQL */ `
       descripcionLaboral
       otro
       logo
+      redesSociales
+      catalogo
       clientes {
         id
+        identidad
         name
+        direccion
         numeroTelefono
         correo
         createdAt
         updatedAt
-        equipo {
-          nextToken
-        }
         ordenServicio {
           nextToken
         }
@@ -161,16 +127,17 @@ export const onDeleteTaller = /* GraphQL */ `
       descripcionLaboral
       otro
       logo
+      redesSociales
+      catalogo
       clientes {
         id
+        identidad
         name
+        direccion
         numeroTelefono
         correo
         createdAt
         updatedAt
-        equipo {
-          nextToken
-        }
         ordenServicio {
           nextToken
         }
@@ -205,6 +172,42 @@ export const onDeleteTaller = /* GraphQL */ `
     }
   }
 `;
+export const onCreatePiezas = /* GraphQL */ `
+  subscription OnCreatePiezas {
+    onCreatePiezas {
+      id
+      nombre
+      precio
+      cantidad
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdatePiezas = /* GraphQL */ `
+  subscription OnUpdatePiezas {
+    onUpdatePiezas {
+      id
+      nombre
+      precio
+      cantidad
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeletePiezas = /* GraphQL */ `
+  subscription OnDeletePiezas {
+    onDeletePiezas {
+      id
+      nombre
+      precio
+      cantidad
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateTecnico = /* GraphQL */ `
   subscription OnCreateTecnico {
     onCreateTecnico {
@@ -224,9 +227,13 @@ export const onCreateTecnico = /* GraphQL */ `
         descripcionLaboral
         otro
         logo
+        redesSociales
+        catalogo
         clientes {
           id
+          identidad
           name
+          direccion
           numeroTelefono
           correo
           createdAt
@@ -247,9 +254,8 @@ export const onCreateTecnico = /* GraphQL */ `
         items {
           id
           numero
-          estado
-          tecnicoID
           clienteID
+          tallerID
           fechaDeFinalizado
           equipoID
           createdAt
@@ -279,9 +285,13 @@ export const onUpdateTecnico = /* GraphQL */ `
         descripcionLaboral
         otro
         logo
+        redesSociales
+        catalogo
         clientes {
           id
+          identidad
           name
+          direccion
           numeroTelefono
           correo
           createdAt
@@ -302,9 +312,8 @@ export const onUpdateTecnico = /* GraphQL */ `
         items {
           id
           numero
-          estado
-          tecnicoID
           clienteID
+          tallerID
           fechaDeFinalizado
           equipoID
           createdAt
@@ -334,9 +343,13 @@ export const onDeleteTecnico = /* GraphQL */ `
         descripcionLaboral
         otro
         logo
+        redesSociales
+        catalogo
         clientes {
           id
+          identidad
           name
+          direccion
           numeroTelefono
           correo
           createdAt
@@ -357,9 +370,8 @@ export const onDeleteTecnico = /* GraphQL */ `
         items {
           id
           numero
-          estado
-          tecnicoID
           clienteID
+          tallerID
           fechaDeFinalizado
           equipoID
           createdAt
@@ -374,25 +386,12 @@ export const onCreateEquipo = /* GraphQL */ `
   subscription OnCreateEquipo {
     onCreateEquipo {
       id
-      nombre
-      descripcion
-      clienteID
+      tipo
+      marca
+      modelo
+      serie
       createdAt
       updatedAt
-      cliente {
-        id
-        name
-        numeroTelefono
-        correo
-        createdAt
-        updatedAt
-        equipo {
-          nextToken
-        }
-        ordenServicio {
-          nextToken
-        }
-      }
     }
   }
 `;
@@ -400,25 +399,12 @@ export const onUpdateEquipo = /* GraphQL */ `
   subscription OnUpdateEquipo {
     onUpdateEquipo {
       id
-      nombre
-      descripcion
-      clienteID
+      tipo
+      marca
+      modelo
+      serie
       createdAt
       updatedAt
-      cliente {
-        id
-        name
-        numeroTelefono
-        correo
-        createdAt
-        updatedAt
-        equipo {
-          nextToken
-        }
-        ordenServicio {
-          nextToken
-        }
-      }
     }
   }
 `;
@@ -426,25 +412,12 @@ export const onDeleteEquipo = /* GraphQL */ `
   subscription OnDeleteEquipo {
     onDeleteEquipo {
       id
-      nombre
-      descripcion
-      clienteID
+      tipo
+      marca
+      modelo
+      serie
       createdAt
       updatedAt
-      cliente {
-        id
-        name
-        numeroTelefono
-        correo
-        createdAt
-        updatedAt
-        equipo {
-          nextToken
-        }
-        ordenServicio {
-          nextToken
-        }
-      }
     }
   }
 `;
@@ -452,29 +425,19 @@ export const onCreateCliente = /* GraphQL */ `
   subscription OnCreateCliente {
     onCreateCliente {
       id
+      identidad
       name
+      direccion
       numeroTelefono
       correo
       createdAt
       updatedAt
-      equipo {
-        items {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       ordenServicio {
         items {
           id
           numero
-          estado
-          tecnicoID
           clienteID
+          tallerID
           fechaDeFinalizado
           equipoID
           createdAt
@@ -489,29 +452,19 @@ export const onUpdateCliente = /* GraphQL */ `
   subscription OnUpdateCliente {
     onUpdateCliente {
       id
+      identidad
       name
+      direccion
       numeroTelefono
       correo
       createdAt
       updatedAt
-      equipo {
-        items {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       ordenServicio {
         items {
           id
           numero
-          estado
-          tecnicoID
           clienteID
+          tallerID
           fechaDeFinalizado
           equipoID
           createdAt
@@ -526,29 +479,19 @@ export const onDeleteCliente = /* GraphQL */ `
   subscription OnDeleteCliente {
     onDeleteCliente {
       id
+      identidad
       name
+      direccion
       numeroTelefono
       correo
       createdAt
       updatedAt
-      equipo {
-        items {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       ordenServicio {
         items {
           id
           numero
-          estado
-          tecnicoID
           clienteID
+          tallerID
           fechaDeFinalizado
           equipoID
           createdAt
@@ -564,21 +507,13 @@ export const onCreateOrdenServicio = /* GraphQL */ `
     onCreateOrdenServicio {
       id
       numero
-      estado
-      tecnicoID
-      clienteID
-      fechaDeFinalizado
-      equipoID
-      piezas {
-        id
-        nombre
-        precio
-        cantidad
-        createdAt
-        updatedAt
+      estados {
+        status
+        fecha
+        descripcion
       }
-      createdAt
-      updatedAt
+      clienteID
+      tallerID
       tecnico {
         id
         name
@@ -596,6 +531,8 @@ export const onCreateOrdenServicio = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          redesSociales
+          catalogo
           telefonos
           administradorID
           createdAt
@@ -605,32 +542,69 @@ export const onCreateOrdenServicio = /* GraphQL */ `
           nextToken
         }
       }
-      equipo {
+      fechaDeFinalizado
+      equipoID
+      piezas {
         id
         nombre
-        descripcion
-        clienteID
+        precio
+        cantidad
         createdAt
         updatedAt
-        cliente {
+      }
+      createdAt
+      updatedAt
+      taller {
+        id
+        name
+        direccion
+        correo
+        mision
+        vision
+        descripcionLaboral
+        otro
+        logo
+        redesSociales
+        catalogo
+        clientes {
           id
+          identidad
           name
+          direccion
           numeroTelefono
           correo
           createdAt
           updatedAt
         }
+        telefonos
+        administradorID
+        createdAt
+        updatedAt
+        tecnicos {
+          nextToken
+        }
+        ofertasTrabajo {
+          nextToken
+        }
+      }
+      equipo {
+        id
+        tipo
+        marca
+        modelo
+        serie
+        createdAt
+        updatedAt
       }
       cliente {
         id
+        identidad
         name
+        direccion
         numeroTelefono
         correo
         createdAt
         updatedAt
-        equipo {
-          nextToken
-        }
         ordenServicio {
           nextToken
         }
@@ -643,21 +617,13 @@ export const onUpdateOrdenServicio = /* GraphQL */ `
     onUpdateOrdenServicio {
       id
       numero
-      estado
-      tecnicoID
-      clienteID
-      fechaDeFinalizado
-      equipoID
-      piezas {
-        id
-        nombre
-        precio
-        cantidad
-        createdAt
-        updatedAt
+      estados {
+        status
+        fecha
+        descripcion
       }
-      createdAt
-      updatedAt
+      clienteID
+      tallerID
       tecnico {
         id
         name
@@ -675,6 +641,8 @@ export const onUpdateOrdenServicio = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          redesSociales
+          catalogo
           telefonos
           administradorID
           createdAt
@@ -684,32 +652,69 @@ export const onUpdateOrdenServicio = /* GraphQL */ `
           nextToken
         }
       }
-      equipo {
+      fechaDeFinalizado
+      equipoID
+      piezas {
         id
         nombre
-        descripcion
-        clienteID
+        precio
+        cantidad
         createdAt
         updatedAt
-        cliente {
+      }
+      createdAt
+      updatedAt
+      taller {
+        id
+        name
+        direccion
+        correo
+        mision
+        vision
+        descripcionLaboral
+        otro
+        logo
+        redesSociales
+        catalogo
+        clientes {
           id
+          identidad
           name
+          direccion
           numeroTelefono
           correo
           createdAt
           updatedAt
         }
+        telefonos
+        administradorID
+        createdAt
+        updatedAt
+        tecnicos {
+          nextToken
+        }
+        ofertasTrabajo {
+          nextToken
+        }
+      }
+      equipo {
+        id
+        tipo
+        marca
+        modelo
+        serie
+        createdAt
+        updatedAt
       }
       cliente {
         id
+        identidad
         name
+        direccion
         numeroTelefono
         correo
         createdAt
         updatedAt
-        equipo {
-          nextToken
-        }
         ordenServicio {
           nextToken
         }
@@ -722,21 +727,13 @@ export const onDeleteOrdenServicio = /* GraphQL */ `
     onDeleteOrdenServicio {
       id
       numero
-      estado
-      tecnicoID
-      clienteID
-      fechaDeFinalizado
-      equipoID
-      piezas {
-        id
-        nombre
-        precio
-        cantidad
-        createdAt
-        updatedAt
+      estados {
+        status
+        fecha
+        descripcion
       }
-      createdAt
-      updatedAt
+      clienteID
+      tallerID
       tecnico {
         id
         name
@@ -754,6 +751,8 @@ export const onDeleteOrdenServicio = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          redesSociales
+          catalogo
           telefonos
           administradorID
           createdAt
@@ -763,32 +762,69 @@ export const onDeleteOrdenServicio = /* GraphQL */ `
           nextToken
         }
       }
-      equipo {
+      fechaDeFinalizado
+      equipoID
+      piezas {
         id
         nombre
-        descripcion
-        clienteID
+        precio
+        cantidad
         createdAt
         updatedAt
-        cliente {
+      }
+      createdAt
+      updatedAt
+      taller {
+        id
+        name
+        direccion
+        correo
+        mision
+        vision
+        descripcionLaboral
+        otro
+        logo
+        redesSociales
+        catalogo
+        clientes {
           id
+          identidad
           name
+          direccion
           numeroTelefono
           correo
           createdAt
           updatedAt
         }
+        telefonos
+        administradorID
+        createdAt
+        updatedAt
+        tecnicos {
+          nextToken
+        }
+        ofertasTrabajo {
+          nextToken
+        }
+      }
+      equipo {
+        id
+        tipo
+        marca
+        modelo
+        serie
+        createdAt
+        updatedAt
       }
       cliente {
         id
+        identidad
         name
+        direccion
         numeroTelefono
         correo
         createdAt
         updatedAt
-        equipo {
-          nextToken
-        }
         ordenServicio {
           nextToken
         }
@@ -816,9 +852,13 @@ export const onCreateOfertaTrabajo = /* GraphQL */ `
         descripcionLaboral
         otro
         logo
+        redesSociales
+        catalogo
         clientes {
           id
+          identidad
           name
+          direccion
           numeroTelefono
           correo
           createdAt
@@ -870,9 +910,13 @@ export const onUpdateOfertaTrabajo = /* GraphQL */ `
         descripcionLaboral
         otro
         logo
+        redesSociales
+        catalogo
         clientes {
           id
+          identidad
           name
+          direccion
           numeroTelefono
           correo
           createdAt
@@ -924,9 +968,13 @@ export const onDeleteOfertaTrabajo = /* GraphQL */ `
         descripcionLaboral
         otro
         logo
+        redesSociales
+        catalogo
         clientes {
           id
+          identidad
           name
+          direccion
           numeroTelefono
           correo
           createdAt
@@ -986,6 +1034,8 @@ export const onCreateAspirante = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          redesSociales
+          catalogo
           telefonos
           administradorID
           createdAt
@@ -1026,6 +1076,8 @@ export const onUpdateAspirante = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          redesSociales
+          catalogo
           telefonos
           administradorID
           createdAt
@@ -1066,6 +1118,8 @@ export const onDeleteAspirante = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          redesSociales
+          catalogo
           telefonos
           administradorID
           createdAt
