@@ -1,0 +1,5 @@
+id;cliente_id;estado;fecha de recepcion;fecha prometida;fecha de entrega;fecha terminado;tiempo de garantia;tipo de equipo;serie;marca;modelo;defecto;observacion
+1;68;en_proceso;21/03/2021;01/04/2021;;;;Telefono;656s6sd56;Samsung;S10;No enciende;Problema con la bateria
+2;68;sin_revisar;21/03/2021;15/04/2021;;;;Laptop;ff5545;HP;ss44;;
+3;68;entregado;21/03/2021;01/04/2021;02/04/2021;01/04/2021;30;Tablet;77w9fw;Ipad;Ipad 10;Display partido;Se cambio el display
+3;68;terminada;21/03/2021;01/04/2021;;01/04/2021;30;Tablet;555ds5;Ipad;Ipad 10;Display partido;Se cambio el display

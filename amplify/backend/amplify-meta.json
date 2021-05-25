@@ -24,7 +24,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-qvafix-dev-182546-deployment/amplify-cfn-templates/function/qvafixCustomMessage-cloudformation-template.json",
         "logicalId": "functionqvafixCustomMessage"
       },
-      "lastPushTimeStamp": "2021-05-23T22:23:19.629Z",
+      "lastPushTimeStamp": "2021-05-25T03:14:06.865Z",
       "output": {
         "Region": "us-east-1",
         "Arn": "arn:aws:lambda:us-east-1:529173520750:function:qvafixCustomMessage-dev",
@@ -44,7 +44,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-qvafix-dev-182546-deployment/amplify-cfn-templates/function/qvafixPostConfirmation-cloudformation-template.json",
         "logicalId": "functionqvafixPostConfirmation"
       },
-      "lastPushTimeStamp": "2021-05-23T22:23:19.681Z",
+      "lastPushTimeStamp": "2021-05-25T03:14:06.868Z",
       "output": {
         "Region": "us-east-1",
         "Arn": "arn:aws:lambda:us-east-1:529173520750:function:qvafixPostConfirmation-dev",
@@ -57,25 +57,25 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
-      "lastBuildTimeStamp": "2021-05-23T22:23:46.431Z",
-      "lastPackageTimeStamp": "2021-05-14T04:22:48.170Z",
-      "distZipFilename": "dataImporter-6258666a54684276454e-build.zip",
+      "lastBuildTimeStamp": "2021-05-25T03:09:37.409Z",
+      "lastPackageTimeStamp": "2021-05-25T03:09:38.875Z",
+      "distZipFilename": "dataImporter-6173614e322b566b737a-build.zip",
       "s3Bucket": {
         "deploymentBucketName": "amplify-qvafix-dev-182546-deployment",
-        "s3Key": "amplify-builds/dataImporter-6258666a54684276454e-build.zip"
+        "s3Key": "amplify-builds/dataImporter-6173614e322b566b737a-build.zip"
       },
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-qvafix-dev-182546-deployment/amplify-cfn-templates/function/dataImporter-cloudformation-template.json",
         "logicalId": "functiondataImporter"
       },
-      "lastPushTimeStamp": "2021-05-23T22:23:19.683Z",
+      "lastPushTimeStamp": "2021-05-25T03:14:06.877Z",
       "output": {
         "Region": "us-east-1",
         "Arn": "arn:aws:lambda:us-east-1:529173520750:function:dataImporter-dev",
         "Name": "dataImporter-dev",
         "LambdaExecutionRole": "qvafixLambdaRole77e1cc8e-dev"
       },
-      "lastPushDirHash": "BZJKuYb6PEkGoBPRjjyDcuCm+bE="
+      "lastPushDirHash": "eLwy9Ol7YefH09RZlpPPCwuP9B8="
     }
   },
   "auth": {
@@ -93,7 +93,7 @@
           ]
         }
       ],
-      "lastPushTimeStamp": "2021-05-23T22:23:19.685Z",
+      "lastPushTimeStamp": "2021-05-25T03:14:06.871Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-qvafix-dev-182546-deployment/amplify-cfn-templates/auth/template.json",
         "logicalId": "authuserPoolGroups"
@@ -129,7 +129,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-qvafix-dev-182546-deployment/amplify-cfn-templates/auth/qvafix-cloudformation-template.yml",
         "logicalId": "authqvafix"
       },
-      "lastPushTimeStamp": "2021-05-23T22:23:19.687Z",
+      "lastPushTimeStamp": "2021-05-25T03:14:06.872Z",
       "output": {
         "AppClientSecret": "19itcr1g6tmmbomahvfv5cts872iar3ogk1cs2l8kptlp0mqunvf",
         "UserPoolId": "us-east-1_Ik3eF3PMj",
@@ -170,8 +170,8 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-qvafix-dev-182546-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiqvafix"
       },
-      "lastPushTimeStamp": "2021-05-23T22:23:19.689Z",
-      "lastPushDirHash": "bJdhdBoN/8aOPZZJRaCXAukaWWQ="
+      "lastPushTimeStamp": "2021-05-25T03:14:06.877Z",
+      "lastPushDirHash": "hpk91qFm8gmABammTcpU5X9gG9w="
     }
   }
 }

@@ -96,7 +96,7 @@
         "TemplateURL": "https://s3.amazonaws.com/amplify-qvafix-dev-182546-deployment/amplify-cfn-templates/function/dataImporter-cloudformation-template.json",
         "Parameters": {
           "deploymentBucketName": "amplify-qvafix-dev-182546-deployment",
-          "s3Key": "amplify-builds/dataImporter-6258666a54684276454e-build.zip",
+          "s3Key": "amplify-builds/dataImporter-6173614e322b566b737a-build.zip",
           "env": "dev"
         }
       }
@@ -238,7 +238,7 @@
             ]
           },
           "S3DeploymentBucket": "amplify-qvafix-dev-182546-deployment",
-          "S3DeploymentRootKey": "amplify-appsync-files/735317ddc990feb03affe0871f5c48ba9a6cc236",
+          "S3DeploymentRootKey": "amplify-appsync-files/c6ac0b1ed640e056f6dd714121746892758f6a01",
           "env": "dev"
         }
       }

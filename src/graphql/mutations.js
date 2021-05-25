@@ -16,16 +16,17 @@ export const deleteTaller = /* GraphQL */ `
       descripcionLaboral
       otro
       logo
+      redesSociales
+      catalogo
       clientes {
         id
+        identidad
         name
+        direccion
         numeroTelefono
         correo
         createdAt
         updatedAt
-        equipo {
-          nextToken
-        }
         ordenServicio {
           nextToken
         }
@@ -57,36 +58,6 @@ export const deleteTaller = /* GraphQL */ `
         }
         nextToken
       }
-    }
-  }
-`;
-export const createPiezas = /* GraphQL */ `
-  mutation CreatePiezas(
-    $input: CreatePiezasInput!
-    $condition: ModelPiezasConditionInput
-  ) {
-    createPiezas(input: $input, condition: $condition) {
-      id
-      nombre
-      precio
-      cantidad
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updatePiezas = /* GraphQL */ `
-  mutation UpdatePiezas(
-    $input: UpdatePiezasInput!
-    $condition: ModelPiezasConditionInput
-  ) {
-    updatePiezas(input: $input, condition: $condition) {
-      id
-      nombre
-      precio
-      cantidad
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -127,9 +98,13 @@ export const deleteTecnico = /* GraphQL */ `
         descripcionLaboral
         otro
         logo
+        redesSociales
+        catalogo
         clientes {
           id
+          identidad
           name
+          direccion
           numeroTelefono
           correo
           createdAt
@@ -150,9 +125,8 @@ export const deleteTecnico = /* GraphQL */ `
         items {
           id
           numero
-          estado
-          tecnicoID
           clienteID
+          tallerID
           fechaDeFinalizado
           equipoID
           createdAt
@@ -170,25 +144,12 @@ export const deleteEquipo = /* GraphQL */ `
   ) {
     deleteEquipo(input: $input, condition: $condition) {
       id
-      nombre
-      descripcion
-      clienteID
+      tipo
+      marca
+      modelo
+      serie
       createdAt
       updatedAt
-      cliente {
-        id
-        name
-        numeroTelefono
-        correo
-        createdAt
-        updatedAt
-        equipo {
-          nextToken
-        }
-        ordenServicio {
-          nextToken
-        }
-      }
     }
   }
 `;
@@ -199,29 +160,19 @@ export const deleteCliente = /* GraphQL */ `
   ) {
     deleteCliente(input: $input, condition: $condition) {
       id
+      identidad
       name
+      direccion
       numeroTelefono
       correo
       createdAt
       updatedAt
-      equipo {
-        items {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       ordenServicio {
         items {
           id
           numero
-          estado
-          tecnicoID
           clienteID
+          tallerID
           fechaDeFinalizado
           equipoID
           createdAt
@@ -240,21 +191,13 @@ export const deleteOrdenServicio = /* GraphQL */ `
     deleteOrdenServicio(input: $input, condition: $condition) {
       id
       numero
-      estado
-      tecnicoID
-      clienteID
-      fechaDeFinalizado
-      equipoID
-      piezas {
-        id
-        nombre
-        precio
-        cantidad
-        createdAt
-        updatedAt
+      estados {
+        status
+        fecha
+        descripcion
       }
-      createdAt
-      updatedAt
+      clienteID
+      tallerID
       tecnico {
         id
         name
@@ -272,6 +215,8 @@ export const deleteOrdenServicio = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          redesSociales
+          catalogo
           telefonos
           administradorID
           createdAt
@@ -281,32 +226,69 @@ export const deleteOrdenServicio = /* GraphQL */ `
           nextToken
         }
       }
-      equipo {
+      fechaDeFinalizado
+      equipoID
+      piezas {
         id
         nombre
-        descripcion
-        clienteID
+        precio
+        cantidad
         createdAt
         updatedAt
-        cliente {
+      }
+      createdAt
+      updatedAt
+      taller {
+        id
+        name
+        direccion
+        correo
+        mision
+        vision
+        descripcionLaboral
+        otro
+        logo
+        redesSociales
+        catalogo
+        clientes {
           id
+          identidad
           name
+          direccion
           numeroTelefono
           correo
           createdAt
           updatedAt
         }
+        telefonos
+        administradorID
+        createdAt
+        updatedAt
+        tecnicos {
+          nextToken
+        }
+        ofertasTrabajo {
+          nextToken
+        }
+      }
+      equipo {
+        id
+        tipo
+        marca
+        modelo
+        serie
+        createdAt
+        updatedAt
       }
       cliente {
         id
+        identidad
         name
+        direccion
         numeroTelefono
         correo
         createdAt
         updatedAt
-        equipo {
-          nextToken
-        }
         ordenServicio {
           nextToken
         }
@@ -337,9 +319,13 @@ export const deleteOfertaTrabajo = /* GraphQL */ `
         descripcionLaboral
         otro
         logo
+        redesSociales
+        catalogo
         clientes {
           id
+          identidad
           name
+          direccion
           numeroTelefono
           correo
           createdAt
@@ -402,6 +388,8 @@ export const deleteAspirante = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          redesSociales
+          catalogo
           telefonos
           administradorID
           createdAt
@@ -569,16 +557,17 @@ export const createTaller = /* GraphQL */ `
       descripcionLaboral
       otro
       logo
+      redesSociales
+      catalogo
       clientes {
         id
+        identidad
         name
+        direccion
         numeroTelefono
         correo
         createdAt
         updatedAt
-        equipo {
-          nextToken
-        }
         ordenServicio {
           nextToken
         }
@@ -628,16 +617,17 @@ export const updateTaller = /* GraphQL */ `
       descripcionLaboral
       otro
       logo
+      redesSociales
+      catalogo
       clientes {
         id
+        identidad
         name
+        direccion
         numeroTelefono
         correo
         createdAt
         updatedAt
-        equipo {
-          nextToken
-        }
         ordenServicio {
           nextToken
         }
@@ -672,6 +662,36 @@ export const updateTaller = /* GraphQL */ `
     }
   }
 `;
+export const createPiezas = /* GraphQL */ `
+  mutation CreatePiezas(
+    $input: CreatePiezasInput!
+    $condition: ModelPiezasConditionInput
+  ) {
+    createPiezas(input: $input, condition: $condition) {
+      id
+      nombre
+      precio
+      cantidad
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePiezas = /* GraphQL */ `
+  mutation UpdatePiezas(
+    $input: UpdatePiezasInput!
+    $condition: ModelPiezasConditionInput
+  ) {
+    updatePiezas(input: $input, condition: $condition) {
+      id
+      nombre
+      precio
+      cantidad
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createTecnico = /* GraphQL */ `
   mutation CreateTecnico(
     $input: CreateTecnicoInput!
@@ -694,9 +714,13 @@ export const createTecnico = /* GraphQL */ `
         descripcionLaboral
         otro
         logo
+        redesSociales
+        catalogo
         clientes {
           id
+          identidad
           name
+          direccion
           numeroTelefono
           correo
           createdAt
@@ -717,9 +741,8 @@ export const createTecnico = /* GraphQL */ `
         items {
           id
           numero
-          estado
-          tecnicoID
           clienteID
+          tallerID
           fechaDeFinalizado
           equipoID
           createdAt
@@ -752,9 +775,13 @@ export const updateTecnico = /* GraphQL */ `
         descripcionLaboral
         otro
         logo
+        redesSociales
+        catalogo
         clientes {
           id
+          identidad
           name
+          direccion
           numeroTelefono
           correo
           createdAt
@@ -775,9 +802,8 @@ export const updateTecnico = /* GraphQL */ `
         items {
           id
           numero
-          estado
-          tecnicoID
           clienteID
+          tallerID
           fechaDeFinalizado
           equipoID
           createdAt
@@ -795,25 +821,12 @@ export const createEquipo = /* GraphQL */ `
   ) {
     createEquipo(input: $input, condition: $condition) {
       id
-      nombre
-      descripcion
-      clienteID
+      tipo
+      marca
+      modelo
+      serie
       createdAt
       updatedAt
-      cliente {
-        id
-        name
-        numeroTelefono
-        correo
-        createdAt
-        updatedAt
-        equipo {
-          nextToken
-        }
-        ordenServicio {
-          nextToken
-        }
-      }
     }
   }
 `;
@@ -824,25 +837,12 @@ export const updateEquipo = /* GraphQL */ `
   ) {
     updateEquipo(input: $input, condition: $condition) {
       id
-      nombre
-      descripcion
-      clienteID
+      tipo
+      marca
+      modelo
+      serie
       createdAt
       updatedAt
-      cliente {
-        id
-        name
-        numeroTelefono
-        correo
-        createdAt
-        updatedAt
-        equipo {
-          nextToken
-        }
-        ordenServicio {
-          nextToken
-        }
-      }
     }
   }
 `;
@@ -853,29 +853,19 @@ export const createCliente = /* GraphQL */ `
   ) {
     createCliente(input: $input, condition: $condition) {
       id
+      identidad
       name
+      direccion
       numeroTelefono
       correo
       createdAt
       updatedAt
-      equipo {
-        items {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       ordenServicio {
         items {
           id
           numero
-          estado
-          tecnicoID
           clienteID
+          tallerID
           fechaDeFinalizado
           equipoID
           createdAt
@@ -893,29 +883,19 @@ export const updateCliente = /* GraphQL */ `
   ) {
     updateCliente(input: $input, condition: $condition) {
       id
+      identidad
       name
+      direccion
       numeroTelefono
       correo
       createdAt
       updatedAt
-      equipo {
-        items {
-          id
-          nombre
-          descripcion
-          clienteID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       ordenServicio {
         items {
           id
           numero
-          estado
-          tecnicoID
           clienteID
+          tallerID
           fechaDeFinalizado
           equipoID
           createdAt
@@ -934,21 +914,13 @@ export const createOrdenServicio = /* GraphQL */ `
     createOrdenServicio(input: $input, condition: $condition) {
       id
       numero
-      estado
-      tecnicoID
-      clienteID
-      fechaDeFinalizado
-      equipoID
-      piezas {
-        id
-        nombre
-        precio
-        cantidad
-        createdAt
-        updatedAt
+      estados {
+        status
+        fecha
+        descripcion
       }
-      createdAt
-      updatedAt
+      clienteID
+      tallerID
       tecnico {
         id
         name
@@ -966,6 +938,8 @@ export const createOrdenServicio = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          redesSociales
+          catalogo
           telefonos
           administradorID
           createdAt
@@ -975,32 +949,69 @@ export const createOrdenServicio = /* GraphQL */ `
           nextToken
         }
       }
-      equipo {
+      fechaDeFinalizado
+      equipoID
+      piezas {
         id
         nombre
-        descripcion
-        clienteID
+        precio
+        cantidad
         createdAt
         updatedAt
-        cliente {
+      }
+      createdAt
+      updatedAt
+      taller {
+        id
+        name
+        direccion
+        correo
+        mision
+        vision
+        descripcionLaboral
+        otro
+        logo
+        redesSociales
+        catalogo
+        clientes {
           id
+          identidad
           name
+          direccion
           numeroTelefono
           correo
           createdAt
           updatedAt
         }
+        telefonos
+        administradorID
+        createdAt
+        updatedAt
+        tecnicos {
+          nextToken
+        }
+        ofertasTrabajo {
+          nextToken
+        }
+      }
+      equipo {
+        id
+        tipo
+        marca
+        modelo
+        serie
+        createdAt
+        updatedAt
       }
       cliente {
         id
+        identidad
         name
+        direccion
         numeroTelefono
         correo
         createdAt
         updatedAt
-        equipo {
-          nextToken
-        }
         ordenServicio {
           nextToken
         }
@@ -1016,21 +1027,13 @@ export const updateOrdenServicio = /* GraphQL */ `
     updateOrdenServicio(input: $input, condition: $condition) {
       id
       numero
-      estado
-      tecnicoID
-      clienteID
-      fechaDeFinalizado
-      equipoID
-      piezas {
-        id
-        nombre
-        precio
-        cantidad
-        createdAt
-        updatedAt
+      estados {
+        status
+        fecha
+        descripcion
       }
-      createdAt
-      updatedAt
+      clienteID
+      tallerID
       tecnico {
         id
         name
@@ -1048,6 +1051,8 @@ export const updateOrdenServicio = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          redesSociales
+          catalogo
           telefonos
           administradorID
           createdAt
@@ -1057,32 +1062,69 @@ export const updateOrdenServicio = /* GraphQL */ `
           nextToken
         }
       }
-      equipo {
+      fechaDeFinalizado
+      equipoID
+      piezas {
         id
         nombre
-        descripcion
-        clienteID
+        precio
+        cantidad
         createdAt
         updatedAt
-        cliente {
+      }
+      createdAt
+      updatedAt
+      taller {
+        id
+        name
+        direccion
+        correo
+        mision
+        vision
+        descripcionLaboral
+        otro
+        logo
+        redesSociales
+        catalogo
+        clientes {
           id
+          identidad
           name
+          direccion
           numeroTelefono
           correo
           createdAt
           updatedAt
         }
+        telefonos
+        administradorID
+        createdAt
+        updatedAt
+        tecnicos {
+          nextToken
+        }
+        ofertasTrabajo {
+          nextToken
+        }
+      }
+      equipo {
+        id
+        tipo
+        marca
+        modelo
+        serie
+        createdAt
+        updatedAt
       }
       cliente {
         id
+        identidad
         name
+        direccion
         numeroTelefono
         correo
         createdAt
         updatedAt
-        equipo {
-          nextToken
-        }
         ordenServicio {
           nextToken
         }
@@ -1113,9 +1155,13 @@ export const createOfertaTrabajo = /* GraphQL */ `
         descripcionLaboral
         otro
         logo
+        redesSociales
+        catalogo
         clientes {
           id
+          identidad
           name
+          direccion
           numeroTelefono
           correo
           createdAt
@@ -1170,9 +1216,13 @@ export const updateOfertaTrabajo = /* GraphQL */ `
         descripcionLaboral
         otro
         logo
+        redesSociales
+        catalogo
         clientes {
           id
+          identidad
           name
+          direccion
           numeroTelefono
           correo
           createdAt
@@ -1235,6 +1285,8 @@ export const createAspirante = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          redesSociales
+          catalogo
           telefonos
           administradorID
           createdAt
@@ -1278,6 +1330,8 @@ export const updateAspirante = /* GraphQL */ `
           descripcionLaboral
           otro
           logo
+          redesSociales
+          catalogo
           telefonos
           administradorID
           createdAt

@@ -1,0 +1,62 @@
+{
+  "body": "{\"type\":\"orden\" ,\"tallerId\": \"1\",\"file\": \"aWQ7Y2xpZW50ZV9pZDtlc3RhZG87ZmVjaGEgZGUgcmVjZXBjaW9uO2ZlY2hhIHByb21ldGlkYTtmZWNoYSBkZSBlbnRyZWdhO2ZlY2hhIHRlcm1pbmFkbzt0aWVtcG8gZGUgZ2FyYW50aWE7dGlwbyBkZSBlcXVpcG87c2VyaWU7bWFyY2E7bW9kZWxvO2RlZmVjdG87b2JzZXJ2YWNpb24NCjE7Njg7ZW5fcHJvY2VzbzsyMS8wMy8yMDIxOzAxLzA0LzIwMjE7Ozs7VGVsZWZvbm87NjU2czZzZDU2O1NhbXN1bmc7UzEwO05vIGVuY2llbmRlO1Byb2JsZW1hIGNvbiBsYSBiYXRlcmlhDQoyOzY4O3Npbl9yZXZpc2FyOzIxLzAzLzIwMjE7MTUvMDQvMjAyMTs7OztMYXB0b3A7ZmY1NTQ1O0hQO3NzNDQ7Ow0KMzs2ODtlbnRyZWdhZG87MjEvMDMvMjAyMTswMS8wNC8yMDIxOzAyLzA0LzIwMjE7MDEvMDQvMjAyMTszMDtUYWJsZXQ7Nzd3OWZ3O0lwYWQ7SXBhZCAxMDtEaXNwbGF5IHBhcnRpZG87U2UgY2FtYmlvIGVsIGRpc3BsYXkNCjM7Njg7dGVybWluYWRhOzIxLzAzLzIwMjE7MDEvMDQvMjAyMTs7MDEvMDQvMjAyMTszMDtUYWJsZXQ7NTU1ZHM1O0lwYWQ7SXBhZCAxMDtEaXNwbGF5IHBhcnRpZG87U2UgY2FtYmlvIGVsIGRpc3BsYXkNCg==\"}",
+  "resource": "/{proxy+}",
+  "path": "/path/to/resource",
+  "httpMethod": "POST",
+  "isBase64Encoded": false,
+  "queryStringParameters": {
+    "foo": "bar"
+  },
+  "pathParameters": {
+    "proxy": "/path/to/resource"
+  },
+  "stageVariables": {
+    "baz": "qux"
+  },
+  "headers": {
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    "Accept-Encoding": "gzip, deflate, sdch",
+    "Accept-Language": "en-US,en;q=0.8",
+    "Cache-Control": "max-age=0",
+    "CloudFront-Forwarded-Proto": "https",
+    "CloudFront-Is-Desktop-Viewer": "true",
+    "CloudFront-Is-Mobile-Viewer": "false",
+    "CloudFront-Is-SmartTV-Viewer": "false",
+    "CloudFront-Is-Tablet-Viewer": "false",
+    "CloudFront-Viewer-Country": "US",
+    "Host": "1234567890.execute-api.us-east-1.amazonaws.com",
+    "Upgrade-Insecure-Requests": "1",
+    "User-Agent": "Custom User Agent String",
+    "Via": "1.1 08f323deadbeefa7af34d5feb414ce27.cloudfront.net (CloudFront)",
+    "X-Amz-Cf-Id": "cDehVQoZnx43VYQb9j2-nvCh-9z396Uhbp027Y2JvkCPNLmGJHqlaA==",
+    "X-Forwarded-For": "127.0.0.1, 127.0.0.2",
+    "X-Forwarded-Port": "443",
+    "X-Forwarded-Proto": "https"
+  },
+  "requestContext": {
+    "accountId": "123456789012",
+    "resourceId": "123456",
+    "stage": "prod",
+    "requestId": "c6af9ac6-7b61-11e6-9a41-93e8deadbeef",
+    "requestTime": "09/Apr/2015:12:34:56 +0000",
+    "requestTimeEpoch": 1428582896000,
+    "identity": {
+      "cognitoIdentityPoolId": null,
+      "accountId": null,
+      "cognitoIdentityId": null,
+      "caller": null,
+      "accessKey": null,
+      "sourceIp": "127.0.0.1",
+      "cognitoAuthenticationType": null,
+      "cognitoAuthenticationProvider": null,
+      "userArn": null,
+      "userAgent": "Custom User Agent String",
+      "user": null
+    },
+    "path": "/prod/path/to/resource",
+    "resourcePath": "/{proxy+}",
+    "httpMethod": "POST",
+    "apiId": "1234567890",
+    "protocol": "HTTP/1.1"
+  }
+}
